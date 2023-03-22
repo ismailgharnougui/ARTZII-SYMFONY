@@ -1,0 +1,330 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Artzii
+{% endblock %}
+
+
+{% block body %}
+
+
+
+   {% if basketData is empty %}
+	   <section class="posts">
+						            <article class="article1"> 
+						                <img class="img1" src={{asset("assets/images/emptyBasket.png")}} alt="" width="250px" class="mt-3 mb-3"> 
+					<h4>Votre panier est vide!</h4>
+					<p>Vous n'avez pas encore ajouté d'article à votre panier.</p>
+					 <a href="{{ path('app_articles') }}" class="btn btn-secondary">Retour à l'accueil</a>
+					</article>
+			</section>
+    {% else %}
+
+
+	<div class="container" >
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" style="margin-top: 8px;  border-radius: 7px;">
+					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
+						<h4 class="card-title">Votre panier</h4>
+					</div>
+					<div class="card-body">
+          <div class="bonjour">  Bonjour, <span class="user"> Mohamed Mokhtar Hadded </span> </div>
+          <div class="reflet">  Votre panier est le reflet de votre style </div>
+
+						
+							<div class="row">
+								<div class="col-md-8">
+
+                  {% for basketItem in basketData %}
+									<section class="basket-item" style="position: relative; transform: scale(0.95)">
+
+                    <a href="{{ path('app_removeFromBasket', {'idArticle': basketItem.id}) }}" >
+										<img src="{{asset('assets/images/trash.png')}}"  alt="add to cart" width="45px" style="position: absolute; top: 0 ; right: 0; margin-top: 7px; margin-right: 7px;">
+                    </a>
+
+
+										<div class="row">
+											<div class="col-md-5">
+												<div class="content">
+													<img class="img2" src="{{asset(basketItem.idArticle.imageUrl)}}"  alt="" width="250px" class="mt-3 mb-3">
+												</div>
+											</div>
+
+											<div class="col-md-7">
+												<article class="article2">
+
+
+													<h2>{{basketItem.idArticle.noma}}</h2>
+													<div class="metadat">
+														<span class="date">Ajouté le: {{basketItem.dateAjout|date('Y-m-d H:i:s')}}
+														</span>
+
+													</div>
+
+													<div style="font-weight:bold; margin-top: 6px;font-size: 19px;">
+														{{basketItem.idArticle.dimensiona}} cm</div>
+													<div style="font-weight:bold; color:black; margin-left:70%; font-size: 21px;">Prix : {{basketItem.idArticle.prixa}} DT</div>
+
+												</article>
+
+											</div>
+										</div>
+									</section>
+                                    {% endfor %}
+								</div>
+                               
+
+								<div class="col-md-4" style="position: relative;">
+									<div class="vl"></div>
+
+                                     <section class="tot-cost" style="position: absolute; top:0; left: 27px;">
+                                      
+                                     <article class="article1"> 
+						                <img class="img1" src={{asset("assets/images/imagePanier.png")}} alt="" width="180px" class="mt-3 mb-3"> 
+						                <h3 style="font-weight: bold;">Coût totale: {{totalPrice}} DT</h3>
+						                {# <h4 style=" color: black;">65 DT</h4> #}
+
+                                        <h5 style="margin-top: 15px;">Mokhtar Hadded</h5>
+                                        <h6 style="margin-top: -7px;">Bizerte</h6>
+
+						                <a href="{{ path('app_commands') }}" class="button-77">Commander</a>
+                             <div class="aide" style=" margin-top: 125%; position: absolute;">  Besoin d'aide ? </div>
+                             <div class="aaaaa" style=" margin-top: 134%; position: absolute;">  Notre processus de Commande est simple et efficace</div>
+						            </article>
+                                    </section>
+
+                                   
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+        <style>
+        .card{
+            min-height: 84vh;
+        }
+
+        .vl {
+             border-left: 3px solid lightgrey;
+             height: 97%;
+             margin-left: -8px;
+             min-height: 220%;
+        }
+
+        .posts{
+            border-radius: 10px;
+            box-shadow: 0 10px 16px rgba(0, 0, 0, .25);
+            margin-bottom: 30;
+            margin-top: 30px;
+            padding: 35px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .basket-item{
+            border-radius: 10px;
+            box-shadow: 0 10px 16px rgba(0, 0, 0, .10);
+            margin-bottom: 0px;
+            margin-top: 5px;
+            padding: 10px;
+            padding-left: 32px;
+            width: auto;
+            background-color: white;
+            margin-left: 3%;
+            margin-right: 3%;
+        }
+
+        .tot-cost{
+            border-radius: 10px;
+            box-shadow: 0 10px 16px rgba(0, 0, 0, .25);
+            margin-bottom: 30;
+            padding: 35px;
+            padding-top: 10px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article2{
+            margin-top: 40px;
+            margin-left: 17px;
+        }
+
+
+
+
+        .article1{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .img1{
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .img2{
+            border-radius: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+            
+        }
+        
+        .bonjour{
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: black;
+
+        }
+        .user{
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-color: black;
+            color: #FFA500;
+        }
+        .reflet{
+          font-size : 17px;
+          margin-top: -12px;
+          margin-left: 5px;
+        }
+        .aide{
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: black;
+            margin-left: 10px;
+            color: #FFA500;
+        }
+
+
+
+
+
+
+
+/* CSS */
+.button-77 {
+  align-items: center;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: initial;
+  background-image: none;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: Eina01,sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 24px;
+  margin: 0;
+  min-height: 30px;
+  outline: none;
+  overflow: visible;
+  padding: 10px 15px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+  word-break: keep-all;
+  z-index: 0;
+
+}
+
+@media (min-width: 768px) {
+  .button-77 {
+    padding: 11px 18px;
+  }
+}
+
+.button-77:before,
+.button-77:after {
+  border-radius: 30px;
+}
+
+.button-77:before {
+  background-color: rgba(249, 58, 19, .32);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.button-77:after {
+  background-color: initial;
+  background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-77:hover:not(:disabled):after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition-timing-function: ease-in;
+}
+
+.button-77:active:not(:disabled) {
+  color: #fff;
+}
+
+.button-77:active:not(:disabled):after {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+}
+
+.button-77:disabled {
+  cursor: default;
+  opacity: .24;
+}
+</style>
+
+	{% endblock %}
