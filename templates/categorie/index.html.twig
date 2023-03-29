@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Les Articles</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">General</li>
+                </ol>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">List Articles</h5>
+                            <a href="{{ path('ajout_category') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
+
+                            </a>
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">CatLib</th>
+
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Supprimer</th>
+                                    <th scope="col">Detail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {% if cat | length == 0 %}
+
+                                            <p style="text-align: center">Categories vides</p>
+
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+
+
+
+                                {% for p in cat  %}
+
+
+
+                                    <tr>
+
+                                        <td>{{p.CatLib}}</td>
+
+
+                                        <td>
+                                            <a href="{{ path('modifier_category',{id:p.id}) }}">
+                                                <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
+
+
+                                        <td><a href="{{ path('supprimerCategory',{id:p.id}) }}">
+                                                <button type="button" class="btn btn-outline-danger">Supprimer</button>
+                                            </a></td>
+                                        <td><button type="button" class="btn btn-outline-dark">Detail</button></td>
+                                    </tr>
+
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}
