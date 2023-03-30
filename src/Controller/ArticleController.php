@@ -50,7 +50,7 @@ class ArticleController extends AbstractController
             $em->flush();// commit
             /// bch n7adhr hne message elybch naffichia ba3d ajout  w nhot fiha description ta3ha :
             $this->addFlash(
-                'notice', 'Artice a ete ajoutée '
+                'notice', 'Article a été bien ajoutée '
             );
 
 
@@ -90,7 +90,7 @@ class ArticleController extends AbstractController
             $em->persist($prod);//ajout
             $em->flush();// commit
             $this->addFlash(
-                'notice', 'Artice a ete bien modifié '
+                'notice', 'Article a été bien modifié '
             );
 
             return $this->redirectToRoute('display_prod');
@@ -110,7 +110,7 @@ class ArticleController extends AbstractController
         //MISE A JOURS
         $em->flush();
         $this->addFlash(
-            'noticedelete', 'Artice a ete bien supprimer '
+            'noticedelete', 'Article a été bien supprimer '
         );
 
         return $this->redirectToRoute('display_prod');
@@ -128,6 +128,7 @@ class ArticleController extends AbstractController
             'id' => $prod->getId(),
             'name' => $prod->getArtLib(),
             'prix' => $prod->getArtPrix(),
+            'artdispo' =>$prod->getArtDispo(),
             'description' => $prod->getArtDesc(),
             'image'=>$prod->getArtImg(),
             'catLib'=>$prod->getCatLib()->getCatLib()

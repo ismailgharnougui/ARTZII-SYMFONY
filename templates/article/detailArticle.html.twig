@@ -26,19 +26,20 @@
                         <div class="card m-b-20">
                             <img class="card-img-top img-fluid" src="{{ asset('uploads/'~image) }}" alt="Card image cap">
                             <div class="card-body">
-                                <h4 class="card-title"> Produit numero :{{id }}</h4>
-                                <p class="card-text">Description : <span style="color:#ff5b5b">{{ description }}</span> </p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Prix: <span style="color:#ff5b5b">{{ prix }}</span> </li>
-                                <li class="list-group-item">Nom : {{ name }}</li>
-                                <li class="list-group-item">Categorie : {{ catLib }}</li>
+                                <h4 class="card-title style="color:#ff5b5b""> Produit numero :{{id }}</h4>
+                                <li class="list-group-item style="color:#ff5b5b"">Nom : {{ name }}</li>
+                                <li class="list-group-item style="color:#ff5b5b"">Description :{{ description }}</span> </li>
+                                <li class="list-group-item style="color:#ff5b5b"">Disponibilite :{{ artdispo }}</span> </li>
+
+                                <li class="list-group-item style="color:#ff5b5b" >Prix: {{ prix }}</span> </li>
+                                <li class="list-group-item style="color:#ff5b5b"">Categorie : {{ catLib }}</li>
 
                             </ul>
                             {#                            <div class="card-body">#}
                             {#                                <a href="#" class="card-link">Card link</a>#}
                             {#                                <a href="#" class="card-link">Another link</a>#}
                             {#                            </div>#}
+                        </div>
                         </div>
 
                     </div>

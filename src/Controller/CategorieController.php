@@ -38,7 +38,9 @@ class CategorieController extends AbstractController
             $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
             $em->persist($category);//ajout
             $em->flush();// commit
-
+            $this->addFlash(
+                'notice', 'Categorie a été bien ajoutée '
+            );
             return $this->redirectToRoute('app_category');
 
         }
@@ -65,7 +67,9 @@ class CategorieController extends AbstractController
             $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
             $em->persist($prod);//ajout
             $em->flush();// commit
-
+            $this->addFlash(
+                'notice', 'Categorie a été bien modifier '
+            );
             return $this->redirectToRoute('app_category');
 
         }
@@ -83,8 +87,11 @@ class CategorieController extends AbstractController
         $em->remove($category);
         //MISE A JOURS
         $em->flush();//commit
-
+        $this->addFlash(
+            'noticedelete', 'Categorie a été bien supprimer '
+        );
         return $this->redirectToRoute('app_category');
+
     }
 
 

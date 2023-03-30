@@ -7,7 +7,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Les Articles</h1>
+            <h1>Les Categories</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -27,6 +27,20 @@
 
                         <div class="card-body">
 
+                            {% for message in app.flashes('notice') %}
+                                <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                </div>
+
+                            {% endfor %}
+
+
+                            {% for message in app.flashes('noticedelete') %}
+                                <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                </div>
+
+                            {% endfor %}
                             <h5 class="card-title">List Articles</h5>
                             <a href="{{ path('ajout_category') }}">
                                 <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
