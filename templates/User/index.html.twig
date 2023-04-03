@@ -1,0 +1,133 @@
+{# affichage hedhi#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    <main id="main" class="main">
+
+
+
+        <div class="pagetitle">
+            <h1>Les User</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">General</li>
+                </ol>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+                        {% for message in app.flashes('notice') %}
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+
+                        {% for message in app.flashes('noticedelete') %}
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">List User</h5>
+                            <a href="{{ path('ajouterUser') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
+
+                            </a>
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th scope="col">nomU</th>
+                                    <th scope="col">prenomU</th>
+                                    <th scope="col">emailU</th>
+                                    <th scope="col">mdpU</th>
+                                    <th scope="col">roleU</th>
+                                    <th scope="col">adresse</th>
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Supprimer</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {% if listP | length == 0 %}
+
+                                            <p style="text-align: center">User vides</p>
+
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+
+
+
+                                {% for p in listP  %}
+
+
+
+                                    <tr>
+
+
+                                        <td>{{ p.nomU }}</td>
+                                        <td>{{p.prenomU}}</td>
+                                        <td>{{p.emailU}}</td>
+                                        <td>{{p.mdpU}}</td>
+                                        <td>{{p.roleU}}</td>
+                                        <td>{{p.adresse}}</td>
+
+
+                                        <td>
+                                            <a href="{{ path('modifierUser',{idU:p.idU}) }}">
+                                                <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
+
+
+                                        <td>
+                                                <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionUser', {'idU': p.idU }) }}';}">
+
+                                                <button type="button" class="btn btn-outline-danger">Supprimer</button>
+                                            </a></td>
+                                                                         </tr>
+
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}
