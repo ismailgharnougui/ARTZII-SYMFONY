@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\UtilisateurRepository;
 use App\Service\BasketService;
+usE App\Service\CommandService;
 use App\Entity\Commands;
 use App\Entity\CommandArticles;
 use App\Repository\CommandArticlesRepository;
@@ -33,7 +34,7 @@ class CommandsController extends AbstractController
         ]);
     }
 
-    #[Route('/confirmCommand/{livMethod}/{payMethod}/{adress}', name: 'app_confirmCommand')]
+    #[Route('/confirmCommand/{livMethod}/{payMethod}', name: 'app_confirmCommand')]
     public function ajoutCommand(
         CommandsRepository $commandsRepository,
         UtilisateurRepository $userRep,
@@ -87,6 +88,22 @@ class CommandsController extends AbstractController
         return $this->render('commands/backCommands.html.twig', [
             'controller_name' => 'CommandsController',
             'commands' => $commands
+        ]);
+    }
+
+    #[Route('/afficheCommandClient/{idCommand}', name: 'app_afficheCommandClient')]
+    public function afficheCommand(CommandsRepository $rep, $idCommand,CommandArticlesRepository $commandArticlesRep , CommandService $commandServ): Response
+    {
+        $numCommand= $commandServ->generateOrderNumber($idCommand);
+        $command = $rep->find($idCommand);
+
+        $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
+
+        return $this->render('commands/affichageCommand.html.twig', [
+            'controller_name' => 'CommandsController',
+            'command' => $command,
+            'numCommand' => $numCommand,
+            'commandArticles' => $commandArticles,
         ]);
     }
 
@@ -174,4 +191,6 @@ class CommandsController extends AbstractController
 
         return $this->redirectToRoute('app_commandHistory');
     }
+
+   
 }

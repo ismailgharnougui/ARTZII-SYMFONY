@@ -1,6 +1,4 @@
 <?php
-// src/Service/CartService.php
-
 namespace App\Service;
 
 use App\Repository\ArticleRepository;
