@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +57,13 @@ class Commands
      * @ORM\Column(name="etat_commande", type="string", length=30, nullable=true, options={"default"="En attente"})
      */
     private $etatCommande = 'En attente';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=30, nullable=false)
+     */
+    private $adresse;
 
     /**
      * @var \App\Entity\Utilisateur
@@ -128,6 +136,18 @@ class Commands
     public function setEtatCommande(?string $etatCommande): self
     {
         $this->etatCommande = $etatCommande;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

@@ -1,0 +1,19 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Artiiz{% endblock %}
+
+{% block body %}
+
+<h1> Ajouter un article </h1>
+
+ {{ form_start(form) }}
+                {{ form_row(form.artlib) }}
+                {{ form_row(form.artdesc) }}
+                {{ form_row(form.artdispo) }}
+                {{ form_row(form.artimg) }}
+                {{ form_row(form.artprix) }}
+                {{ form_row(form.catlib) }}
+                {{ form_row(form.Ajouter) }}
+                {{ form_end(form) }}
+
+{% endblock %}

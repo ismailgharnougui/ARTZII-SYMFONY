@@ -10,8 +10,8 @@
 
    {% if basketData is empty %}
 	   <section class="posts">
-						            <article class="article1"> 
-						                <img class="img1" src={{asset("assets/images/emptyBasket.png")}} alt="" width="250px" class="mt-3 mb-3"> 
+						<article class="article1"> 
+						<img class="img1" src={{asset("assets/images/emptyBasket.png")}} alt="" width="250px" class="mt-3 mb-3"> 
 					<h4>Votre panier est vide!</h4>
 					<p>Vous n'avez pas encore ajouté d'article à votre panier.</p>
 					 <a href="{{ path('app_articles') }}" class="btn btn-secondary">Retour à l'accueil</a>
@@ -19,8 +19,7 @@
 			</section>
     {% else %}
 
-
-	<div class="container" >
+	<div class="container" style="transform: scale(0.98); margin-top: -5px;">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card" style="margin-top: 8px;  border-radius: 7px;">
@@ -28,7 +27,7 @@
 						<h4 class="card-title">Votre panier</h4>
 					</div>
 					<div class="card-body">
-          <div class="bonjour">  Bonjour, <span class="user"> Mohamed Mokhtar Hadded </span> </div>
+          <div class="bonjour">  Bonjour, <span class="user"> {{connectedUser.prenomu}} {{connectedUser.nomu}} </span> </div>
           <div class="reflet">  Votre panier est le reflet de votre style </div>
 
 						
@@ -38,7 +37,7 @@
                   {% for basketItem in basketData %}
 									<section class="basket-item" style="position: relative; transform: scale(0.95)">
 
-                    <a href="{{ path('app_removeFromBasket', {'idArticle': basketItem.id}) }}" >
+                    <a data-bs-toggle="modal" href="#myModal{{basketItem.id}}">
 										<img src="{{asset('assets/images/trash.png')}}"  alt="add to cart" width="45px" style="position: absolute; top: 0 ; right: 0; margin-top: 7px; margin-right: 7px;">
                     </a>
 
@@ -46,15 +45,14 @@
 										<div class="row">
 											<div class="col-md-5">
 												<div class="content">
-													<img class="img2" src="{{asset(basketItem.idArticle.imageUrl)}}"  alt="" width="250px" class="mt-3 mb-3">
+													<img class="img2" src="{{asset(basketItem.idArticle.artimg)}}"  alt="" width="250px" class="mt-3 mb-3">
 												</div>
 											</div>
 
 											<div class="col-md-7">
 												<article class="article2">
 
-
-													<h2>{{basketItem.idArticle.noma}}</h2>
+													<h2>{{basketItem.idArticle.artlib}}</h2>
 													<div class="metadat">
 														<span class="date">Ajouté le: {{basketItem.dateAjout|date('Y-m-d H:i:s')}}
 														</span>
@@ -62,27 +60,52 @@
 													</div>
 
 													<div style="font-weight:bold; margin-top: 6px;font-size: 19px;">
-														{{basketItem.idArticle.dimensiona}} cm</div>
-													<div style="font-weight:bold; color:black; margin-left:70%; font-size: 21px;">Prix : {{basketItem.idArticle.prixa}} DT</div>
+														{{basketItem.idArticle.artdesc}} cm</div>
+													<div style="font-weight:bold; color:black; margin-left:70%; font-size: 21px;">Prix : {{basketItem.idArticle.artprix}} DT</div>
 
 												</article>
 
 											</div>
 										</div>
 									</section>
-                                    {% endfor %}
-								</div>
-                               
 
+    <!-- DELETE CONFIRMATION MODAL -->
+
+		<div id="myModal{{basketItem.id}}" class="modal fade delete-modal" >
+			<div class="modal-dialog modal-confirm">
+				<div class="modal-content" style="z-index: 100 !important;">
+					<div class="modal-header flex-column">
+						<div class="icon-box">
+							<i class="material-icons">&#xE5CD;</i>
+						</div>
+						<h4 class="modal-title w-100">Vous êtes sure?</h4>
+						
+					</div>
+					<div class="modal-body">
+						<p>Vous êtes sure vous voulez supprimer cet article de cette commande ?</p>
+					</div>
+					<div class="modal-footer justify-content-center">
+						<button id="cancelDeleteArticle{{basketItem.id}}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+						<a href="{{ path('app_removeFromBasket', {'idArticle': basketItem.id}) }}">
+							<button id="confirm-delete-btn{{basketItem.id}}" type="button" class="btn btn-danger">Supprimer</button>          
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- DELETE CONFIRMATION MODAL -->
+
+ {% endfor %}
+								</div>
+                        
 								<div class="col-md-4" style="position: relative;">
-									<div class="vl"></div>
+								<div class="vl"></div> 	
 
                                      <section class="tot-cost" style="position: absolute; top:0; left: 27px;">
                                       
                                      <article class="article1"> 
 						                <img class="img1" src={{asset("assets/images/imagePanier.png")}} alt="" width="180px" class="mt-3 mb-3"> 
 						                <h3 style="font-weight: bold;">Coût totale: {{totalPrice}} DT</h3>
-						                {# <h4 style=" color: black;">65 DT</h4> #}
 
                                         <h5 style="margin-top: 15px;">Mokhtar Hadded</h5>
                                         <h6 style="margin-top: -7px;">Bizerte</h6>
@@ -91,10 +114,7 @@
                              <div class="aide" style=" margin-top: 125%; position: absolute;">  Besoin d'aide ? </div>
                              <div class="aaaaa" style=" margin-top: 134%; position: absolute;">  Notre processus de Commande est simple et efficace</div>
 						            </article>
-                                    </section>
-
-                                   
-
+                     </section>
 
 								</div>
 							</div>
@@ -117,17 +137,41 @@
 
 
 
-        <style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .modal-backdrop {
+            z-index: 0 !important;
+        }
         .card{
             min-height: 84vh;
+        }
+        .modal-content{
+            z-index: 100 !important;
         }
 
         .vl {
              border-left: 3px solid lightgrey;
              height: 97%;
              margin-left: -8px;
-             min-height: 220%;
-        }
+             min-height: 450px;
+          }
 
         .posts{
             border-radius: 10px;
@@ -217,20 +261,124 @@
             color: #FFA500;
         }
 
+        /* fallback */
+        @font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
 
 
+.modal-confirm {		
+        color: #636363;
+        width: 400px;
+    }
+    .modal-confirm .modal-content {
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+    }
+    .modal-confirm .modal-header {
+        border-bottom: none;   
+        position: relative;
+    }
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 -10px;
+    }
+    .modal-confirm .close {
+        position: absolute;
+        top: -5px;
+        right: -2px;
+    }
+    .modal-confirm .modal-body {
+        color: #999;
+    }
+    .modal-confirm .modal-footer {
+        border: none;
+        text-align: center;		
+        border-radius: 5px;
+        font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}		
+.modal-confirm .icon-box {
+    width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+    color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+    color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+    background: #8b8b8bd7;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+    background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+    background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+    background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
 
 
-
-
-/* CSS */
-.button-77 {
-  align-items: center;
-  appearance: none;
-  background-clip: padding-box;
-  background-color: initial;
-  background-image: none;
-  border-style: none;
+        
+        /* CSS */
+        .button-77 {
+        align-items: center;
+        appearance: none;
+       background-clip: padding-box;
+    background-color: initial;
+    background-image: none;
+    border-style: none;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;

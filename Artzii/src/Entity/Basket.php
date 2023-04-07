@@ -24,6 +24,7 @@ class Basket
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+
     private $id;
 
     /**
@@ -34,11 +35,11 @@ class Basket
     private $dateAjout = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var \App\Entity\Articles
+     * @var \App\Entity\Article
      *
-     * @ORM\ManyToOne(targetEntity="Articles")
+     * @ORM\ManyToOne(targetEntity="Article")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_article", referencedColumnName="refA")
+     *   @ORM\JoinColumn(name="id_article", referencedColumnName="ArtId")
      * })
      */
     private $idArticle;
@@ -58,6 +59,9 @@ class Basket
         return $this->id;
     }
 
+
+    
+
     public function getDateAjout(): ?\DateTimeInterface
     {
         return $this->dateAjout;
@@ -70,12 +74,12 @@ class Basket
         return $this;
     }
 
-    public function getIdArticle(): ?Articles
+    public function getIdArticle(): ?Article
     {
         return $this->idArticle;
     }
 
-    public function setIdArticle(?Articles $idArticle): self
+    public function setIdArticle(?Article $idArticle): self
     {
         $this->idArticle = $idArticle;
 
@@ -90,7 +94,6 @@ class Basket
     public function setIdClient(?Utilisateur $idClient): self
     {
         $this->idClient = $idClient;
-
         return $this;
     }
 

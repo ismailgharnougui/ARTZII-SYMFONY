@@ -1,0 +1,23 @@
+{# templates/login.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <h1>Login</h1>
+
+    {% if app.session.flashbag.has('error') %}
+        <div class="alert alert-danger">{{ app.session.flashbag.get('error')|first }}</div>
+    {% endif %}
+
+    {% if app.session.flashbag.has('success') %}
+        <div class="alert alert-success">{{ app.session.flashbag.get('success')|first }}</div>
+    {% endif %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    {{ form_end(form) }}
+{% endblock %}

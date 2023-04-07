@@ -8,7 +8,8 @@
 
 		<!-- Google Web Fonts -->
   
-    <link href={{asset("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;800&family=Roboto:wght@400;500;700&display=swap")}} rel="stylesheet"> 
+    <link href={{asset("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;800&family=Roboto:wght@400;500;700&display=swap")}} rel="stylesheet">
+     
 
     <!-- Libraries Stylesheet -->
     <link href={{asset("assets/css/animate.min.css")}} rel="stylesheet">
@@ -25,8 +26,8 @@
 	<body style="background-color: #f5f5f5;">
 	 <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
-            <h1 class="m-0"><img class="img-fluid me-3" src={{asset("assets/images/logo.png")}} alt="">Artzii</h1>
+        <a href="{{ path('app_articles') }}" class="navbar-brand d-flex align-items-center">
+            <h1 class="m-0"><img class="img-fluid me-3"  src={{asset("assets/images/logo.png")}} alt=""> <span style="margin-left: -25px;">Artzii </span></h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -40,16 +41,25 @@
             </div>
             <div class="h-100 d-lg-inline-flex align-items-center d-none">
 			
-                <a style="margin-left:10px; margin-right:5px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_panier') }}"><img src={{asset("assets/images/panier.png")}} width="33px;"></img></a> <span style="margin-left:16px;font-size: 17px; font-weight: bold;">Panier</span>
+                <a style="margin-left:10px; margin-right:5px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_panier') }}"><img src={{asset("assets/images/panier.png")}} width="33px;"></img></a> 
+                <a style="margin-left:25px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_commandHistory') }}"><img src={{asset("assets/images/commands.png")}} width="26px;"></img></a> 
+
             </div>
         </div>
     </nav>
     <!-- Navbar End -->
 
 		{% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
 
 		<!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top""> <img src={{asset("assets/images/arrowUp.png")}} width="26px;"></img> </a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"> <img src={{asset("assets/images/arrowUp.png")}} width="26px;"></img> </a>
+
+
+    <!-- Libraries JS -->
+
+
+    <script src={{asset("https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js")}}></script>
 	</body>
 
 

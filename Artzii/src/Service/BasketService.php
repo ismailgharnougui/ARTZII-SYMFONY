@@ -3,7 +3,7 @@
 
 namespace App\Service;
 
-use App\Repository\ArticlesRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\UtilisateurRepository;
 use App\Repository\BasketRepository;
 
@@ -19,7 +19,7 @@ class BasketService
         $this->entityManager = $entityManager;
     }
 
-     public function addToCart($userId, $articleId, UtilisateurRepository $userRep , ArticlesRepository $articleRep)
+     public function addToCart($userId, $articleId, UtilisateurRepository $userRep , ArticleRepository $articleRep)
      {
         $user = $userRep->find($userId);
         $article = $articleRep->find($articleId);
@@ -43,15 +43,28 @@ class BasketService
     }
     
     public function removeFromCart($basketId, BasketRepository $basketRep)
-{
-    $basket = $basketRep->find($basketId);
+    {
+        $basket = $basketRep->find($basketId);
 
-    if (!$basket) {
-        throw new \Exception('Basket item not found');
+        if (!$basket) {
+            throw new \Exception('Basket item not found');
+        }
+
+        $this->entityManager->remove($basket);
+        $this->entityManager->flush();
     }
 
-    $this->entityManager->remove($basket);
-    $this->entityManager->flush();
-}
+    public function emptyCart($userId)
+    {
+        $panier = $this->entityManager->getRepository(Basket::class)->findBy([
+            'idClient' => $userId
+        ]);
+
+        foreach ($panier as $item) {
+            $this->entityManager->remove($item);
+        }
+        
+        $this->entityManager->flush();
+    }
 
 }
