@@ -17,6 +17,7 @@ class PanierController extends AbstractController
     public function index( BasketService $basketService, UtilisateurRepository $userRep ): Response
     {
         $basketData = $basketService->getCartItems(32);
+        $basketItemsCount = count($basketData);
         $connectedUser = $userRep->find(32);
 
         $totalPrice = array_reduce($basketData , function ($total, $product) {
@@ -27,7 +28,8 @@ class PanierController extends AbstractController
             'controller_name' => 'PanierController',
             'basketData' => $basketData,
             'totalPrice' => $totalPrice,
-            'connectedUser' => $connectedUser
+            'connectedUser' => $connectedUser,
+            'basketItemsCount' => $basketItemsCount,
         ]);
     }
 

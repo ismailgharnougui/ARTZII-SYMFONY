@@ -25,32 +25,39 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/articles', name: 'app_articles')]
-    public function goToArticles(ArticleRepository $rep, BasketRepository $basketRep): Response
+    public function goToArticles(ArticleRepository $rep, BasketRepository $basketRep, UtilisateurRepository $userRep): Response
     {
         $existingArticles = [];
+        $connectedUser = $userRep->find(32);
 
-        $basketItems=$basketRep->findAll();
+        $basketItems=$basketRep->findBy(['idClient' => $connectedUser]);
+        $basketItemsCount = count($basketItems);
+
         $articles = $rep->findAll();
-
-
+        
         // Loop through each basket item
         foreach ($basketItems as $basketItem) {
-        $articleId = $basketItem->getIdArticle()->getArtid();
+            $articleId = $basketItem->getIdArticle()->getArtid();
 
-        // Check if the article ID exists in the list of articles
-        foreach ($articles as $article) {
-            if ($article->getArtid() === $articleId) {
-                // Add the existing article to the list of existing articles
-                $existingArticles[] = $article->getArtid();
-                break;
-            }
-          }
+            // Check if the article ID exists in the list of articles
+            foreach ($articles as $article) {
+                if ($article->getArtid() === $articleId) {
+                    // Add the existing article to the list of existing articles
+                    $existingArticles[] = $article->getArtid();
+                    break;
+                }
+             }
         }
 
+        // Randomly shuffle the articles array
+        usort($articles, function ($a, $b) {
+            return rand(-1, 1);
+        });
         
         return $this->render('article/articles.html.twig', [
             'articles' => $articles,
             'existingArticles' => $existingArticles,
+            'basketItemsCount' => $basketItemsCount,
         ]);
     }
 

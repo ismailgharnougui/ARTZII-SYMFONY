@@ -147,6 +147,9 @@
 											{{basketItem.idArticle.artlib}}
 										</span>
 									</div>
+									<div>
+										Dimension : {{basketItem.idArticle.artdesc}} cm
+									</div>
 
 
 
@@ -219,10 +222,6 @@ let radios = document.getElementsByName('livraisonRadios');
 let livraison;
 let radios2 = document.getElementsByName('paiementRadios');
 let paiement;
-let radios3 = document.getElementsByName('adressRadios');
-let adresse;
-let defaultAdresse = document.getElementById('defaultAdresse');
-let inputAdresse = document.getElementById('inputAdresse');
 
 let a = document.getElementById('sending');
 
@@ -239,24 +238,8 @@ function update() {
       break;
     }
   }
-  for (let i = 0; i < radios3.length; i++) {
-    if (radios3[i].checked) {
-      adresse = radios3[i].value;
-      break;
-    }
-  }
-  if(adresse == 'default'){
-	defaultAdresse.style.display = "block";
-	inputAdresse.style.display = "none";
-	  adresse = defaultAdresse.value;
-  }
-  else{
-	defaultAdresse.style.display = "none";
-	inputAdresse.style.display = "block";
-	  adresse = inputAdresse.value;
-  }
-
-  a.href = "{{ path('app_confirmCommand', {'livMethod': 'livraison', 'payMethod': 'paiement', 'adress': 'adresse'}) }}".replace('livraison', livraison).replace('paiement', paiement).replace('adresse', adresse);
+  
+  a.href = "{{ path('app_confirmCommand', {'livMethod': 'livraison', 'payMethod': 'paiement'}) }}".replace('livraison', livraison).replace('paiement', paiement);
 }
 
 
@@ -271,19 +254,10 @@ for (let i = 0; i < radios2.length; i++) {
   radios2[i].addEventListener('change', update);
 }
 
-// add event listeners to update adresse whenever a radio button is selected or deselected
-for (let i = 0; i < radios3.length; i++) {
-  radios3[i].addEventListener('change', update);
-}
-
 // initialize paiement with the default selected radio button value
 update();
 
 </script>
-
-
-
-
 
 
 

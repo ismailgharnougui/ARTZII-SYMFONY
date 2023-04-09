@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Repository\CommandsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\UtilisateurRepository;
 use App\Service\BasketService;
-usE App\Service\CommandService;
+use App\Service\CommandService;
 use App\Entity\Commands;
 use App\Entity\CommandArticles;
+use App\Repository\BasketRepository;
 use App\Repository\CommandArticlesRepository;
 
 class CommandsController extends AbstractController
@@ -21,6 +23,7 @@ class CommandsController extends AbstractController
     {
         $connectedUser = $userRep->find(32);
         $basketData = $basketService->getCartItems(32);
+        $basketItemsCount = count($basketData);
 
         $totalPrice = array_reduce($basketData, function ($total, $product) {
             return $total + $product->getIdArticle()->getArtprix();
@@ -30,7 +33,8 @@ class CommandsController extends AbstractController
             'controller_name' => 'CommandsController',
             'basketData' => $basketData,
             'totalPrice' => $totalPrice,
-            'connectedUser' => $connectedUser
+            'connectedUser' => $connectedUser,
+            'basketItemsCount' => $basketItemsCount,
         ]);
     }
 
@@ -40,12 +44,13 @@ class CommandsController extends AbstractController
         UtilisateurRepository $userRep,
         BasketService $basketService,
         CommandArticlesRepository $commandArticlesRep,
-        $livMethod, $payMethod
+        $livMethod,
+        $payMethod
         ): Response {
 
         $connectedUser = $userRep->find(32);
         $command = new Commands();
-       
+
         $command->setDateCommande(new \DateTime());
         $command->setIdClient($connectedUser);
         $command->setEtatCommande('En Attente');
@@ -58,7 +63,7 @@ class CommandsController extends AbstractController
         $command->setCoutTotale($totalPrice + 8);
 
         $command->setAdresse($connectedUser->getAdresse());
-        
+
         $command->setModeLivraison($livMethod);
 
         $command->setModePaiement($payMethod);
@@ -92,14 +97,34 @@ class CommandsController extends AbstractController
     }
 
     #[Route('/afficheCommandClient/{idCommand}', name: 'app_afficheCommandClient')]
-    public function afficheCommand(CommandsRepository $rep, $idCommand,CommandArticlesRepository $commandArticlesRep , CommandService $commandServ): Response
+    public function afficheCommand(CommandsRepository $rep, $idCommand, CommandArticlesRepository $commandArticlesRep, CommandService $commandServ, BasketService $basketService): Response
     {
-        $numCommand= $commandServ->generateOrderNumber($idCommand);
+        $numCommand = $commandServ->generateOrderNumber($idCommand);
         $command = $rep->find($idCommand);
 
         $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
 
+        $basketItemsCount= count($basketService->getCartItems(32));
+
+
         return $this->render('commands/affichageCommand.html.twig', [
+            'controller_name' => 'CommandsController',
+            'command' => $command,
+            'numCommand' => $numCommand,
+            'commandArticles' => $commandArticles,
+            'basketItemsCount' => $basketItemsCount,
+        ]);
+    }
+
+    #[Route('/afficheCommandAdmin/{idCommand}', name: 'app_afficheCommandAdmin')]
+    public function afficheCommandAdmin(CommandsRepository $rep, $idCommand, CommandArticlesRepository $commandArticlesRep, CommandService $commandServ): Response
+    {
+        $numCommand = $commandServ->generateOrderNumber($idCommand);
+        $command = $rep->find($idCommand);
+
+        $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
+
+        return $this->render('commands/affichageCommandAdmin.html.twig', [
             'controller_name' => 'CommandsController',
             'command' => $command,
             'numCommand' => $numCommand,
@@ -107,13 +132,14 @@ class CommandsController extends AbstractController
         ]);
     }
 
+
     #[Route('/commandHistory', name: 'app_commandHistory')]
-    public function commandHistory(CommandsRepository $rep): Response
+    public function commandHistory(CommandsRepository $rep, BasketService $basketService): Response
     {
         $Encourslist = [];
-        $EnAttentelist=[];
-        $Livrelist=[];
-        $Annulelist=[];
+        $EnAttentelist = [];
+        $Livrelist = [];
+        $Annulelist = [];
         // Récupère toutes les commandes du client
         $commands = $rep->findBy(['idClient' => 32]);
 
@@ -149,6 +175,7 @@ class CommandsController extends AbstractController
                 $Annulelist[] = $command;
             }
         }
+        $basketItemsCount= count($basketService->getCartItems(32));
 
         return $this->render('commands/listCommandsClient.html.twig', [
             'controller_name' => 'CommandsController',
@@ -156,41 +183,63 @@ class CommandsController extends AbstractController
             'Encourslist' => $Encourslist,
             'EnAttentelist' => $EnAttentelist,
             'Livrelist' => $Livrelist,
-            'Annulelist' => $Annulelist
+            'Annulelist' => $Annulelist,
+            'basketItemsCount' => $basketItemsCount
         ]);
     }
 
 
     #[Route('/removeCommand/{idCommand}', name: 'app_removeCommand')]
-    public function removeArticle($idCommand, CommandsRepository $commandRep)
+    public function removeArticle($idCommand, CommandsRepository $commandRep, CommandArticlesRepository $commandArticlesRep)
     {
+        $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
+        foreach ($commandArticles as $commandArticle) {
+            $commandArticlesRep->remove($commandArticle, true);
+        }
         $command = $commandRep->find($idCommand);
-      
+
         if (!$command) {
             throw new \Exception('Article not found');
         }
 
         $commandRep->remove($command, true);
 
-        return $this->redirectToRoute('app_commandHistory');
+        return $this->redirectToRoute('app_backCommand');
     }
 
 
-    #[Route('/updateCommand/{idCommand}/{etatCommand}', name: 'app_updateCommand')]
-    public function updateCommand($idCommand, $etatCommand, CommandsRepository $commandRep)
+    #[Route('/updateCommand/{idCommand}', name: 'app_updateCommand')]
+    public function updateCommand($idCommand, CommandsRepository $commandRep, Request $request)
     {
+        $command = new commands();
         $command = $commandRep->find($idCommand);
-      
-        if (!$command) {
-            throw new \Exception('Article not found');
+        // Create a new form instance
+        $form = $this->createFormBuilder($command)
+            ->add('EtatCommand', ChoiceType::class, [
+                'label' => 'Status',
+                'choices' => [
+                    'En cours' => 'En cours',
+                    'En attente' => 'En attente',
+                    'Livré' => 'Livré',
+                    'Annulé' => 'Annulé',
+                ]
+            ])
+            ->add('save', ImageType::class, [
+                'data' => 'assets/images/editBlack.png',
+                'attr' => [
+                    'class' => 'save-button', // add a CSS class to style the button
+                ],
+            ])
+            -> getForm();
+
+        // Handle the request
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Update the EtatCommand property of your entity
+            $command = $form->getData();
+            $commandRep->save($command, true);
+            return $this->redirectToRoute('app_commandHistory');
         }
-
-        $command->setEtatCommande($etatCommand);
-
-        $commandRep->save($command, true);
-
-        return $this->redirectToRoute('app_commandHistory');
     }
-
-   
 }

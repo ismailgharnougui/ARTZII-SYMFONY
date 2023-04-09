@@ -1,28 +1,25 @@
-{% extends 'base2.html.twig' %}
-{% block title %}Artzii{% endblock %}
+{% extends 'baseAffichageCommand.html.twig' %}
+{% block title %}Artzii back{% endblock %}
 
 {% block body %}
 
 
-<h1 style="text-align: center; margin-top: 17px; color: #ccbc67;"> Merci pour votre commande ! </h1>
+<h1 style="text-align: center; margin-top: 75px; color: #ccbc67;"> Ici vous voyez la</h1>
 <!-- HTML !-->
 
 <div class="button-container">
  <button class="button-59" role="button">Commande n° {{numCommand}}</button>
 </div>
 
-<p style="text-align: center; margin-top: 15px; color: blaxk;"> Votre commande est en cours de préparation. </p> 
-
-
-
+ {# <p style="text-align: center; margin-top: 15px; color: blaxk;"> Votre commande est en cours de préparation. </p> #}
 
     <div class="container">
         
-        <div class="card" style="margin-top: 20px; border-radius: 7px;">
+        <div class="card" style="margin-top: 20px; border-radius: 7px; padding-top: 10px;">
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12">
-						<h3> Votre commande </h3>
+						<h3 > Détails commande </h3>
 
                         <table class="table">
                             <thead>
@@ -52,7 +49,7 @@
         <div class="col-md-12">
 				<div class="card" style="margin-top: 20px; border-radius: 7px;">
 					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
-						<h4 class="card-title">Les articles de votre commande :</h4>
+						<h3 class="card-title">Les articles de la commande</h3>
 					</div>
 
 					<div class="card-body">
@@ -87,7 +84,7 @@
 									</div>
 								</div>
                                 <div class="col-md-3">
-                                    <h6 class="card-title"  style="margin-top:21px;">Livré entre :</h6>
+                                    <h6 class="card-title"  style="margin-top:21px;">Doit être livrée entre :</h6>
                                     <div> {{ command.dateCommande|date("d-m-Y") }} et {{ command.dateCommande|date_modify("+4 days")|date("Y-m-d") }} </div>
                                 </div>
 							</div>
@@ -101,7 +98,7 @@
 
 <div class="button-container2">
   <div class="button-wrapper">
-    <a href="{{ path('app_commandHistory') }}">
+    <a href="{{ path('app_backCommand') }}">
       <button class="button-60">Revenir au liste</button>
     </a>
   </div>

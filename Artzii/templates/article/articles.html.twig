@@ -6,25 +6,24 @@
     
     {% for article in articles %}
 
-        <section class="posts"> 
+        <section class="posts" style="position: relative;">
             
-           <img class="img2" src="{{asset('assets/images/userImage.png')}}" alt="" width="65px" style="display: inline-block; margin-top: 10px; margin-left: 10px;">
-           <div style="display: inline-block; margin-top: 10px; margin-left: 0px;font-size: 17px; font-color:black; font-weight: bold;">Mokhtar Hadded</div>
+           <img class="img2" src="{{asset('assets/images/userImage.png')}}" alt="" width="55px" style="display: inline-block; margin-top: 10px; margin-left: 10px;">
+           <h3 style="display: inline-block; margin-top: 10px; margin-left: 3px;font-size: 17px; font-color:black; font-weight: bold;">{{article.getIdartiste().nomu}} {{article.getIdartiste().prenomu}}</h3>
            
            {% if article.getArtid in existingArticles %}
-           <img  src="{{asset('assets/images/basketChecked.png')}}" alt="exist in cart" width="54px" style="display: inline-block; margin-top: 10px; margin-left: 365px;">
+           <img  src="{{asset('assets/images/basketChecked.png')}}" alt="exist in cart" width="54px" style="position: absolute; top: 0 ; right: 0; margin-top: 15px; margin-right: 15px;">
             {% else %}
             <a href="{{ path('app_addToBasket', {'idArticle': article.getArtid()} ) }}">
-           <img  src="{{asset('assets/images/basket2.png')}}" alt="add to cart" width="52px" style="display: inline-block; margin-top: 10px; margin-left: 365px;">
+           <img  src="{{asset('assets/images/basket2.png')}}" alt="add to cart" width="52px" style="position: absolute; top: 0 ; right: 0; margin-top: 15px; margin-right: 15px;">
             </a>
-            {% endif %}
+           {% endif %}
 
 
             <article class="article1"> 
                 <h2>{{article.getArtlib()}}</h2>
                 <div class="metadat">
-                
-                   Publié le: 01/02/2023 à 12:00 <span class="badge bg-dark text-white p-1">Nature</span>
+                   Publié le: 01/02/2023 à 12:00 <span class="badge bg-dark text-white p-1" style="border-radius: 3px;">{{article.getCatlib()}}</span>
                 </div>
                 <div class="content">
                    

@@ -5,9 +5,6 @@
 
 
 {% block body %}
-
-
-
    {% if basketData is empty %}
 	   <section class="posts">
 						<article class="article1"> 
@@ -71,9 +68,9 @@
 
     <!-- DELETE CONFIRMATION MODAL -->
 
-		<div id="myModal{{basketItem.id}}" class="modal fade delete-modal" >
+		<div id="myModal{{basketItem.getId()}}" class="modal fade delete-modal" >
 			<div class="modal-dialog modal-confirm">
-				<div class="modal-content" style="z-index: 100 !important;">
+				<div class="modal-content" style="z-index: 99999 !important;">
 					<div class="modal-header flex-column">
 						<div class="icon-box">
 							<i class="material-icons">&#xE5CD;</i>
@@ -85,7 +82,7 @@
 						<p>Vous êtes sure vous voulez supprimer cet article de cette commande ?</p>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<button id="cancelDeleteArticle{{basketItem.id}}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+						<button id="cancelDeleteArticle{{basketItem.getId()}}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
 						<a href="{{ path('app_removeFromBasket', {'idArticle': basketItem.id}) }}">
 							<button id="confirm-delete-btn{{basketItem.id}}" type="button" class="btn btn-danger">Supprimer</button>          
 						</a>

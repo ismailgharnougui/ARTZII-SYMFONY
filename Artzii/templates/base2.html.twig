@@ -6,8 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-		<!-- Google Web Fonts -->
-  
+	<!-- Google Web Fonts -->
     <link href={{asset("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;800&family=Roboto:wght@400;500;700&display=swap")}} rel="stylesheet">
      
 
@@ -20,7 +19,36 @@
     <!-- Template Stylesheet -->
     <link href={{asset("assets/css/styleNavbar.css")}} rel="stylesheet">
 
+    <!-- fontawsome Stylesheet -->
+    <link href={{asset("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")}} rel="stylesheet">
+
+
 	{% block Stylesheet %}{% endblock %}
+
+    <style>
+        .badge2 {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    transform: scale(0.98);
+    }
+
+    .label-warning[href],
+    .badge-warning[href] {
+    background-color: #c67605;
+    }
+    #lblCartCount {
+        font-size: 11px;
+        background: #ff0000;
+        color: #fff;
+        padding: 1.2px 4px;
+        vertical-align: top;
+        margin-left: -14px;
+        margin-top: -9px; 
+    }
+    </style>
 
 	</head>
 	<body style="background-color: #f5f5f5;">
@@ -32,17 +60,33 @@
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left:-135px;">
+        <div class="collapse navbar-collapse" id="navbarCollapse" >
             <div class="navbar-nav mx-auto bg-light pe-4 py-3 py-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="{{ path('app_articles') }}" class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">Evennements</a>
                 <a href="service.html" class="nav-item nav-link">Réclamer</a>
                 <a href="contact.html" class="nav-item nav-link">About us</a>
             </div>
             <div class="h-100 d-lg-inline-flex align-items-center d-none">
 			
-                <a style="margin-left:10px; margin-right:5px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_panier') }}"><img src={{asset("assets/images/panier.png")}} width="33px;"></img></a> 
-                <a style="margin-left:25px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_commandHistory') }}"><img src={{asset("assets/images/commands.png")}} width="26px;"></img></a> 
+                <a style="margin-left:10px; margin-right:5px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_panier') }}">
+                    <img src={{asset("assets/images/panier.png")}} width="35px;"></img>
+                    <span class='badge badge-warning badge2' id='lblCartCount'> {{basketItemsCount}}</span>
+                </a> 
+                <a style="margin-left:25px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="{{ path('app_commandHistory') }}"><img src={{asset("assets/images/commands.png")}} width="24px;"></img></a>
+                <a style="margin-left:25px; transform: scale(1.4);" class="btn btn-square rounded-circle bg-light text-primary me-0" href="#"><img src={{asset("assets/images/profile.png")}} width="24px;"></img></a>
+                
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="margin-left: -12px; color:black;"></a>
+                    <div class="dropdown-menu bg-light border-0 m-0">
+                     
+                        <a class="dropdown-header" style="font-size: 16px;">Mokhtar Hadded</a>
+                        <a href="quote.html" class="dropdown-item"><i class="fa-solid fa-user"></i>Profile</a>
+                        <a href="404.html" class="dropdown-item"> <i class="fas fa-question-circle"></i> Besoin d'aide ?</a>
+                        <a href="404.html" class="dropdown-item"> <i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                    </div>
+                </div>
+                 
 
             </div>
         </div>
@@ -55,10 +99,7 @@
 		<!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"> <img src={{asset("assets/images/arrowUp.png")}} width="26px;"></img> </a>
 
-
     <!-- Libraries JS -->
-
-
     <script src={{asset("https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js")}}></script>
 	</body>
 
