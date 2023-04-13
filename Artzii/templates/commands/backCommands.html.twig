@@ -39,6 +39,7 @@
 										<th scope="col">Adresse</th>
 										<th scope="col">Date commande</th>
 										<th scope="col">Mode paiement</th>
+										<th scope="col">Mode livraison</th>
 										<th scope="col">Coût totale</th>
 										<th scope="col">Status</th>
 										<th scope="col">Actions</th>
@@ -52,11 +53,12 @@
 											<td>{{command.adresse}}</td>
 											<td>{{command.dateCommande | date('Y-m-d')}}</td>
 											<td>{{command.modePaiement}}</td>
+											<td>{{command.modeLivraison}}</td>
 											<td>{{command.coutTotale}} DT</td>
 											<td >
 												{% set status = command.etatCommande  %}
 
-												<select id="EtatCommand">
+												<select id="EtatCommand{{command.getId()}}" >
 													{% if status == 'En cours' %}
 														<option value="En cours" selected >
 															<span class="badge bg-primary">En cours</span>
@@ -102,7 +104,7 @@
 
 											<td>
 
-											    <a href="#">
+											    <a href="#" onclick="modifierCommand(EtatCommand{{command.getId()}})">
 													<img src="{{asset('assets/images/editBlack.png')}}" alt="modifier" width="24px">
 												</a> 
 
@@ -114,10 +116,6 @@
 												<a href="{{path('app_afficheCommandAdmin',{'idCommand':command.id})}}">
 													<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="27px" style="margin-left:-6px;">
 												</a>
-
-
-
-
 											</td>
 										</tr>
 									{% endfor %}
@@ -137,6 +135,13 @@
 
 	<!-- End #main -->
 
+	{% for flash_message in app.session.flashbag.get('SuccessModifierCommand') %}
+     <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+    {{ flash_message }}
+       
+    </div>
+    {% endfor %}
+
 
 {% endblock %}
 
@@ -144,16 +149,23 @@
 {% block javascripts %}
 <script>
 
-  var selectElement = document.getElementById("EtatCommand");
-  var hiddenInputElement = document.getElementById("selected-fruit");
-  
-  // Update the hidden input field with the selected value whenever the selection changes
-  selectElement.addEventListener("change", function() {
-    // hiddenInputElement.value = selectElement.value;
-     var selectedOption = selectElement.options[selectElement.selectedIndex];
-     hiddenInputElement.value = ""+selectedOption.value;
-  });
+// Automatically dismiss the alert after 3 seconds
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 3000);
+
+const selectElement = document.getElementById("EtatCommand");
+selectElement.addEventListener("change", function() {
+  const selectedValue = selectElement.value;
+  console.log(selectedValue);
+});
 
 
+function modifierCommand(select){
+	
+	let selectedElement = select.options[select.selectedIndex].value;
+	location.href = "http://localhost:8000/updateCommand/"+select.id.replace("EtatCommand","")+"/"+selectedElement;
+	
+}
 </script>
 {% endblock %}

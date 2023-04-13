@@ -77,7 +77,6 @@ class CommandsController extends AbstractController
             $commandArticlesRep->save($commandArticle, true);
         }
 
-
         $basketService->emptyCart(32);
 
         // add flash message
@@ -140,6 +139,7 @@ class CommandsController extends AbstractController
         $EnAttentelist = [];
         $Livrelist = [];
         $Annulelist = [];
+        
         // Récupère toutes les commandes du client
         $commands = $rep->findBy(['idClient' => 32]);
 
@@ -190,7 +190,7 @@ class CommandsController extends AbstractController
 
 
     #[Route('/removeCommand/{idCommand}', name: 'app_removeCommand')]
-    public function removeArticle($idCommand, CommandsRepository $commandRep, CommandArticlesRepository $commandArticlesRep)
+    public function removeCommand($idCommand, CommandsRepository $commandRep, CommandArticlesRepository $commandArticlesRep)
     {
         $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
         foreach ($commandArticles as $commandArticle) {
@@ -208,38 +208,18 @@ class CommandsController extends AbstractController
     }
 
 
-    #[Route('/updateCommand/{idCommand}', name: 'app_updateCommand')]
-    public function updateCommand($idCommand, CommandsRepository $commandRep, Request $request)
+    #[Route('/updateCommand/{idCommand}/{status}', name: 'app_updateCommand')]
+    public function updateCommand($idCommand, $status, CommandsRepository $commandRep, Request $request)
     {
         $command = new commands();
         $command = $commandRep->find($idCommand);
-        // Create a new form instance
-        $form = $this->createFormBuilder($command)
-            ->add('EtatCommand', ChoiceType::class, [
-                'label' => 'Status',
-                'choices' => [
-                    'En cours' => 'En cours',
-                    'En attente' => 'En attente',
-                    'Livré' => 'Livré',
-                    'Annulé' => 'Annulé',
-                ]
-            ])
-            ->add('save', ImageType::class, [
-                'data' => 'assets/images/editBlack.png',
-                'attr' => [
-                    'class' => 'save-button', // add a CSS class to style the button
-                ],
-            ])
-            -> getForm();
+        $command->setEtatCommande($status);
+        
+        $commandRep->save($command, true);
 
-        // Handle the request
-        $form->handleRequest($request);
+        // add flash message
+        $this->addFlash('SuccessModifierCommand', 'Commande modifié avec succès');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Update the EtatCommand property of your entity
-            $command = $form->getData();
-            $commandRep->save($command, true);
-            return $this->redirectToRoute('app_commandHistory');
-        }
+        return $this->redirectToRoute('app_backCommand');
     }
 }

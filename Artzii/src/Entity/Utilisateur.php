@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Utilisateur
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var int
@@ -148,4 +149,36 @@ class Utilisateur
 
         return $this;
     }
+
+    public function getUserIdentifier(): string
+{
+    return $this->emailu;
+}
+
+public function getRoles(): array
+{
+    return [$this->roleu];
+}
+
+public function getPassword(): ?string
+{
+    return $this->mdpu;
+}
+
+public function getSalt(): ?string
+{
+    // leave this blank unless you're using bcrypt or Argon2i
+    // these algorithms have salt built-in
+    return null;
+}
+
+public function eraseCredentials()
+{
+    // if you store any temporary, sensitive data on the user, delete it here
+}
+
+public function getUsername(): string
+{
+    return $this->emailu;
+}
 }

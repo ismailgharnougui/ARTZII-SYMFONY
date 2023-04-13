@@ -19,7 +19,7 @@
 	<div class="container" style="transform: scale(0.98); margin-top: -5px;">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="card" style="margin-top: 8px;  border-radius: 7px;">
+				<div class="card" style="margin-top: -5px;  border-radius: 7px;">
 					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
 						<h4 class="card-title">Votre panier</h4>
 					</div>
@@ -34,7 +34,7 @@
                   {% for basketItem in basketData %}
 									<section class="basket-item" style="position: relative; transform: scale(0.95)">
 
-                    <a data-bs-toggle="modal" href="#myModal{{basketItem.id}}">
+                    <a href="{{ path('app_removeFromBasket', {'idArticle': basketItem.id}) }}">
 										<img src="{{asset('assets/images/trash.png')}}"  alt="add to cart" width="45px" style="position: absolute; top: 0 ; right: 0; margin-top: 7px; margin-right: 7px;">
                     </a>
 
@@ -68,7 +68,7 @@
 
     <!-- DELETE CONFIRMATION MODAL -->
 
-		<div id="myModal{{basketItem.getId()}}" class="modal fade delete-modal" >
+		  {# <div id="myModal{{basketItem.getId()}}" class="modal fade delete-modal" >
 			<div class="modal-dialog modal-confirm">
 				<div class="modal-content" style="z-index: 99999 !important;">
 					<div class="modal-header flex-column">
@@ -89,7 +89,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		  </div> #}
 		<!-- DELETE CONFIRMATION MODAL -->
 
  {% endfor %}

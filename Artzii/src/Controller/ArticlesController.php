@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
 use App\Form\AjoutArticleType;
 use App\Repository\BasketRepository;
+use App\Service\BasketService;
 
 class ArticlesController extends AbstractController
 {
@@ -62,7 +63,7 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/articlesArtiste/{idArtiste}', name: 'app_articlesArtiste')]
-    public function goToArticlesArtiste($idArtiste, ArticleRepository $articleRep, UtilisateurRepository $userRep, Request $request): Response
+    public function goToArticlesArtiste($idArtiste, ArticleRepository $articleRep, UtilisateurRepository $userRep, BasketService $basketService, Request $request): Response
     {
 
         $articles = $articleRep->findBy(['idartiste' => $userRep->find($idArtiste)]);
@@ -89,10 +90,13 @@ class ArticlesController extends AbstractController
              // redirect to a success page or do something else
              return $this->redirectToRoute('app_articles');
          }
+         $basketItemsCount= count($basketService->getCartItems(32));
+
 
         return $this->render('article/articlesArtiste.html.twig', [
             'articles' => $articles,
             'form' => $form->createView(),
+            'basketItemsCount' => $basketItemsCount,
         ]);
     }
 
