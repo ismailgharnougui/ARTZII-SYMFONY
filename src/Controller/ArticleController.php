@@ -20,6 +20,18 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', ['listP'=>$prods]);
     }
 
+
+
+    #[Route('/produits/front', name: 'display_prod_front')]
+    public function indexfront(): Response
+    {
+
+        $em = $this->getDoctrine()->getManager()->getRepository(Article::class); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+
+        $prods = $em->findAll(); // Select * from produits;
+        return $this->render('article/indexfront.html.twig', ['listP'=>$prods]);
+    }
+
     #[Route('/ajouterArticle', name: 'ajouterArticle')]
     public function ajouterArticle(Request $request): Response
     {
@@ -30,19 +42,19 @@ class ArticleController extends AbstractController
 
 
 
-        $form->handleRequest($request); // bch man5srhomich ya3ni les donnees yab9o persisté
+        $form->handleRequest($request); //
 
 
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $fileUpload= $form->get('ArtImg')->getData(); // recuperriha fikle (valeur image
+            $fileUpload= $form->get('ArtImg')->getData();
 
-            $fileName= md5(uniqid()). '.' .$fileUpload->guessExtension(); //Cryptage image
+            $fileName= md5(uniqid()). '.' .$fileUpload->guessExtension();
 
             $fileUpload->move($this->getParameter('kernel.project_dir').'/public/uploads',$fileName);// Creation dossier uploads
 
-            $prod->setArtImg($fileName);// colonne ta3 image bch nsob fiha esem image crypté
+            $prod->setArtImg($fileName);
 
 
             $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
@@ -135,7 +147,24 @@ class ArticleController extends AbstractController
         ));
     }
 
+    #[Route('/detailArticle/front/{id}', name: 'detailArticlefront')]
 
+    public function detailArticlefront(\Symfony\Component\HttpFoundation\Request $req, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $prod = $em->getRepository(Article::class)->find($id);
+
+
+        return $this->render('article/detailArticlefront.html.twig', array(
+            'id' => $prod->getId(),
+            'name' => $prod->getArtLib(),
+            'prix' => $prod->getArtPrix(),
+            'artdispo' =>$prod->getArtDispo(),
+            'description' => $prod->getArtDesc(),
+            'image'=>$prod->getArtImg(),
+            'catLib'=>$prod->getCatLib()->getCatLib()
+        ));
+    }
 
 
 }

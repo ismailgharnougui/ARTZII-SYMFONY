@@ -1,0 +1,71 @@
+{% extends 'indexClient.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <main id="main">
+
+        <!-- ======= Portfolio Details Section ======= -->
+        <section id="portfolio-details" class="portfolio-details">
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-8">
+                        <div class="portfolio-details-slider swiper">
+                            <div class="swiper-wrapper align-items-center">
+
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('uploads/' ~ image) }}" style="max-height: 400px">
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="portfolio-info">
+                            <h3>Article information</h3>
+                            <ul>
+                                <li><strong>Article numero</strong>: {{ id }}</li>
+                                <br>
+                                <br>
+                                <li><strong>Nom</strong>: {{ name }}</li>
+                                <br>
+                                <br>
+                                <li><strong>Description</strong>: {{ description }}</li>
+                                <br>
+                                <br>
+                                <li><strong>Disponibilite</strong>: {{ artdispo }}</li>
+                                <br>
+                                <br>
+                                <li><strong>Prix</strong>: {{ prix }}</li>
+                                <br>
+                                <br>
+                                <li><strong>Categorie</strong>: {{ catLib }}</li>
+
+                              {#   <center>    <table border="0">
+                                        <tr>
+                                            <th>  <a href="{{ path('app_reservation_add', {id: voiture.id}) }}">
+                                                    <button type="button" class="btn btn-outline-success">book</button></a></center></th>
+#}
+                                </tr>
+
+                                </center>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Portfolio Details Section -->
+
+    </main><!-- End #main -->
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+{% endblock %}

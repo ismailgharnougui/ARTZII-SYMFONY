@@ -1,0 +1,46 @@
+{% extends 'indexClient.html.twig' %}
+
+{% block body %}
+
+    <main id="main">
+
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <br>
+
+
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+                    {% for p in listP %}
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-wrap">
+                            <td><img  style="max-height: 50% ; width: 50%;  object-fit: cover;" src="{{ asset('uploads/'~p.ArtImg) }}"/></td>
+
+                            <div class="portfolio-info">
+                                <h4>{{ p.id }}</h4>
+
+                                <div class="portfolio-links">
+                              <a href="{{ path('detailArticlefront',{id:p.id}) }}" title="More Details"><i class="bx bx-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if loop.index % 3 == 0 %}
+                </div>
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+
+            </div>
+        </section><!-- End Portfolio Section -->
+
+
+    </main><!-- End #main -->
+
+
+    <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+{% endblock %}

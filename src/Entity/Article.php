@@ -69,6 +69,7 @@ class Article
     {
         $this->ArtLib = $ArtLib;
 
+
         return $this;
     }
 

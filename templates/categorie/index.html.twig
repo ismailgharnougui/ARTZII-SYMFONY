@@ -84,10 +84,13 @@
                                             <a href="{{ path('modifier_category',{id:p.id}) }}">
                                                 <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
 
+                                        <td>
+                                            <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('supprimerCategory', {'id': p.id }) }}';}">
 
-                                        <td><a href="{{ path('supprimerCategory',{id:p.id}) }}">
                                                 <button type="button" class="btn btn-outline-danger">Supprimer</button>
                                             </a></td>
+
+
                                     </tr>
 
                                 {% endfor %}
