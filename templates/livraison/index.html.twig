@@ -1,0 +1,79 @@
+{% extends 'baseBackLivraison.html.twig' %}
+
+{% block title %}Livraison index{% endblock %}
+
+{% block body %}
+
+
+	<!-- ======= main ======= -->
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Data Tables</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Tables</li>
+					<li class="breadcrumb-item active">Data</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Les livraisons</h5>
+							<p>Bienvenue dans l'interface de gestion des livraisons, vous êtes maintenant aux livraisons !
+							</p>
+
+							<!-- Table with stripped rows -->
+							<table class="table table-striped datatable">
+								<thead>
+									<tr>
+										<th>IdLivraison</th>
+                                        <th>Etatliv</th>
+                                        <th>Dateliv</th>
+                                        <th>Prixliv</th>
+                                        <th>actions</th>
+									</tr>
+								</thead>
+								<tbody>
+        {% for livraison in livraisons %}
+            <tr>
+                <td>{{ livraison.idLivraison }}</td>
+                <td>{{ livraison.etatliv }}</td>
+                <td>{{ livraison.dateliv ? livraison.dateliv|date('Y-m-d') : '' }}</td>
+                <td>{{ livraison.prixliv }}</td>
+                <td>
+                    <a href="{{ path('app_livraison_show', {'idLivraison': livraison.idLivraison}) }}">show</a>
+                    <a href="{{ path('app_livraison_edit', {'idLivraison': livraison.idLivraison}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+							</table>
+							<!-- End Table with stripped rows -->
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- End #main -->
+
+
+{% endblock %}

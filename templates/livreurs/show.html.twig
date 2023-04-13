@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livreurs{% endblock %}
+
+{% block body %}
+    <h1>Livreurs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livreur.id }}</td>
+            </tr>
+            <tr>
+                <th>NumTel</th>
+                <td>{{ livreur.numTel }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ livreur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ livreur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>RegionLivreur</th>
+                <td>{{ livreur.regionLivreur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_livreurs_index') }}">back to list</a>
+
+    <a href="{{ path('app_livreurs_edit', {'id': livreur.id}) }}">edit</a>
+
+    {{ include('livreurs/_delete_form.html.twig') }}
+{% endblock %}
