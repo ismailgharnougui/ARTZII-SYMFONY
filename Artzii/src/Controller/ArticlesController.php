@@ -51,9 +51,9 @@ class ArticlesController extends AbstractController
         }
 
         // Randomly shuffle the articles array
-        usort($articles, function ($a, $b) {
-            return rand(-1, 1);
-        });
+        // usort($articles, function ($a, $b) {
+        //     return rand(-1, 1);
+        // });
         
         return $this->render('article/articles.html.twig', [
             'articles' => $articles,

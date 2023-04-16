@@ -1,0 +1,72 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Artzii
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+
+		<h2>
+			Nos cours de dessin : {{cours|length}} résultats
+		</h2>
+
+		<section class="section">
+			<div class="row align-items-top">
+            {% for cour in cours %}
+			  
+                <div class="col-lg-3" >
+                    <a href="{{path('app_infoCours',{'idCours':cour.getId()})}}">
+					<!-- Card with an image on top -->
+					<div class="card" style="border-radius: 5px; margin-top: 20px;" >
+						<img src={{asset('assets/images/art6.png')}} class="card-img-top" alt="..." style=" border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                        
+						<div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{cour.getIdInstructeur().getNom()}}</h6>
+							<h5 class="card-title">{{cour.getNom()}}</h5>
+							<p class="card-text"> {{cour.getDescription()}} </p>
+                            <h5 class="card-title">plus d'infos: </h5>  <p class="card-text">Niveau: {{cour.getQualifications()}} <span style="font-weight:bold;">·</span> Cours <span style="font-weight:bold;">·</span> Durée: {{cour.getDuree()}}h </p>
+						</div>
+					</div>
+					<!-- End Card with an image on top -->
+                    </a>
+				</div>
+              
+            {% endfor %}
+			</div>
+		</section>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+    .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    }
+
+    .card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+    </style>
+
+{% endblock %}
+
+
+

@@ -222,4 +222,19 @@ class CommandsController extends AbstractController
 
         return $this->redirectToRoute('app_backCommand');
     }
+
+    #[Route('/facture/{idCommand}', name: 'app_facture')]
+    public function facture($idCommand, CommandsRepository $rep, CommandArticlesRepository $commandArticlesRep, CommandService $commandServ, BasketService $basketService): Response
+    {
+        $numCommand = $commandServ->generateOrderNumber($idCommand);
+        $command= $rep->find($idCommand);
+        $commandArticles = $commandArticlesRep->findBy(['command' => $idCommand]);
+
+        return $this->render('facture/facture.html.twig', [
+            'controller_name' => 'CommandsController',
+            'command' => $command,
+            'commandArticles' => $commandArticles,
+            'numCommand' => $numCommand,
+        ]);
+    }
 }

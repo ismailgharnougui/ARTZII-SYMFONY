@@ -1,0 +1,17 @@
+# knp_snappy:
+#     pdf:
+#         enabled:    true
+#         binary:     '%env(WKHTMLTOPDF_PATH)%'
+#         options:    []
+#     image:
+#         enabled:    true
+#         binary:     '%env(WKHTMLTOIMAGE_PATH)%'
+#         options:    []
+
+
+knp_snappy:
+    pdf:
+        enabled: true
+        binary: /usr/local/bin/wkhtmltopdf
+        options:
+            enable-local-file-access: true

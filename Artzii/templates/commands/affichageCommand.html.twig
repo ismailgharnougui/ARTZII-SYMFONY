@@ -106,7 +106,9 @@
     </a>
   </div>
   <div class="button-wrapper">
-    <button class="button-60">Imprimer</button>
+    <a href="{{ path('app_facture', {'idCommand': command.getId()}) }}">
+      <button class="button-60" >Générer facture</button>
+    </a>
   </div>
 </div>
 
