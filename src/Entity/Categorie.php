@@ -1,60 +1,71 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\CategorieRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+/**
+ * Categorie
+ *
+ * @ORM\Table(name="categorie")
+ * @ORM\Entity
+ */
 class Categorie
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="CatId", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $catid;
 
-    #[ORM\Column(length: 255)]
-    private ?string $CatLib = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatLib", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+     * @Assert\Length(max=20, maxMessage="Le champ ne doit pas dépasser {{ limit }} caractères.")
+     * @Assert\Regex(pattern="/^[^0-9]*$/", message="Le champ ne doit pas contenir de chiffres.")
+     */
+    private $catlib;
 
-
-
-
-    // JOIN:
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'catLib')]
-    private $products;
-
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getCatid(): int
     {
-        return $this->id;
-    }
-
-    public function getCatLib(): ?string
-    {
-        return $this->CatLib;
-    }
-
-    public function setCatLib(string $CatLib): self
-    {
-        $this->CatLib = $CatLib;
-
-        return $this;
+        return $this->catid;
     }
 
     /**
-     * @return mixed
+     * @param int $catid
      */
-    public function getProducts()
+    public function setCatid(int $catid): void
     {
-        return $this->products;
+        $this->catid = $catid;
     }
 
     /**
-     * @param mixed $products
+     * @return string
      */
-    public function setProducts($products): void
+    public function getCatlib(): string
     {
-        $this->products = $products;
+        return $this->catlib;
     }
 
+    /**
+     * @param string $catlib
+     */
+    public function setCatlib(string $catlib): void
+    {
+        $this->catlib = $catlib;
+    }
 
+    public function __toString(): string
+    {
+        // TODO: Implement __toString() method.
+        return $this->catlib;
+    }
 }

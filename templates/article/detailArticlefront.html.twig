@@ -1,4 +1,4 @@
-{% extends 'indexClient.html.twig' %}
+{% extends 'baseFront.html.twig' %}
 
 {% block body %}
     <br>
@@ -45,14 +45,15 @@
                                 <li><strong>Prix</strong>: {{ prix }}</li>
                                 <br>
                                 <br>
-                                <li><strong>Categorie</strong>: {{ catLib }}</li>
+                                <li><strong>Categorie</strong>: {{ catlib }}</li>
 
-                              {#   <center>    <table border="0">
+                                {#   <center>    <table border="0">
                                         <tr>
                                             <th>  <a href="{{ path('app_reservation_add', {id: voiture.id}) }}">
                                                     <button type="button" class="btn btn-outline-success">book</button></a></center></th>
-#}
+                                #}
                                 </tr>
+                            </ul>
 
                                 </center>
                         </div>

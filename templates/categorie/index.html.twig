@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}Hello CategorieController!{% endblock %}
 
@@ -9,11 +9,7 @@
         <div class="pagetitle">
             <h1>Les Categories</h1>
             <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">General</li>
-                </ol>
+
 
             </nav>
         </div><!-- End Page Title -->
@@ -41,9 +37,11 @@
                                 </div>
 
                             {% endfor %}
-                            <h5 class="card-title">List Articles</h5>
+                            <h5 class="card-title"></h5>
                             <a href="{{ path('ajout_category') }}">
                                 <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
+
+
 
                             </a>
 
@@ -77,19 +75,18 @@
 
                                     <tr>
 
-                                        <td>{{p.CatLib}}</td>
+                                        <td>{{p.catlib}}</td>
 
 
                                         <td>
-                                            <a href="{{ path('modifier_category',{id:p.id}) }}">
-                                                <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
+                                            <a href="{{ path('modifier_category',{catid:p.catid}) }}">
+                                                <i  class="bi bi-pencil" style="color: #0a58ca;"></i></a></td>
 
                                         <td>
-                                            <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('supprimerCategory', {'id': p.id }) }}';}">
+                                            <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('supprimerCategory', {'catid': p.catid }) }}';}">
 
-                                                <button type="button" class="btn btn-outline-danger">Supprimer</button>
-                                            </a></td>
-
+                                                <i  class="bi bi-trash" style="color:red;"></i></a></td>
+                                        </a></td>
 
                                     </tr>
 
@@ -103,15 +100,13 @@
                         </div>
 
                     </div>
-
-
-
                 </div>
-
-
             </div>
         </section>
 
     </main>
 
 {% endblock %}
+
+
+

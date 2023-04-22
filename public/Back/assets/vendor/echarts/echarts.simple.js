@@ -19773,7 +19773,7 @@
           name: rawItem.name,
           displayName: rawItem.displayName,
           type: rawItem.type
-        }; // User can set null in dimensions.
+        }; // Useraaa can set null in dimensions.
         // We don't auto specify name, otherwise a given name may
         // cause it to be referred unexpectedly.
 
@@ -19782,7 +19782,7 @@
         } // Also consider number form like 2012.
 
 
-        item.name += ''; // User may also specify displayName.
+        item.name += ''; // Useraaa may also specify displayName.
         // displayName will always exists except user not
         // specified or dim name is not specified or detected.
         // (A auto generated dim name will not be used as
@@ -23379,7 +23379,7 @@
      */
 
     function autoSeriesName(seriesModel) {
-      // User specified name has higher priority, otherwise it may cause
+      // Useraaa specified name has higher priority, otherwise it may cause
       // series can not be queried unexpectedly.
       var name = seriesModel.name;
 
@@ -29698,8 +29698,8 @@
 
             if (mayLabelDimType(dimItem.type)) {
               defaultedLabel[0] = dimName;
-            } // User output encode do not contain generated coords.
-            // And it only has index. User can use index to retrieve value from the raw item array.
+            } // Useraaa output encode do not contain generated coords.
+            // And it only has index. Useraaa can use index to retrieve value from the raw item array.
 
 
             getOrCreateEncodeArr(userOutputEncode, coordDim)[coordDimIndex] = data.getDimensionIndex(dimItem.name);
@@ -32585,7 +32585,7 @@
 
         if (!isFinite(span)) {
           return;
-        } // User may set axis min 0 and data are all negative
+        } // Useraaa may set axis min 0 and data are all negative
         // FIXME If it needs to reverse ?
 
 
@@ -41789,7 +41789,7 @@
       }
 
       if (layout.labelStyleWidth != null) {
-        // User-defined style.width has the highest priority.
+        // Useraaa-defined style.width has the highest priority.
         return;
       }
 
@@ -43393,17 +43393,17 @@
       var max = rawExtent[1];
 
       if (isMinFixed && isMaxFixed) {
-        // User set min, max, divide to get new interval
+        // Useraaa set min, max, divide to get new interval
         interval = (max - min) / alignToSplitNumber;
       } else if (isMinFixed) {
-        max = rawExtent[0] + interval * alignToSplitNumber; // User set min, expand extent on the other side
+        max = rawExtent[0] + interval * alignToSplitNumber; // Useraaa set min, expand extent on the other side
 
         while (max < rawExtent[1] && isFinite(max) && isFinite(rawExtent[1])) {
           interval = increaseInterval(interval);
           max = rawExtent[0] + interval * alignToSplitNumber;
         }
       } else if (isMaxFixed) {
-        // User set max, expand extent on the other side
+        // Useraaa set max, expand extent on the other side
         min = rawExtent[1] - interval * alignToSplitNumber;
 
         while (min > rawExtent[0] && isFinite(min) && isFinite(rawExtent[0])) {
@@ -45143,7 +45143,7 @@
 
             function mergeDecal(specifiedDecal, paletteDecal) {
               // Merge decal from palette to decal from itemStyle.
-              // User do not need to specify all of the decal props.
+              // Useraaa do not need to specify all of the decal props.
               var resultDecal = specifiedDecal ? extend(extend({}, paletteDecal), specifiedDecal) : paletteDecal;
               resultDecal.dirty = true;
               return resultDecal;

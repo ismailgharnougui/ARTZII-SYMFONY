@@ -1,0 +1,155 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block categories %}
+
+{% endblock %}
+
+{% block candidate %}
+
+{% endblock %}
+
+{% block body %}
+    <section class="min-sec">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-9">
+                    <div class="sec-heading">
+                        <h2>list Services rated <span class="theme-cl-2">Jobs</span></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <section>
+
+                    <div class="album py-5 bg-light">
+                        <div class="container">
+                            <div class="sidebar-search" >
+                                <div class="input-group custom-search-form">
+                                    <input    type="text" id="search" class="form-control widget_input" placeholder="Chercher..." style="width: 1180px;background: white">
+                                </div>
+                                <br>
+                                <!-- /input-group -->
+                                <ul class="nav" id="side-menu">
+                                    <li>
+                                        <a href="#"> <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level" id="entitiesNav">
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row d-flex" id="containerr">
+                <div id="search"></div>
+
+                <div class="row justify-content-center">
+
+                    <div class="row">
+                        <!-- Single Item -->
+                        {% for p in listS %}
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="ser_110">
+                                    <div class="ser_110_thumb">
+                                        <a href="{{ path('detailServices',{servid:p.servid}) }}" class="ser_100_link">
+                                            <img src="{{ asset('uploads/'~p.servimg) }}" class="img-fluid" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="ser_110_footer bott">
+                                        <div class="_110_foot_left">
+                                            <div class="_autho098">
+                                                <img src="{{ asset('uploads/'~p.qrcode) }}" class="img-fluid circle" alt="">
+                                                <img src="assets/img/verify.svg" class="verified" width="12" alt="">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="text-center">
+                                        <div class="ser_title098">
+                                            <h4 class="_ser_title"><a href="{{ path('detailServices',{servid:p.servid}) }}">{{ p.servlib }}</a></h4>
+                                        </div>
+                                        <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong class="theme-cl">{{ p.servprix }} DT</strong></div>
+                                        <div class="ser_110_caption">
+                                            <div class="ser_rev098">
+                                                {% for i in range(0, p.note) %}
+                                                    <i class="fa fa-star filled"></i>
+                                                {% endfor %}
+                                                {% for i in range(0, 5 - p.note) %}
+                                                    <i class="fa fa-star"></i>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+    </section>
+
+
+    <!-- jQuery is necessary -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 3;
+                var that = this;
+                var value = $(this).val(); // elyyktbo fi input 7atito fi var var
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'products') {
+                                            if (id != 'error') {
+                                                x= document.getElementById("containerr");
+                                                entitySelector.append('<div style="display: table;width:100%;padding: 15px"><span style="text-align: center">'+value[2]+'</span><br/><a href="/show_products_cat/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 150px; height: 150px"/>'+'</a></div>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(".btn1").click(function(){
+                $("h1").slideUp();
+            });
+            $(".btn2").click(function(){
+                $("h1").slideDown();
+            });
+            $(".btn3").click(function(){
+                $("h1").slideToggle();
+            });
+        });
+    </script>
+{% endblock %}

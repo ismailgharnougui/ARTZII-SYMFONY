@@ -3051,12 +3051,12 @@ export interface CartesianScaleOptions extends CoreScaleOptions {
   axis: 'x' | 'y' | 'r';
 
   /**
-   * User defined minimum value for the scale, overrides minimum value from data.
+   * Useraaa defined minimum value for the scale, overrides minimum value from data.
    */
   min: number;
 
   /**
-   * User defined maximum value for the scale, overrides maximum value from data.
+   * Useraaa defined maximum value for the scale, overrides maximum value from data.
    */
   max: number;
 
@@ -3146,12 +3146,12 @@ export type LinearScaleOptions = CartesianScaleOptions & {
     precision: number;
 
     /**
-     * User defined fixed step size for the scale
+     * Useraaa defined fixed step size for the scale
      */
     stepSize: number;
 
     /**
-     * User defined count of ticks
+     * Useraaa defined count of ticks
      */
     count: number;
   };
@@ -3307,12 +3307,12 @@ export type RadialTickOptions = TickOptions & {
   precision: number;
 
   /**
-   * User defined fixed step size for the scale.
+   * Useraaa defined fixed step size for the scale.
    */
   stepSize: number;
 
   /**
-   * User defined number of ticks
+   * Useraaa defined number of ticks
    */
   count: number;
 }
@@ -3361,11 +3361,11 @@ export type RadialLinearScaleOptions = CoreScaleOptions & {
   grid: Partial<GridLineOptions>;
 
   /**
-   * User defined minimum number for the scale, overrides minimum value from data.
+   * Useraaa defined minimum number for the scale, overrides minimum value from data.
    */
   min: number;
   /**
-   * User defined maximum number for the scale, overrides maximum value from data.
+   * Useraaa defined maximum number for the scale, overrides maximum value from data.
    */
   max: number;
 

@@ -8638,7 +8638,7 @@
 
         return this.w;
       }
-      /** User possibly set string categories in xaxis.categories or labels prop
+      /** Useraaa possibly set string categories in xaxis.categories or labels prop
        * Or didn't set xaxis labels at all - in which case we manually do it.
        * If user passed series data as [[3, 2], [4, 5]] or [{ x: 3, y: 55 }],
        * this shouldn't be called

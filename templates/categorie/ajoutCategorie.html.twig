@@ -1,15 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 {% block body %}
     <main id="main" class="main">
 
         <div class="pagetitle">
             <h1>Formualire Ajout Categorie</h1>
             <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Forms</li>
-                    <li class="breadcrumb-item active">Article</li>
-                </ol>
+
             </nav>
         </div>
 
@@ -20,14 +16,14 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <h5 class="card-title">Ajouter Categorie</h5>
+                        <h5 class="card-title">Ajouter Catégorie</h5>
 
                         {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-4 col-form-label">CatLib</label>
                             <div class="col-sm-10">
-                                {{ form_widget(f.CatLib,{'attr':{'class':'form-control'}}) }}
-                                {{ form_errors(f.CatLib,{'attr':{'class':'text-danger'}}) }}
+                                {{ form_widget(f.catlib,{'attr':{'class':'form-control'}}) }}
+                                {{ form_errors(f.catlib,{'attr':{'class':'text-danger'}}) }}
                             </div>
                         </div>
 
@@ -36,7 +32,7 @@
                         <br/>
                         <div class="row mb-3">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">S'Enregistrer</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
 
                             </div>
                         </div>

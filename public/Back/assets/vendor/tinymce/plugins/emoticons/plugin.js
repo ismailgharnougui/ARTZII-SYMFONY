@@ -312,7 +312,7 @@
       travel_and_places: 'Travel and Places',
       objects: 'Objects',
       flags: 'Flags',
-      user: 'User Defined'
+      user: 'Useraaa Defined'
     };
     const translateCategory = (categories, name) => has(categories, name) ? categories[name] : name;
     const getUserDefinedEmoji = editor => {

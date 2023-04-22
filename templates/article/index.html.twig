@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}Hello ArticleController!{% endblock %}
 
@@ -59,6 +59,7 @@
 
                                     <th scope="col">ArtPrix</th>
                                     <th scope="col">Categorie</th>
+                                    <th scope="col">QrCode</th>
 
                                     <th scope="col">Modifier</th>
                                     <th scope="col">Supprimer</th>
@@ -68,7 +69,7 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        {% if listP | length == 0 %}
+                                        {% if listS | length == 0 %}
 
                                             <p style="text-align: center">Articles vides</p>
 
@@ -79,31 +80,32 @@
 
 
 
-                                {% for p in listP  %}
+                                {% for p in listS  %}
 
 
 
                                     <tr>
 
-                                        <td>{{p.ArtLib}}</td>
-                                        <td>{{ p.ArtDispo }}</td>
+                                        <td>{{p.artlib}}</td>
+                                        <td>{{ p.artdispo }}</td>
 
 
-                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.ArtImg) }}"/></td>
-                                        <td>{{p.ArtPrix}}</td>
-                                        <td>{{p.catLib.CatLib}}</td>
+                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.artimg) }}"/></td>
+                                        <td>{{p.artprix}}</td>
+                                        <td>{{p.catlib}}</td>
+                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.qrcode) }}"/></td>
 
                                         <td>
-                                            <a href="{{ path('modifierArticle',{id:p.id}) }}">
+                                            <a href="{{ path('modifierArticle',{artid:p.artid}) }}">
                                                 <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
 
 
                                         <td>
-                                                <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionArticle', {'id': p.id }) }}';}">
+                                            <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionArticle', {'artid': p.artid }) }}';}">
 
                                                 <button type="button" class="btn btn-outline-danger">Supprimer</button>
                                             </a></td>
-                                        <td><a href="{{ path('detailArticle',{id:p.id}) }}">
+                                        <td><a href="{{ path('detailArticle',{artid:p.artid}) }}">
                                                 <button type="button" class="btn btn-outline-dark">Detail</button>
                                             </a></td>                                    </tr>
 
@@ -113,7 +115,13 @@
 
                                 </tbody>
                             </table>
+                            {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
+
                             <!-- End Default Table Example -->
+                            <a href="{{ path('exportExcel') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
+
+                            </a>
 
                         </div>
 

@@ -15,17 +15,15 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ArtLib')
-            ->add('ArtDesc',TextareaType::class)
-            ->add('ArtPrix')
-            ->add('ArtDispo')
-
-            ->add('ArtImg',FileType::class,array("data_class"=>null))
-            ->add('CatLib', EntityType::class, [
+            ->add('artlib')
+            ->add('artdesc',TextareaType::class)
+            ->add('artprix')
+            ->add('artdispo')
+            ->add('artimg',FileType::class,array("data_class"=>null))
+            ->add('catlib', EntityType::class, [
                 'class' => Categorie::class,
-
-                'choice_label'=>'CatLib',
-
+                'choice_label' => 'catlib',
+                'choice_value' => 'catlib',
             ])
         ;
     }

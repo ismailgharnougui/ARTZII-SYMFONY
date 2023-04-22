@@ -2,150 +2,269 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+/**
+ * Article
+ *
+ * @ORM\Table(name="article", uniqueConstraints={@ORM\UniqueConstraint(name="ArtLib", columns={"ArtLib"})}, indexes={@ORM\Index(name="fk_id_user", columns={"id_user"})})
+ * @ORM\Entity
+ */
 class Article
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $ArtId = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ArtId", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $artid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ArtLib", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+     * @Assert\Length(max=20, maxMessage="Le champ ne doit pas dépasser {{ limit }} caractères.")
+     * @Assert\Regex(pattern="/^[^0-9]*$/", message="Le champ ne doit pas contenir de chiffres.")
+     */
+    private $artlib;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ArtDesc", type="string", length=200, nullable=false)
+     * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+     * @Assert\Length(max=200, maxMessage="Le champ ne doit pas dépasser {{ limit }} caractères.")
+     */
+    private $artdesc;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ArtDispo", type="integer", nullable=false)
+     * * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+     */
+    private $artdispo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ArtImg", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+     * @Assert\Length(max=255, maxMessage="Le champ ne doit pas dépasser {{ limit }} caractères.")
+     */
+    private $artimg;
 
 
-    #[Assert\NotBlank(message: "nom produit doit etre non vide")]
-    #[Assert\Length(
-        min: 5,
-        minMessage: "Entrer un nom au min de 5 caracteres"
-    )]
-    #[ORM\Column(length: 255)]
-    private ?string $ArtLib = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="QrCode", type="string", length=255, nullable=true)
+     */
+    private $qrcode;
 
-    #[Assert\NotBlank(message: "description doit etre non vide")]
-    #[Assert\Length(
-        min: 10,
-        max: 150,
-        minMessage: "doit etre > 10",
-        maxMessage: "doit etre < à 150"
-    )]
-    #[ORM\Column(length: 500)]
-    private ?string $ArtDesc = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $ArtDispo = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $ArtImg = null;
-
-    #[Assert\NotBlank(message: "prix doit etre non vide")]
-    #[Assert\Range(
-        min: 1,
-        max: 9999999999,
-        notInRangeMessage: "le prix doit etre valide"
-    )]
-    #[ORM\Column]
-    private ?float $ArtPrix = null;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="ArtPrix", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\Positive(message="La valeur doit être positive.")
+     */
+    private $artprix;
 
 
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'products')]
-    private $catLib;
+    /**
+     * @var string
+     *
+
+     * @ORM\Column(name="CatLib", type="string", length=20, nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="catlib", referencedColumnName="catlib")
+     * })
+     */
 
 
-    public function getId(): ?int
+    private $catlib;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     * })
+     */
+    private $idUser;
+
+
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $note;
+
+    /**
+     * @return int
+     */
+    public function getArtid(): int
     {
-        return $this->ArtId;
+        return $this->artid;
     }
 
-    public function getArtLib(): ?string
+    /**
+     * @param int $artid
+     */
+    public function setArtid(int $artid): void
     {
-        return $this->ArtLib;
+        $this->artid = $artid;
     }
 
-    public function setArtLib(string $ArtLib): self
+    /**
+     * @return string
+     */
+    public function getArtlib(): string
     {
-        $this->ArtLib = $ArtLib;
-
-
-        return $this;
+        return $this->artlib;
     }
 
-    public function getArtDesc(): ?string
+    /**
+     * @param string $artlib
+     */
+    public function setArtlib(string $artlib): void
     {
-        return $this->ArtDesc;
+        $this->artlib = $artlib;
     }
 
-    public function setArtDesc(string $ArtDesc): self
+    /**
+     * @return string
+     */
+    public function getArtdesc(): string
     {
-        $this->ArtDesc = $ArtDesc;
-
-        return $this;
+        return $this->artdesc;
     }
 
-    public function getArtDispo(): ?int
+    /**
+     * @param string $artdesc
+     */
+    public function setArtdesc(string $artdesc): void
     {
-        return $this->ArtDispo;
+        $this->artdesc = $artdesc;
     }
 
-    public function setArtDispo(int $ArtDispo): self
+    /**
+     * @return int
+     */
+    public function getArtdispo(): int
     {
-        $this->ArtDispo = $ArtDispo;
-
-        return $this;
+        return $this->artdispo;
     }
 
-    public function getArtImg(): ?string
+    /**
+     * @param int $artdispo
+     */
+    public function setArtdispo(int $artdispo): void
     {
-        return $this->ArtImg;
+        $this->artdispo = $artdispo;
     }
 
-    public function setArtImg(string $ArtImg): self
+    /**
+     * @return string
+     */
+    public function getArtimg(): string
     {
-        $this->ArtImg = $ArtImg;
-
-        return $this;
+        return $this->artimg;
     }
 
-    public function getArtPrix(): ?float
+    /**
+     * @param string $artimg
+     */
+    public function setArtimg(string $artimg): void
     {
-        return $this->ArtPrix;
+        $this->artimg = $artimg;
     }
 
-    public function setArtPrix(float $ArtPrix): self
+    /**
+     * @return float
+     */
+    public function getArtprix(): float
     {
-        $this->ArtPrix = $ArtPrix;
+        return $this->artprix;
+    }
 
-        return $this;
+    /**
+     * @param float $artprix
+     */
+    public function setArtprix(float $artprix): void
+    {
+        $this->artprix = $artprix;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getCatlib(): string
+    {
+        return $this->catlib;
+    }
+
+    /**
+     * @param string $catlib
+     */
+    public function setCatlib(Categorie $catlib): void
+    {
+        $this->catlib = $catlib;
+    }
+
+    public function getIdUser(): User
+    {
+        return $this->idUser;
+    }
+
+
+    public function setIdUser(User $idUser): void
+    {
+        $this->idUser = $idUser;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQrcode(): string
+    {
+        return $this->qrcode;
+    }
+
+    /**
+     * @param string $qrcode
+     */
+    public function setQrcode(string $qrcode): void
+    {
+        $this->qrcode = $qrcode;
     }
 
     /**
      * @return mixed
      */
-    public function getCatLib()
+    public function getNote()
     {
-        return $this->catLib;
+        return $this->note;
     }
 
     /**
-     * @param mixed $catLib
+     * @param mixed $note
      */
-    public function setCatLib($catLib): void
+    public function setNote($note): void
     {
-        $this->catLib = $catLib;
+        $this->note = $note;
     }
 
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
 
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
 
-        return $this;
-    }
 }

@@ -201,7 +201,7 @@
     const getCharMapAppend = option('charmap_append');
 
     const isArray = global.isArray;
-    const UserDefined = 'User Defined';
+    const UserDefined = 'Useraaa Defined';
     const getDefaultCharMap = () => {
       return [
         {

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Categorie;
@@ -15,84 +14,81 @@ class CategorieController extends AbstractController
     public function affichageCategories(): Response
     {
 
-        $em = $this->getDoctrine()->getManager()->getRepository(Categorie::class); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+        $em = $this->getDoctrine()->getManager()->getRepository(Categorie::class);
 
-        $categories = $em->findAll(); // Select * from Catgories;
-        return $this->render('categorie/index.html.twig', ['cat'=>$categories]);
+        $categories = $em->findAll();
+        return $this->render('categorie/index.html.twig', ['cat' => $categories]);
     }
 
     #[Route('/ajoutCategorie', name: 'ajout_category')]
     public function ajoutCategorie(Request $request): Response
     {
 
-        $category = new Categorie(); // init objet
-        $form = $this->createForm(CategorieType::class,$category); // jeblna formulaire CategorieType.
+        $category = new Categorie();
+        $form = $this->createForm(CategorieType::class, $category);
 
-        $form->handleRequest($request); // bch man5srhomich ya3ni les donnees yab9o persisté
-
-
-
-        if($form->isSubmitted() && $form->isValid()) {
+        $form->handleRequest($request);
 
 
-            $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
-            $em->persist($category);//ajout
-            $em->flush();// commit
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
             $this->addFlash(
-                'notice', 'Categorie a été bien ajoutée '
+                'notice', 'Catégorie a été bien ajoutée !'
             );
             return $this->redirectToRoute('app_category');
 
         }
 
         return $this->render('categorie/ajoutCategorie.html.twig',
-            ['f'=>$form->createView()]
+            ['f' => $form->createView()]
         );
     }
 
-    #[Route('/modifierCategorie/{id}', name: 'modifier_category')]
-    public function modifierCategory(Request $request,$id): Response
+    #[Route('/modifierCategorie/{catid}', name: 'modifier_category')]
+    public function modifierCategory(Request $request, $catid): Response
     {
-        $prod= $this->getDoctrine()->getManager()->getRepository(Categorie::class)->find($id);
+        $prod = $this->getDoctrine()->getManager()->getRepository(Categorie::class)->find($catid);
 
 
-        $form = $this->createForm(CategorieType::class,$prod);
+        $form = $this->createForm(CategorieType::class, $prod);
 
 
-        $form->handleRequest($request); // bch man5srhomich ya3ni les donnees yab9o persisté
+        $form->handleRequest($request);
 
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+            $em = $this->getDoctrine()->getManager();
             $em->persist($prod);//ajout
             $em->flush();// commit
             $this->addFlash(
-                'notice', 'Categorie a été bien modifier '
+                'notice', 'Catégorie a été bien modifiée ! '
             );
             return $this->redirectToRoute('app_category');
 
         }
 
         return $this->render('categorie/modifierCategorie.html.twig',
-            ['f'=>$form->createView()]
+            ['f' => $form->createView()]
         );
     }
 
-    #[Route('/supprimerCategorie/{id}', name: 'supprimerCategory')]
+    #[Route('/supprimerCategorie/{catid}', name: 'supprimerCategory')]
     public function supprimerCategory(Categorie $category): Response
     {
 
-        $em = $this->getDoctrine()->getManager();// ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+        $em = $this->getDoctrine()->getManager();
         $em->remove($category);
-        //MISE A JOURS
+        //MISE A JOUR
         $em->flush();//commit
         $this->addFlash(
-            'noticedelete', 'Categorie a été bien supprimer '
+            'noticedelete', 'Catégorie a été bien supprimé '
         );
         return $this->redirectToRoute('app_category');
-
     }
-
 
 }

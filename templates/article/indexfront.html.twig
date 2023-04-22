@@ -1,4 +1,4 @@
-{% extends 'indexClient.html.twig' %}
+{% extends 'baseFront.html.twig' %}
 
 {% block body %}
 
@@ -12,16 +12,16 @@
 
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
-                    {% for p in listP %}
+                    {% for p in listS %}
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <td><img  style="max-height: 50% ; width: 50%;  object-fit: cover;" src="{{ asset('uploads/'~p.ArtImg) }}"/></td>
+                            <td><img  style="max-height: 50% ; width: 50%;  object-fit: cover;" src="{{ asset('uploads/'~p.artimg) }}"/></td>
 
                             <div class="portfolio-info">
-                                <h4>{{ p.id }}</h4>
+                                <h4>{{ p.artid }}</h4>
 
                                 <div class="portfolio-links">
-                              <a href="{{ path('detailArticlefront',{id:p.id}) }}" title="More Details"><i class="bx bx-plus"></i></a>
+                              <a href="{{ path('detailArticlefront',{artid:p.artid}) }}" title="More Details"><i class="bx bx-plus"></i></a>
                                 </div>
                             </div>
                         </div>
