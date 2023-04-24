@@ -1,0 +1,65 @@
+
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reponse{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Reponse sur reclamation</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <h3>Reclmation </h3>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-12">
+            <table class="table">
+
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ reclamation.id }}</td>
+                </tr>
+                <tr>
+                    <th>TypeR</th>
+                    <td>{{ reclamation.TypeR }}</td>
+                </tr>
+                <tr>
+                    <th>DateR</th>
+                    <td>{{ reclamation.dateR ? reclamation.dateR|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Etat</th>
+                    <td>{{ reclamation.etat }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ reclamation.Description }}</td>
+                </tr>
+                <tr>
+                    <th>Objet</th>
+                    <td>{{ reclamation.objet }}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+
+    {{ include('reponse/_form.html.twig') }}
+
+    <a href="{{ path('app_reponse_index') }}">back to list</a>
+        </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

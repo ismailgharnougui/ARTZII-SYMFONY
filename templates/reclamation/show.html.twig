@@ -1,0 +1,76 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+<div class="container" style="transform: scale(0.98); margin-top: -5px;">
+    <div class="row">
+        <div class="col-md-12">
+    <h1>Reclamation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reclamation.id }}</td>
+            </tr>
+            <tr>
+                <th>TypeR</th>
+                <td>{{ reclamation.TypeR }}</td>
+            </tr>
+            <tr>
+                <th>DateR</th>
+                <td>{{ reclamation.dateR ? reclamation.dateR|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ reclamation.etat }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.Description }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ reclamation.objet }}</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+    </div>
+    {% if reclamation.etat=="nonresolu" %}
+
+    <div class="row">
+        <div class="col-3">
+    <a href="{{ path('app_reclamation_index') }}" class="btn btn-primary">back to list</a>
+        </div>
+        <div class="col-3">
+
+    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-warning">edit</a>
+        </div>
+
+        <div class="col-3">
+
+    {{ include('reclamation/_delete_form.html.twig') }}
+        </div>
+
+    </div>
+
+    {%else %}
+        <div class="row">
+            <div class="col-12">
+                Reponse :
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_reclamation_index') }}" class="btn btn-primary">back to list</a>
+            </div>
+        </div>
+
+
+    {% endif %}
+</div>
+
+
+    {% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste des Reponses</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRep</th>
+                <th>DateRep</th>
+                <th>ContenuRep</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.idRep }}</td>
+                <td>{{ reponse.dateRep ? reponse.dateRep|date('Y-m-d') : '' }}</td>
+                <td>{{ reponse.contenuRep }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_show', {'idRep': reponse.idRep}) }}">show</a>
+                    <a href="{{ path('app_reponse_edit', {'idRep': reponse.idRep}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+
+
+    </section>
+</main>
+
+
+{% endblock %}
