@@ -35,13 +35,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ArticleController extends AbstractController
 {
     #[Route('/articles', name: 'display_articles')]
-    public function index(Request  $request,PaginatorInterface  $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
 
         $em = $this->getDoctrine()->getManager()->getRepository(Article::class);
 
         $repository = $this->getDoctrine()->getRepository(Article::class)->findAll();
-
 
 
         $pagination = $paginator->paginate(
@@ -50,9 +49,8 @@ class ArticleController extends AbstractController
             3 // Number of items per page
         );
 
-        return $this->render('article/index.html.twig', ['listS'=>$pagination]);
+        return $this->render('article/index.html.twig', ['listS' => $pagination]);
     }
-
 
 
     #[Route('/articles/front', name: 'display_prod_front')]
@@ -62,40 +60,38 @@ class ArticleController extends AbstractController
         $em = $this->getDoctrine()->getManager()->getRepository(Article::class); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
 
         $prods = $em->findAll(); // Select * from produits;
-        return $this->render('article/indexfront.html.twig', ['listS'=>$prods]);
+        return $this->render('article/indexfront.html.twig', ['listS' => $prods]);
     }
 
     #[Route('/ajouterArticle', name: 'ajouterArticle')]
-    public function ajouterArticle(Request $request,SluggerInterface $slugger): Response
+    public function ajouterArticle(Request $request, SluggerInterface $slugger): Response
     {
 
         $prod = new Article(); // init objet
-        $form = $this->createForm(ArticleType::class,$prod);
+        $form = $this->createForm(ArticleType::class, $prod);
 
         $qrCodes = [];
-
 
 
         $form->handleRequest($request); //
 
 
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        if($form->isSubmitted() && $form->isValid()) {
+            $fileUpload = $form->get('artimg')->getData();
 
-            $fileUpload= $form->get('artimg')->getData();
+            $fileName = md5(uniqid()) . '.' . $fileUpload->guessExtension();
 
-            $fileName= md5(uniqid()). '.' .$fileUpload->guessExtension();
-
-            $fileUpload->move($this->getParameter('kernel.project_dir').'/public/uploads',$fileName);// Creation dossier uploads
+            $fileUpload->move($this->getParameter('kernel.project_dir') . '/public/uploads', $fileName);// Creation dossier uploads
 
             $prod->setArtImg($fileName);
 
             // USER :
-            $User= $this->getDoctrine()->getManager()->getRepository(User::class)->find(
+            $User = $this->getDoctrine()->getManager()->getRepository(User::class)->find(
                 39
             );
 
-            $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+            $em = $this->getDoctrine()->getManager();
 
             $prod->setIdUser($User);
 
@@ -106,14 +102,19 @@ class ArticleController extends AbstractController
             $objDateTime = new \DateTime('NOW');
             $dateString = $objDateTime->format('d-m-Y H:i:s');
 
-            $path = dirname(__DIR__, 2).'/public/';
+            $path = dirname(__DIR__, 2) . '/public/';
 
 
             // set qrcode
-            $result =Builder::create()
+            $result = Builder::create()
                 ->writer(new PngWriter())
                 ->writerOptions([])
-                ->data('Custom QR code contents')
+                ->data('Article Name: ' . $prod->getArtlib() . "\n"
+                    . 'Article Price: ' . $prod->getArtprix() . "\n"
+                    . 'Article Diponibilite: ' . $prod->getArtdispo() . "\n"
+                    . 'Article Description: ' . $prod->getArtdesc() . "\n"
+                    . 'Article Categorie: ' . $prod->getCatlib() . "\n"
+                )
                 ->encoding(new Encoding('UTF-8'))
                 ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
                 ->size(400)
@@ -121,34 +122,28 @@ class ArticleController extends AbstractController
                 ->labelText($dateString)
                 ->labelAlignment(new LabelAlignmentCenter())
                 ->labelMargin(new Margin(15, 5, 5, 5))
-                ->logoPath($path.'uploads/'.$fileName)
+                ->logoPath($path . 'uploads/' . $fileName)
                 ->logoResizeToWidth('100')
                 ->logoResizeToHeight('100')
                 ->backgroundColor(new Color(255, 255, 255))
-                ->build()
-            ;
+                ->build();
 
             //generate name
             $namePng = uniqid('', '') . '.png';
 
             //Save img png
-            $result->saveToFile($path.'uploads/'.$namePng);
+            $result->saveToFile($path . 'uploads/' . $namePng);
 
             $result->getDataUri();
 
             $prod->setQrcode($namePng);
 
 
-
-
             $em->persist($prod);//ajout
-            $em->flush();// commit
-            /// bch n7adhr hne message elybch naffichia ba3d ajout  w nhot fiha description ta3ha :
+            $em->flush();
             $this->addFlash(
                 'notice', 'Article a été bien ajoutée '
             );
-
-
 
 
             return $this->redirectToRoute('display_articles');
@@ -156,34 +151,34 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/createArticle.html.twig',
-            ['f'=>$form->createView(),'qrCodes'=>$qrCodes]
+            ['f' => $form->createView(), 'qrCodes' => $qrCodes]
         );
     }
 
     #[Route('/modifierArticle/{artid}', name: 'modifierArticle')]
-    public function modifierArticle(Request $request,$artid): Response
+    public function modifierArticle(Request $request, $artid): Response
     {
-        $prod= $this->getDoctrine()->getManager()->getRepository(Article::class)->find($artid);
+        $prod = $this->getDoctrine()->getManager()->getRepository(Article::class)->find($artid);
 
-        $form = $this->createForm(ArticleType::class,$prod);
+        $form = $this->createForm(ArticleType::class, $prod);
 
         $form->handleRequest($request); // bch man5srhomich ya3ni les donnees yab9o persisté
 
 
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        if($form->isSubmitted() && $form->isValid()) {
 
-            $fileUpload= $form->get('artimg')->getData(); // recuperriha fikle (valeur image
+            $fileUpload = $form->get('artimg')->getData(); // recuperriha fikle (valeur image
 
-            $fileName= md5(uniqid()). '.' .$fileUpload->guessExtension(); //Cryptage image
+            $fileName = md5(uniqid()) . '.' . $fileUpload->guessExtension(); //Cryptage image
 
-            $fileUpload->move($this->getParameter('kernel.project_dir').'/public/uploads',$fileName);// Creation dossier uploads
+            $fileUpload->move($this->getParameter('kernel.project_dir') . '/public/uploads', $fileName);// Creation dossier uploads
 
-            $prod->setArtImg($fileName);// colonne ta3 image bch nsob fiha esem image crypté
+            $prod->setArtImg($fileName);
 
-            $em = $this->getDoctrine()->getManager(); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
-            $em->persist($prod);//ajout
-            $em->flush();// commit
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prod);
+            $em->flush();
             $this->addFlash(
                 'notice', 'Article a été bien modifié '
             );
@@ -193,12 +188,12 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/modifierArticle.html.twig',
-            ['f'=>$form->createView()]
+            ['f' => $form->createView()]
         );
     }
 
     #[Route('/suppressionArticle/{artid}', name: 'suppressionArticle')]
-    public function suppressionArticle(Article  $prod): Response
+    public function suppressionArticle(Article $prod): Response
     {
         $em = $this->getDoctrine()->getManager();// ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
         $em->remove($prod);
@@ -212,7 +207,6 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/detailArticle/{artid}', name: 'detailArticle')]
-
     public function detailArticle(\Symfony\Component\HttpFoundation\Request $req, $artid)
     {
         $em = $this->getDoctrine()->getManager();
@@ -223,15 +217,16 @@ class ArticleController extends AbstractController
             'id' => $prod->getArtid(),
             'name' => $prod->getArtlib(),
             'prix' => $prod->getArtprix(),
-            'artdispo' =>$prod->getArtdispo(),
+            'artdispo' => $prod->getArtdispo(),
             'description' => $prod->getArtdesc(),
-            'image'=>$prod->getArtimg(),
-            'catlib'=>$prod->getCatlib()
+            'image' => $prod->getArtimg(),
+            'catlib' => $prod->getCatlib(),
+            'User' => $prod->getIdUser()->getNomUser() . ' ' . $prod->getIdUser()->getPrenomUser(),
+            'mail' => $prod->getIdUser()->getEmailUser()
         ));
     }
 
     #[Route('/detailArticle/front/{artid}', name: 'detailArticlefront')]
-
     public function detailArticlefront(\Symfony\Component\HttpFoundation\Request $req, $artid)
     {
         $em = $this->getDoctrine()->getManager();
@@ -242,16 +237,17 @@ class ArticleController extends AbstractController
             'id' => $prod->getArtid(),
             'name' => $prod->getArtlib(),
             'prix' => $prod->getArtprix(),
-            'artdispo' =>$prod->getArtdispo(),
+            'artdispo' => $prod->getArtdispo(),
             'description' => $prod->getArtdesc(),
-            'image'=>$prod->getArtimg(),
-            'catlib'=>$prod->getCatlib()
+            'image' => $prod->getArtimg(),
+            'catlib' => $prod->getCatlib()
+
         ));
     }
 
     #[Route('/exportExcel', name: 'exportExcel')]
-
-    public function exportExcel() {
+    public function exportExcel()
+    {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -286,4 +282,42 @@ class ArticleController extends AbstractController
         return $this->file($filename);
     }
 
+
+
+    /**
+     * @Route("/ajax_search/", name="ajax_search")
+     */
+    public function chercherArticles(\Symfony\Component\HttpFoundation\Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $requestString = $request->get('q');
+
+        $x = $em
+            ->createQuery(
+                'SELECT P
+                FROM App\Entity\Article P
+                WHERE P.artlib LIKE :str'
+            )
+            ->setParameter('str', '%' . $requestString . '%')->getResult();
+
+
+        $products = $x;
+        if (!$products) {
+            $result['products']['error'] = "Articles non trouvé :( ";
+        } else {
+            $result['products'] = $this->getRealEntities($products);
+        }
+        return new Response(json_encode($result));
+    }
+
+
+// LES  attributs
+    public function getRealEntities($products)
+    {
+        foreach ($products as $products) {
+            $realEntities[$products->getArtId()] = [$products->getArtimg(), $products->getArtDispo(), $products->getArtlib(), $products->getArtPrix()];
+
+        }
+        return $realEntities;
+    }
 }
