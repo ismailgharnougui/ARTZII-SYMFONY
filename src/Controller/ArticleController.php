@@ -54,13 +54,20 @@ class ArticleController extends AbstractController
 
 
     #[Route('/articles/front', name: 'display_prod_front')]
-    public function indexfront(): Response
+    public function indexfront(Request $request, PaginatorInterface $paginator): Response
     {
+        $em = $this->getDoctrine()->getManager()->getRepository(Article::class);
 
-        $em = $this->getDoctrine()->getManager()->getRepository(Article::class); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
+        $repository = $this->getDoctrine()->getRepository(Article::class)->findAll();
 
-        $prods = $em->findAll(); // Select * from produits;
-        return $this->render('article/indexfront.html.twig', ['listS' => $prods]);
+
+        $pagination = $paginator->paginate(
+            $repository,
+            $request->query->getInt('page', 1), // Current page number
+            3 // Number of items per page
+        );
+
+        return $this->render('article/indexfront.html.twig', ['listS' => $pagination]);
     }
 
     #[Route('/ajouterArticle', name: 'ajouterArticle')]

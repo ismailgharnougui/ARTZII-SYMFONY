@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-9">
                     <div class="sec-heading">
-                        <h2>List Articles rated <span class="theme-cl-2">Jobs</span></h2>
+                        <h2>List Des   <span class="theme-cl-2">Articles</span></h2>
                     </div>
                 </div>
             </div>
@@ -88,10 +88,12 @@
 
                                 </div>
                             </div>
+
                         {% endfor %}
 
 
                     </div>
+
     </section>
 
 
@@ -151,4 +153,6 @@
             });
         });
     </script>
+    {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
+
 {% endblock %}
