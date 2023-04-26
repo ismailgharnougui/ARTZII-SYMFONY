@@ -13,8 +13,9 @@ use App\Service\BasketService;
 use App\Service\CommandService;
 use App\Entity\Commands;
 use App\Entity\CommandArticles;
-use App\Repository\BasketRepository;
 use App\Repository\CommandArticlesRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CommandsController extends AbstractController
 {
@@ -235,6 +236,42 @@ class CommandsController extends AbstractController
             'command' => $command,
             'commandArticles' => $commandArticles,
             'numCommand' => $numCommand,
+        ]);
+    }
+
+    #[Route('/chart', name: 'app_chart')]
+    public function commandsChart( CommandService $commandServ, EntityManagerInterface $em, CommandsRepository $comRep)
+    {
+        $months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+
+        $chartData = [];
+        $totale=0;
+        $commands = $comRep->findAll();
+        for($i=1; $i<13; $i++){
+            for($j=0; $j<count($commands); $j++){
+                if($commands[$j]->getDateCommande()->format('m') == $i){
+                    $totale += $commands[$j]->getCoutTotale();
+                }
+            }
+            $chartData[$months[$i-1]] = $totale;
+            $totale=0;
+        }
+
+        return $this->render('chart/index.html.twig', [
+            'chartData' =>  $chartData,
         ]);
     }
 }

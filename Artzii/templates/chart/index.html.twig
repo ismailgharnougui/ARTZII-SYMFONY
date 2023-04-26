@@ -1,0 +1,76 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block body %}
+
+	<script src={{asset("https://cdn.jsdelivr.net/npm/chart.js")}}></script>
+
+    <!-- ======= main ======= -->
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Data Tables</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Tables</li>
+					<li class="breadcrumb-item active">Data</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Les commandes</h5>
+							<p>Bienvenue dans l'interface de gestion des commandes, vous êtes maintenant aux commandes !
+							</p>
+                            <!-- Line Chart -->
+						<canvas id="lineChart" style="max-height: 400px;"></canvas>
+						<!-- End Line Chart -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+	</section>
+
+
+	<script>
+    console.log({{chartData|json_encode()|raw}});
+		document.addEventListener("DOMContentLoaded", () => {
+new Chart(document.querySelector('#lineChart'), {
+type: 'line',
+data: {
+datasets: [
+{
+label: 'Line Chart',
+data: {{chartData|json_encode()|raw}},
+fill: false,
+borderColor: 'rgb(75, 192, 192)',
+tension: 0.1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+});
+	</script>
+	<!-- End Line CHart -->
+
+{% endblock %}

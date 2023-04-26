@@ -54,13 +54,14 @@
 											<td>{{command.dateCommande | date('Y-m-d')}}</td>
 											<td>{{command.modePaiement}}</td>
 											<td>{{command.modeLivraison}}</td>
-											<td>{{command.coutTotale}} DT</td>
-											<td >
+											<td>{{command.coutTotale}}
+												DT</td>
+											<td>
 												{% set status = command.etatCommande  %}
 
-												<select id="EtatCommand{{command.getId()}}" >
+												<select id="EtatCommand{{command.getId()}}">
 													{% if status == 'En cours' %}
-														<option value="En cours" selected >
+														<option value="En cours" selected>
 															<span class="badge bg-primary">En cours</span>
 														</option>
 													{% else  %}
@@ -98,17 +99,16 @@
 														</option>
 													{% endif %}
 
-												</select> 
-												
+												</select>
+
 											</td>
 
 											<td>
 
-											    <a href="#" onclick="modifierCommand(EtatCommand{{command.getId()}})">
+												<a href="#" onclick="modifierCommand(EtatCommand{{command.getId()}})">
 													<img src="{{asset('assets/images/editBlack.png')}}" alt="modifier" width="24px">
-												</a> 
+												</a>
 
-												
 
 												<a href="{{ path('app_removeCommand', {'idCommand': command.getId()} ) }}">
 													<img src="{{asset('assets/images/trash.png')}}" alt="supprimer" width="39px" style="margin-left: -8px;">
@@ -136,36 +136,36 @@
 	<!-- End #main -->
 
 	{% for flash_message in app.session.flashbag.get('SuccessModifierCommand') %}
-     <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
-    {{ flash_message }}
-       
-    </div>
-    {% endfor %}
+		<div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+			{{ flash_message }}
+
+		</div>
+	{% endfor %}
 
 
 {% endblock %}
 
 
 {% block javascripts %}
-<script>
+	<script>
 
-// Automatically dismiss the alert after 3 seconds
-        setTimeout(function() {
-            document.querySelector('.alert').remove();
-        }, 3000);
+		// Automatically dismiss the alert after 3 seconds
+setTimeout(function () {
+document.querySelector('.alert').remove();
+}, 3000);
 
 const selectElement = document.getElementById("EtatCommand");
-selectElement.addEventListener("change", function() {
-  const selectedValue = selectElement.value;
-  console.log(selectedValue);
+selectElement.addEventListener("change", function () {
+const selectedValue = selectElement.value;
+console.log(selectedValue);
 });
 
 
-function modifierCommand(select){
-	
-	let selectedElement = select.options[select.selectedIndex].value;
-	location.href = "http://localhost:8000/updateCommand/"+select.id.replace("EtatCommand","")+"/"+selectedElement;
-	
+function modifierCommand(select) {
+
+let selectedElement = select.options[select.selectedIndex].value;
+location.href = "http://localhost:8000/updateCommand/" + select.id.replace("EtatCommand", "") + "/" + selectedElement;
+
 }
-</script>
+	</script>
 {% endblock %}
