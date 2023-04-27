@@ -327,4 +327,120 @@ class ArticleController extends AbstractController
         }
         return $realEntities;
     }
+
+
+
+#[Route('/top', name: 'top')]
+    public function afficherTopfiveService()
+{
+    $em = $this->getDoctrine()->getManager();
+
+    $query = $em->createQueryBuilder(); // dql
+    $query->select('s.artid, s.note')
+        ->from('App\Entity\Article', 's')
+        ->orderBy('s.note', 'DESC')
+        ->setMaxResults(3);
+    $res = $query->getQuery();
+    $serviceEvalues = $res->execute();
+    $note = 0;
+    //count
+    $i = 0;
+
+    //tableau
+    $j = 0;
+
+    foreach ($serviceEvalues as $se) {
+        $note = $note + $se["note"];
+        $i++;
+
+        $noteMoy = $note / $i;
+        $noteMoy = round($noteMoy);
+
+        $service = $em->getRepository(Article::class)->findOneBy(array('artid' => $se['artid']));
+        $serviceTop[$j] = $service;
+        $j++;
+    }
+    return $this->render('front/top.html.twig', array('id' => $se['artid'], 'note' => $se['note'], 'topfive' => $serviceTop));
+}
+
+ #[Route('/noterService/{artid}/{note}', name: 'noterService')]
+    public function noterService(Request $request, $artid,$note): Response
+{
+    $Services = $this->getDoctrine()->getManager()->getRepository(Article::class)->find($artid);
+
+    $form = $this->createForm(ArticleType::class, $Services);
+
+    $form->handleRequest($request);
+
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $fileUpload = $form->get('artimg')->getData();
+        $fileName = md5(uniqid()) . '.' . $fileUpload->guessExtension();
+
+        $fileUpload->move($this->getParameter('kernel.project_dir') . '/public/uploads', $fileName);
+
+        $Services->setServImg($fileName);
+        $Services->setNote($note);
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($Services);
+        $em->flush();
+        $this->addFlash(
+            'notice', 'Article a été bien noté '
+        );
+
+        return $this->redirectToRoute('display_articles');
+
+    }
+
+    return $this->render('article/modifierArticle.html.twig',
+        ['f' => $form->createView()]
+    );
+}
+
+
+    /**
+     * @Route("/articles/{id}/note", name="service_note")
+     */
+    public function addNoteToService(Request $request, Article $service)
+{
+    $note = $request->request->get('note');
+
+    if ($note) {
+        $service->setNote($note);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', 'Note added successfully!');
+    } else {
+        $this->addFlash('error', 'Note value is required!');
+    }
+
+    return $this->redirectToRoute('display_articles');
+}
+
+    #[Route('/getNoterArticlePage/{artid}', name: 'getNoterArticlePage')]
+    public function getNoterServicePage(\Symfony\Component\HttpFoundation\Request $req, $artid)
+{
+    $em = $this->getDoctrine()->getManager();
+    $Services = $em->getRepository(Article::class)->find($artid);
+
+
+    return $this->render('article/getNoterArticlePage.html.twig', array(
+        'Id' => $Services->getArtid(),
+        'name' => $Services->getArtlib(),
+        'prix' => $Services->getArtprix(),
+        'artdispo' => $Services->getArtdispo(),
+        'description' => $Services->getArtdesc(),
+        'image' => $Services->getArtimg(),
+        'catlib' => $Services->getCatlib(),
+        'User' => $Services->getIdUser()->getNomUser() . ' ' . $Services->getIdUser()->getPrenomUser(),
+        'mail' => $Services->getIdUser()->getEmailUser()
+
+
+    ));
+}
+
+
 }

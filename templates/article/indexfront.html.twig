@@ -84,6 +84,8 @@
                                                 {% endfor %}
                                             </div>
                                         </div>
+                                        <a href="{{ path('getNoterArticlePage',{artid:p.artid}) }}" class="ser_100_link">Noter</a>
+
                                     </div>
 
                                 </div>
@@ -125,6 +127,7 @@
                                     $.each(arr, function(id, value) {
                                         if (key == 'products') {
                                             if (id != 'error') {
+
                                                 x= document.getElementById("containerr");
                                                 entitySelector.append('<div style="display: table;width:100%;padding: 15px"><span style="text-align: center">'+value[2]+'</span><br/><a href="/show_products_cat/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 150px; height: 150px"/>'+'</a></div>');
                                             } else {
@@ -140,6 +143,8 @@
             });
         });
     </script>
+
+
     <script>
         $(document).ready(function(){
             $(".btn1").click(function(){
