@@ -18,7 +18,7 @@ use App\Service\BasketService;
  
 class StripeController extends AbstractController
 {
-    #[Route('/stripe', name: 'app_stripe')]
+    #[Route('/command/stripe', name: 'app_stripe')]
     public function index( BasketService $basketService, UtilisateurRepository $userRep ): Response
     {
         // $idUsercon=1;
@@ -45,6 +45,7 @@ class StripeController extends AbstractController
         $totalPrice = array_reduce($basketData , function ($total, $product) {
             return $total + $product->getIdArticle()->getArtprix();
         }, 0);
+        $totalPrice+=8;
 
         return $this->render('stripe/index.html.twig', [
             'stripe_key' => $_ENV["STRIPE_KEY"],
@@ -86,7 +87,10 @@ class StripeController extends AbstractController
                 "amount" => ($totalPrice+8) * 100,
                 "currency" => "usd",
                 "source" => $request->request->get('stripeToken'),
-                "description" => "Binaryboxtuts Payment Test"
+                "description" => "Paiement de la commande via ARTZII",
+                "metadata" => [
+                    "client_name" => "John Doe"
+                ]
         ]);
         $this->addFlash(
             'success',

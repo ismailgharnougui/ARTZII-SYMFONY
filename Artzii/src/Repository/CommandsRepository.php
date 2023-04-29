@@ -39,6 +39,22 @@ class CommandsRepository extends ServiceEntityRepository
         }
     }
 
+    public function getTotalPriceOfCurrentMonth(): float
+{
+    $startDate = new \DateTime('first day of this month');
+    $endDate = new \DateTime('last day of this month');
+
+    $qb = $this->createQueryBuilder('c')
+        ->select('SUM(c.coutTotale) as total')
+        ->where('c.dateCommande BETWEEN :startDate AND :endDate')
+        ->setParameter('startDate', $startDate)
+        ->setParameter('endDate', $endDate);
+
+    $result = $qb->getQuery()->getSingleResult();
+
+    return $result['total'] ?? 0.0;
+}
+
 //    /**
 //     * @return Commands[] Returns an array of Commands objects
 //     */

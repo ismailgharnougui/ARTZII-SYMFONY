@@ -270,8 +270,21 @@ class CommandsController extends AbstractController
             $totale=0;
         }
 
+        $totalThisMonth = $comRep->getTotalPriceOfCurrentMonth();
+        $list = $comRep->findAll();
+
         return $this->render('chart/index.html.twig', [
             'chartData' =>  $chartData,
+            'totalThisMonth' => $totalThisMonth,
+            'list' => $list
         ]);
     }
+
+    #[Route('/chart2', name: 'app_chart2')]
+    public function commandsChart2(CommandsRepository $comRep)
+    {
+
+        dd($comRep->getTotalPriceOfCurrentMonth());
+    }
+
 }
