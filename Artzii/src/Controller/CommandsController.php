@@ -78,12 +78,16 @@ class CommandsController extends AbstractController
             $commandArticlesRep->save($commandArticle, true);
         }
 
-        $basketService->emptyCart(32);
-
         // add flash message
         $this->addFlash('success', 'Commande effectuée avec succès');
+        if($payMethod == 'Cash'){
+            $basketService->emptyCart(32);
+            return $this->redirectToRoute('app_articles');
+        }
 
-        return $this->redirectToRoute('app_articles');
+        else{
+            return $this->redirectToRoute('app_stripe');
+        }
     }
 
     #[Route('/backCommand', name: 'app_backCommand')]

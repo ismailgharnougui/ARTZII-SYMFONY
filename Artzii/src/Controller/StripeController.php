@@ -3,16 +3,11 @@
 namespace App\Controller;
  
 use Stripe;
-use App\Entity\Panier;
-use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Validator\Constraints\DateTime;
 use App\Service\BasketService;
 
  
@@ -21,23 +16,6 @@ class StripeController extends AbstractController
     #[Route('/command/stripe', name: 'app_stripe')]
     public function index( BasketService $basketService, UtilisateurRepository $userRep ): Response
     {
-        // $idUsercon=1;
-        // $entityManager=$this->getDoctrine()->getManager();
-        // $utilisateur=$entityManager->getRepository(Utilisateur::class)->findOneBy([
-        //     'idUser' => $idUsercon
-        // ]);
-        // $panier = $entityManager->getRepository(Panier::class)->findBy([
-        //     'idUser' => $idUsercon
-        // ]);
-        // $totalPrice = 0;
- 
-        // foreach ($panier as $item) {
-        //     $product = $item->getIdProduit();
-        //     $quantity = $item->getQuantiteProduct();
-        //     $totalPrice += $product->getPrix() * $quantity;
-        // }
-        // $totalPrice+=10;
-
         $basketData = $basketService->getCartItems(32);
         $basketItemsCount = count($basketData);
         $connectedUser = $userRep->find(32);
@@ -50,6 +28,7 @@ class StripeController extends AbstractController
         return $this->render('stripe/index.html.twig', [
             'stripe_key' => $_ENV["STRIPE_KEY"],
             'totalPrice' => $totalPrice,
+            'basketItemsCount' => $basketItemsCount,
         ]);
     }
  
@@ -57,21 +36,6 @@ class StripeController extends AbstractController
     #[Route('/stripe/create-charge', name: 'app_stripe_charge', methods: ['POST'])]
     public function createCharge(Request $request, BasketService $basketService, UtilisateurRepository $userRep)
     {
-        // $idUsercon=1;
-        // $entityManager=$this->getDoctrine()->getManager();
-        // $utilisateur=$entityManager->getRepository(Utilisateur::class)->findOneBy([
-        //     'idUser' => $idUsercon
-        // ]);
-        // $panier = $entityManager->getRepository(Panier::class)->findBy([
-        //     'idUser' => $idUsercon
-        // ]);
-        // $totalPrice = 0;
- 
-        // foreach ($panier as $item) {
-        //     $product = $item->getIdProduit();
-        //     $quantity = $item->getQuantiteProduct();
-        //     $totalPrice += $product->getPrix() * $quantity;
-        // }
 
         $basketData = $basketService->getCartItems(32);
         $basketItemsCount = count($basketData);
@@ -93,9 +57,10 @@ class StripeController extends AbstractController
                 ]
         ]);
         $this->addFlash(
-            'success',
+            'successPaiement',
             'Payment succées!',
         );
-        return $this->redirectToRoute('app_stripe', [], Response::HTTP_SEE_OTHER);
+        $basketService->emptyCart(32);
+        return $this->redirectToRoute('app_articles');
     }
 }

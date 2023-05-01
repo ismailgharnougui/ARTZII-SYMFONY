@@ -13,6 +13,7 @@ use App\Entity\Article;
 use App\Form\AjoutArticleType;
 use App\Repository\BasketRepository;
 use App\Service\BasketService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticlesController extends AbstractController
 {
@@ -143,4 +144,61 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-}
+
+    #[Route('apiTest/{question}', name: 'apiTest')]
+    public function testApi($question): Response
+    {
+
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://openai80.p.rapidapi.com/chat/completions",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                        [
+                                        'role' => 'user',
+                                        'content' => $question
+                        ]
+                ]
+            ]),
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: openai80.p.rapidapi.com",
+                "X-RapidAPI-Key: a18244075dmsh0328f969f916869p162e92jsn6fc0574737fa",
+                "content-type: application/json"
+            ],
+        ]);
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+            //echo "cURL Error #:" . $err;
+        } else {
+            //echo $response;
+        
+        $response = new JsonResponse($response, Response::HTTP_OK);
+        $content = $response->getContent();
+        $decodedData = json_decode($content, true);
+    
+        $response = new Response();
+        $response->setContent($decodedData);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+
+        $response->setStatusCode(Response::HTTP_OK);
+        }
+        return $response;
+    }
+    }
+
+

@@ -94,13 +94,254 @@
     <!-- Navbar End -->
 
 		{% block body %}{% endblock %}
+        <div id="chatbot">
+            <div id="chatbot-header">
+                <i class="fa-solid fa-robot"></i>
+                <h3>Chatbot</h3>
+                <button id="chatbot-toggle">-</button>
+            </div>
+            <div id="chatbot-messages"></div>
+            <div id="chatbot-input">
+                <input type="text" id="chatbot-text-input" placeholder="Ecrivez votre message...">
+                <button id="chatbot-send">Send</button>
+            </div>
+        </div>
+
         {% block javascripts %}{% endblock %}
+        
 
 		<!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"> <img src={{asset("assets/images/arrowUp.png")}} width="26px;"></img> </a>
 
     <!-- Libraries JS -->
     <script src={{asset("https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js")}}></script>
+
+
+<style>
+    #chatbot {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  border-radius: 5px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+#chatbot-header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chatbot-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#chatbot-toggle {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#chatbot-toggle:hover {
+  color: #666;
+}
+
+#chatbot-messages {
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+#chatbot-messages p {
+  margin: 0;
+  padding: 5px;
+}
+
+#chatbot-messages .user-message {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 70%;
+  text-align: left;
+}
+
+#chatbot-messages .assistant-message {
+  background-color: #b7d5ff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 70%;
+  text-align: left;
+}
+
+#chatbot-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+#chatbot-input input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#chatbot-input button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#chatbot-input button:hover {
+  background-color: #0062cc;
+}
+</style>
+
+<script>
+
+const chatbotHeader = document.getElementById('chatbot-header');
+  const chatbotToggle = document.getElementById('chatbot-toggle');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+  const chatbotTextInput = document.getElementById('chatbot-text-input');
+  const chatbotSendButton = document.getElementById('chatbot-send');
+
+  // Hide chatbot by default
+  chatbotToggle.textContent = '+';
+  chatbotMessages.style.display = 'none';
+  chatbotTextInput.style.display = 'none';
+  chatbotSendButton.style.display = 'none';
+
+
+ console.log(chatbotMessages);
+
+
+  // Show/hide chatbot when header is clicked
+  chatbotHeader.addEventListener('click', () => {
+    if (chatbotMessages.style.display === 'none') {
+      chatbotToggle.textContent = '-';
+      chatbotMessages.style.display = 'block';
+      chatbotTextInput.style.display = 'block';
+      chatbotSendButton.style.display = 'block';
+    } else {
+      chatbotToggle.textContent = '+';
+      chatbotMessages.style.display = 'none';
+      chatbotTextInput.style.display = 'none';
+      chatbotSendButton.style.display = 'none';
+    }
+  });
+
+  // Send message to chatbot when Send button is clicked
+
+  function respond(){
+
+const message = chatbotTextInput.value.trim();
+    console.log(message);
+    if (message.length > 0) {
+      let informations = "informations : - artzii is located in ghazela ariana , specialezed in e-commerce and selling arts that people post on the website after the admin verify it, -violent content and nudity are not allowed , -we are working on making the website available in arabic and english and arabic";
+      let condtions = "condtions : only speak about the website (ARTZII) and don't answer anything else than e-commerce questions , -when asked who you are you must say i'm an ai e-commerce that is supposed to help you";
+
+      fetch('http://127.0.0.1:8000/apiTest/'+informations+condtions+message)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data.choices[0].message.content); 
+        let botMessage = data.choices[0].message.content;
+        
+        
+        const chatbotMessage = document.createElement('div');
+        const userMessage = document.createElement('div');
+        const br = document.createElement('br');
+
+        chatbotMessage.classList.add('chatbot-message');
+        chatbotMessage.style="background-color: #d3d3d3;border-radius: 4px;color:white; margin-top:30px; margin-bottom:15px;margin-right:30px; color:black; display:inline-block; float:left; min-width: 15%; max-width:100%; min-height: 30px; padding:10px;";
+        userMessage.style="background-color: #d3d3d3;border-radius: 4px;color:white;margin:30px; color:black; margin-top:30px; margin-bottom:15px; display:inline-block; float:right; min-width: 15%; max-width:100%; min-height: 30px;padding:10px;";
+        
+        userMessage.textContent=message;
+        chatbotMessage.textContent = botMessage;
+        console.log(chatbotMessage);
+        chatbotMessages.appendChild(userMessage);
+        chatbotMessages.appendChild(br);
+        chatbotMessages.appendChild(chatbotMessage);
+        chatbotMessages.appendChild(br);
+        chatbotMessages.scroll({ top: 99999})
+
+        chatbotTextInput.value = '';
+
+  })
+            .catch(err => {
+                console.error(err);
+                chatbotTextInput.value = '';
+            });
+      
+    }
+  }
+  chatbotSendButton.addEventListener('click', () => {
+        const message = chatbotTextInput.value.trim();
+    if (message.length > 0) {
+      let informations = "informations : - artzii is located in ghazela ariana , specialezed in e-commerce and selling arts that people post on the website after the admin verify it, -violent content and nudity are not allowed , -we are working on making the website available in arabic and english and arabic";
+      let condtions = "condtions : only speak about the website (ARTZII) and don't answer anything else than e-commerce questions , -when asked who you are you must say i'm an ai e-commerce that is supposed to help you";
+
+      fetch('http://127.0.0.1:8000/apiTest/'+informations+condtions+message)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data.choices[0].message.content); 
+        let botMessage = data.choices[0].message.content;
+        
+        
+        const chatbotMessage = document.createElement('div');
+        const userMessage = document.createElement('div');
+        const br = document.createElement('br');
+
+        chatbotMessage.classList.add('chatbot-message');
+        chatbotMessage.style="background-color: #d3d3d3;border-radius: 4px;color:white; margin-top:30px; margin-bottom:15px;margin-right:30px; color:black; display:inline-block; float:left; min-width: 15%; min-height: 30px; padding:10px;";
+        userMessage.style="background-color: #d3d3d3;border-radius: 4px;color:white;margin:30px; color:black; margin-top:30px; margin-bottom:15px; display:inline-block; float:right; min-width: 15%; min-height: 30px;padding:10px;";
+        
+        userMessage.textContent=message;
+        chatbotMessage.textContent = botMessage;
+        console.log(chatbotMessage);
+        chatbotMessages.appendChild(userMessage);
+        chatbotMessages.appendChild(br);
+        chatbotMessages.appendChild(chatbotMessage);
+        chatbotMessages.appendChild(br);
+
+        chatbotTextInput.value = '';
+
+  })
+            .catch(err => {
+                console.error(err);
+                chatbotTextInput.value = '';
+            });
+    }
+  } );
+  chatbotTextInput.addEventListener('keypress', (event)=>{
+
+    if(event.key === 'Enter'){
+      respond();
+  }
+  }
+  );
+    
+</script>
 	</body>
 
 

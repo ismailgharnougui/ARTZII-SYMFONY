@@ -1,6 +1,6 @@
 {% extends 'base2.html.twig' %}
 
-{% block title %}Artiiz{% endblock %}
+{% block title %}Artzii{% endblock %}
 
 {% block body %}
     
@@ -40,6 +40,13 @@
 
 
     {% for flash_message in app.session.flashbag.get('success') %}
+    <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+        {{ flash_message }}
+       
+    </div>
+    {% endfor %}
+
+     {% for flash_message in app.session.flashbag.get('successPaiement') %}
     <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
         {{ flash_message }}
        
