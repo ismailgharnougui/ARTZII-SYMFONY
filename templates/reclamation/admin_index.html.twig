@@ -22,7 +22,6 @@
             <button class="btn btn-danger col-3 me-2 etat-filter-btn" etat-filter="nonresolu">Non Resolu</button>
             <button class="btn btn-primary col-3 etat-filter-btn" etat-filter="all">All</button>
 
-
         </div>
         <div class="row mt-3">
             <div class="col-lg-12">
@@ -65,6 +64,19 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12">
+                <ul class="pagination">
+                    {% set rowsPerPage = 3 %}
+                    {% set numRows = reclamations|length %}
+                    {% set numPages = (numRows / rowsPerPage)|round(0, 'ceil') %}
+                    {% for i in 1..numPages %}
+                        <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-3">
                 <a class="btn btn-primary" href="{{ path('app_admin_reclamation_statistique') }}">Stat</a>
             </div>
@@ -82,6 +94,27 @@
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+                var rowsPerPage = 3;
+                var currentPage = 1;
+                var start = 0;
+                var end = rowsPerPage;
+                showPage(currentPage);
+
+                function showPage(page) {
+                    start = (page-1)*rowsPerPage;
+                    end = start+rowsPerPage;
+                    $("table tbody tr").hide();
+                    $("table tbody tr").slice(start, end).show();
+                    $(".page-link").removeClass("active");
+                    $(".page-link").eq(page-1).addClass("active");
+                }
+                $(".page-link").on("click", function(){
+                    var page =  parseInt($(this).text());
+                    showPage(page);
+                    currentPage = page;
+
+                });
+
             });
             $('button:contains("Resolu")').click(function() {
                 $('table tbody tr').show();
@@ -99,6 +132,7 @@
             $('button:contains("All")').click(function() {
                 $('table tbody tr').show();
             });
+
         </script>
     {% endblock %}
 

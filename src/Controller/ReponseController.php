@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twilio\Rest\Client;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 #[Route('/reponse')]
 class ReponseController extends AbstractController
@@ -26,9 +29,9 @@ class ReponseController extends AbstractController
     }
 
     #[Route('/new/{idreclmaation}', name: 'app_reponse_new', methods: ['GET', 'POST'])]
-    public function new(Client $twilio,ValidatorInterface $validator,Request $request, ReponseRepository $reponseRepository , ReclamationRepository $reclamationRepository ,$idreclmaation): Response
+    public function new(Client $twilio,MailerInterface $mailer,ValidatorInterface $validator,Request $request, ReponseRepository $reponseRepository , ReclamationRepository $reclamationRepository ,$idreclmaation): Response
     {   $reclamation = $reclamationRepository->find($idreclmaation);
-
+        $useremail=$reclamation->getUser()->getEmail();
         $reponse = new Reponse();
         $reponse->setIdreclamation($reclamation);
         $reponse->setDateRep(new \DateTime());
@@ -50,6 +53,20 @@ class ReponseController extends AbstractController
                         'body' => 'Votre réclamation a été traitée.'
                     )
                 );
+                $email=(new Email())
+                    ->from('mahdi.mokrani1@esprit.tn')
+                    ->to($useremail
+                    )
+                    ->subject('Votre réclamation a été traitée.')
+                    ->text('Reponse : '.$reponse->getContenuRep());
+                try {
+                    $mailer->send($email);
+                } catch (TransportExceptionInterface $e) {
+                    dd($e->getMessage());
+                    // some error prevented the email sending; display an
+                    // error message or try to resend the message
+                }
+
 
                 return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
             }
