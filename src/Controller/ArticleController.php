@@ -210,21 +210,22 @@ class ArticleController extends AbstractController
     #[Route('/detailArticle/{artid}', name: 'detailArticle')]
     public function detailArticle(\Symfony\Component\HttpFoundation\Request $req, $artid)
     {
+
         $em = $this->getDoctrine()->getManager();
         $prod = $em->getRepository(Article::class)->find($artid);
 
 
-        return $this->render('article/detailArticle.html.twig', array(
+        return $this->render('article/detailArticlefront.html.twig', array(
             'id' => $prod->getArtid(),
             'name' => $prod->getArtlib(),
             'prix' => $prod->getArtprix(),
             'artdispo' => $prod->getArtdispo(),
             'description' => $prod->getArtdesc(),
             'image' => $prod->getArtimg(),
-            'catlib' => $prod->getCatlib(),
-            'User' => $prod->getIdUser()->getNomUser() . ' ' . $prod->getIdUser()->getPrenomUser(),
-            'mail' => $prod->getIdUser()->getEmailUser()
+            'catlib' => $prod->getCatlib()
+
         ));
+
     }
 
     #[Route('/detailArticle/front/{artid}', name: 'detailArticlefront')]
@@ -524,11 +525,11 @@ class ArticleController extends AbstractController
     public function search2(Request $request, \App\Repository\ArticleRepository $repo): Response
     {
         $query = $request->query->get('query');
-        $id = $request->query->get('artid');
+        $artid = $request->query->get('artid');
         $artlib = $request->query->get('artlib');
         $catlib = $request->query->get('catlib');
 
-        $article = $repo->advancedSearch($query, $id, $artlib, $catlib);
+        $article = $repo->advancedSearch($query, $artid, $artlib, $catlib);
 
         return $this->render('article/index.html.twig', [
             'listS' => $article,

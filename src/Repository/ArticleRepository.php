@@ -98,7 +98,7 @@ class ArticleRepository extends ServiceEntityRepository
         if ($query) {
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->like('c.artid', ':query'),
-                $qb->expr()->like('c.ArtLib', ':query'),
+                $qb->expr()->like('c.artlib', ':query'),
                 $qb->expr()->like('c.catlib', ':query'),
 
             ))
@@ -111,7 +111,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         if ($artlib) {
-            $qb->andWhere('c.ArtLib = :ArtLib')
+            $qb->andWhere('c.artlib = :artlib')
                 ->setParameter('artlib', $artlib);
         }
 
