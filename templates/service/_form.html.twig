@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {{ form_label(form.titre, 'Service Title', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 2}}) }}
+        </div>
+        <div class="mb-3">
+                <label for="{{ form.date_annonce.vars.id }}" class="form-label">{{ form.date_annonce.vars.label }}</label>
+                {{ form_widget(form.date_annonce, {
+                    'attr': {'class': 'form-control', 'placeholder': 'Announce date', 'id': 'basic-datepicker'}
+                }) }}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {{ form_label(form.adresse, 'Location', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'location'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.categorie, 'Service Category', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Category'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.user, 'Service Owner', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.user, {'attr': {'class': 'form-select'}}) }}
+        </div>
+    </div>
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

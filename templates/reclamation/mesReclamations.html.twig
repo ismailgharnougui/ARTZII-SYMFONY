@@ -1,0 +1,40 @@
+{% extends 'profile.html.twig' %}
+
+{% block pageTitle %} Reclamation effectuée {% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Date_ajout</th>
+            <th>Sujet</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in pagination %}
+            <tr>
+                <td>{{ reclamation.dateAjout ? reclamation.dateAjout|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.sujet }}</td>
+                <td>{{ reclamation.description }}</td>
+                {% if reclamation.reponse ==""  %} <td> <span class="badge bg-danger">not checked</span></td> {% else %} <td> <span class="badge bg-success">checked</span></td> {% endif %}
+
+                <td>
+                    <a href="{{ path('front_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a href="{{ path('front_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

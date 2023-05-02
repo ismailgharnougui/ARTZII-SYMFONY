@@ -1,0 +1,40 @@
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {{ form_label(form.nom_produit, 'Product Name', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nom_produit, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.categorie, 'Category', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.user, 'Product Owner', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.user, {'attr': {'class': 'form-select'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {{ form_label(form.price, 'Price', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.imageFile, 'Product Image', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.imageFile, {'attr': {'class': 'form-control dropify', 'data-height': '300', 'data-plugins': 'dropify'}}) }}
+            {% if form.imageFile.vars.value is not empty %}
+                <img src="{{ asset('uploads/images/' ~ form.imageFile.vars.value) }}" alt="product-image" width="200">
+            {% endif %}
+        </div>
+
+
+
+    </div>
+</div>
+
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,35 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Edit Service{% endblock %}
+
+{% block body %}
+    <h1>Edit Service</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    {{ include('service/_form.html.twig', {'button_label': 'Update'}) }}
+                    <!-- end row-->
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card -->
+        </div><!-- end col -->
+    </div>
+
+
+    <a href="{{ path('app_service_index') }}">back to list</a>
+
+    {{ include('service/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <!-- Plugins js-->
+    <script src="{{ asset('../admin/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('../admin/assets/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
+    <script src="{{ asset('../admin/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+
+    <!-- Init js-->
+    <script src="{{ asset('../admin/assets/js/pages/form-pickers.init.js') }}"></script>
+
+{% endblock %}

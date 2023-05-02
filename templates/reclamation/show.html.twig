@@ -1,0 +1,73 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+
+    <div style="display: flex ;gap: 1vw">
+        <table class="table" style="width: 60%">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reclamation.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_ajout</th>
+                <td>{{ reclamation.dateAjout ? reclamation.dateAjout|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ reclamation.sujet }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.description }}</td>
+            </tr>
+            <tr>
+                <th>Response</th>
+                {% if reclamation.reponse == "" %}
+                    <td>waiting for response</td>
+                {% else %}
+                    <td>{{ reclamation.reponse.reponse }}</td>
+                {% endif %}
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-response-modal">
+                Add Response
+            </button>
+        </div>
+    </div>
+
+    <a href="{{ path('app_reclamation_index') }}">back to list</a>
+
+    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+
+    {{ include('reclamation/_delete_form.html.twig') }}
+
+    <!-- Modal -->
+    <div class="modal fade" id="add-response-modal" tabindex="-1" aria-labelledby="add-response-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-response-modal-label">Add Response</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(response_form, {'action': path('app_reclamation_add_response', {'id': reclamation.id})}) }}
+                    {{ form_row(response_form.reponse, {'label': 'Response'}) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    {{ form_end(response_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

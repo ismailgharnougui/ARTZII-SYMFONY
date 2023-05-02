@@ -1,0 +1,37 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{asset('../admin/assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('../admin/assets/libs/dropify/css/dropify.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{asset('../admin/assets/css/config/default/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled="disabled" />
+    <link href="{{asset('../admin/assets/css/config/default/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" disabled="disabled" />
+
+    <!-- icons -->
+    <link href="{{asset('../admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+    <h1>Create new Product</h1>
+
+    {{ include('product/_form.html.twig') }}
+
+    <a href="{{ path('app_product_index') }}">back to list</a>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Plugins js -->
+    <script src="{{asset('../admin/assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+    <script src="{{asset('../admin/assets/libs/dropify/js/dropify.min.js')}}"></script>
+
+    <!-- Init js-->
+    <script src="{{asset('../admin/assets/js/pages/form-fileuploads.init.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+{% endblock %}
+{% block body %}
+
+    <section class="section" style="height: 100vh; background-image: url({{ asset('home-img3.png') }}) !important ;background-repeat: no-repeat ;background-size: cover;" id="demo">
+
+        <div class="container-fluid" style="display: flex;height: 100% ;gap: 1vw; margin-top: 5vh">
+            <div class="sidebar">
+                <ul>
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="{{path('front_mesCommande_show')}}">Mes Commandes</a></li>
+                    <li><a href="{{ path('front_mesReclamation_show') }}">Mes Reclamations</a></li>
+                    <li><a href="{{ path('front_mesEchange_show') }}">Mes Echanges</a></li>
+                    <li><a href="{{ path('front_panier_show') }}">Mon panier</a></li>
+                    <li><a href="{{ path('front_dashboard') }}">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="bg-white" style="display: flex ;flex-direction: column ;width: 100% ;padding:20px;border: 2px solid black;
+                border-radius: 10px;  --bs-bg-opacity:0.7">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="title text-center">
+                            <h4>{% block pageTitle %}My Profile {% endblock %}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% block content %}
+                <div class="d-flex flex-wrap align-items-stretch" style="gap: 5vw ;justify-content: center ">
+
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+            <!-- end container-fluid -->
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log("aaaa")
+        const readMores = document.querySelectorAll('.read-more');
+        readMores.forEach(readMore => {
+            const description = readMore.previousElementSibling;
+            const descriptionContainer = readMore.previousElementSibling;
+
+            if (description.offsetHeight > descriptionContainer.offsetHeight) {
+                descriptionContainer.classList.add('collapsed');
+                readMore.style.display = 'block';
+            }
+
+            readMore.addEventListener('click', event => {
+                event.preventDefault();
+                descriptionContainer.classList.toggle('expanded');
+                descriptionContainer.classList.toggle('collapsed');
+                readMore.textContent = descriptionContainer.classList.contains('collapsed') ? 'Read less' : 'Read more...';
+            });
+        });
+
+
+
+
+
+    </script>
+{% endblock %}

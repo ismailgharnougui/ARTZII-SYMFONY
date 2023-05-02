@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('../admin/assets/images/favicon.ico')}}">
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{asset('../admin/assets/css/config/default/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled="disabled" />
+    <link href="{{asset('../admin/assets/css/config/default/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" disabled="disabled" />
+    <link href="{{asset('../admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block body %}
+    <body class="loading authentication-bg authentication-bg-pattern">
+
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="text-center">
+                        <a href="" >
+                            <img src="{{asset('../admin/assets/images/logo.png')}}" alt="" height="22" class="mx-auto">
+                        </a>
+                        <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body p-4">
+                         <div class="g-recaptcha" data-sitekey="6LeXJtMlAAAAAJKpJshu5G_C_YhcN5dJ3nSf0Sry"></div>
+                                    <div class="form-group
+
+                            <div class="text-center mb-4">
+                                <h4 class="text-uppercase mt-0">Register</h4>
+                            </div>
+
+                            {{ form_start(registrationForm) }}
+
+
+
+
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.email, 'Email address', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email', 'required': true}}) }}
+                                {{ form_errors(registrationForm.email) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.nom, 'Last name', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Enter your lastname', 'required': true}}) }}
+                                {{ form_errors(registrationForm.nom) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.prenom, 'First name', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Enter your firstname', 'required': true}}) }}
+                                {{ form_errors(registrationForm.prenom) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.adresse, 'Address', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.adresse, {'attr': {'type':'hidden' ,'class':  'form-control','id':'location','name':'location', 'placeholder': 'Enter your adress', 'required': true}}) }}
+                                {{ form_errors(registrationForm.adresse) }}
+                            </div>
+                            <div id="map" style="width: 100%; height: 400px;"></div>
+
+
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.phone, 'Phone', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control', 'placeholder': 'Enter your phone number', 'required': true}}) }}
+                                {{ form_errors(registrationForm.phone) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password', 'required': true}}) }}
+                                {{ form_errors(registrationForm.plainPassword) }}
+                            </div>
+
+
+                            <div class="mb-3">
+                                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input', 'id': 'checkbox-signup'}}) }}
+                                {{ form_label(registrationForm.agreeTerms, ' I accept', {'label_attr': {'class': 'form-check-label'}}) }}
+
+                                {{ form_errors(registrationForm.agreeTerms) }}
+                                <label class="form-check-label" for="checkbox-signup">
+                                    <a href="{{asset('javascript: void(0);')}}" class="text-dark">Terms and Conditions</a>
+                                </label>
+                            </div>
+
+                            <div class="mb-3 text-center d-grid">
+                                <button class="btn btn-primary" type="submit"> Sign Up </button>
+                            </div>
+
+
+                            {{ form_end(registrationForm) }}
+
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Already have account?  <a href="" class="text-dark ms-1"><b>Sign In</b></a></p>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+
+
+    </body>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('../admin/assets/js/vendor.min.js')}}"></script>
+    <script src="{{asset('../admin/assets/js/app.min.js')}}"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+
+    <script>
+        // Initialize the map
+        mapboxgl.accessToken = 'pk.eyJ1IjoieW91c3NlZjA3MDQiLCJhIjoiY2xncjl6ZjBqMTZnYjNqbXR6cDVybzVzMSJ9.KG6v8v5tjnfhlQRMBsmlvw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [ 10.205280,36.883739], // Default center coordinates
+            zoom: 9 // Default zoom level
+        });
+
+        // Add a marker to the current location
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var marker = new mapboxgl.Marker()
+                .setLngLat([position.coords.longitude, position.coords.latitude])
+                .addTo(map);
+        });
+
+        map.on('click', function(e) {
+            // Update the location field
+            document.getElementById('registration_form_adresse').value = e.lngLat.lat+','+ e.lngLat.lng
+
+
+            // Add a marker to the selected location
+            var marker = new mapboxgl.Marker()
+                .setLngLat(e.lngLat)
+                .addTo(map);
+        });
+    </script>
+$(document ).on ('click',#'login',function(){
+var response = grecaptcha.getResponse();
+if(response.legth=0);
+{
+    alert("please verify you are not a robot");
+    return false;
+}
+
+});
+    </script>
+{% endblock %}

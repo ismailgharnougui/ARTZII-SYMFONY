@@ -1,0 +1,6 @@
+mercuryseries_flashy:
+  # The name to use as the flash message key in the session store
+  flash_message_name:   mercuryseries_flashy_notification
+
+  # The session store to use for storing flash messages
+  session_store: null

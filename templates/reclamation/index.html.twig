@@ -1,0 +1,43 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_ajout</th>
+                <th>Sujet</th>
+                <th>Description</th>
+                <th>Response</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.dateAjout ? reclamation.dateAjout|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.sujet }}</td>
+                <td>{{ reclamation.description }}</td>
+               {% if reclamation.reponse ==""  %} <td> <span class="badge bg-danger">not checked</span></td> {% else %} <td> <span class="badge bg-success">checked</span></td> {% endif %}
+            <td>
+                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+{% endblock %}
+
+

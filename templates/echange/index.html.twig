@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+    <style>
+        .description-container {
+            position: relative;
+            overflow: hidden;
+            max-height: calc(1.2em * 4);
+        }
+
+        .description-container:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 1.2em;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+        }
+
+        .description-container.collapsed:after {
+            display: block;
+        }
+
+        .description-container.expanded {
+            max-height: none;
+        }
+
+        .description-container.expanded:after {
+            display: none;
+        }
+
+        .read-more {
+            display: block;
+            margin-top: 5px;
+            text-align: right;
+            color: black;
+            cursor: pointer;
+        }
+
+
+    </style>
+{% endblock %}
+{% block body %}
+    <section class="section" style="height: 100vh; background-image: url({{ asset('home-img3.png') }}) !important ;background-repeat: no-repeat ;background-size: cover" id="demo">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="title text-center">
+                        <h4>Available Products</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-stretch" style="gap: 5vw ;justify-content: center ">
+                {% for product in products %}
+                    <div class="col-3" >
+                        <div class="d-flex flex-column h-100">
+                            <div class="demo-box text-center p-3 pb-0 mt-4 mb-0 flex-grow-1" style="justify-self: center;align-self: center">
+                                <a href="{{ path('front_product_show', {'id': product.id})  }}" class="text-dark">
+                                    <div class="position-relative demo-content">
+                                        <div class="demo-img">
+                                            <img style="height: 260px; width: 100vw" src="{{ asset(product.getImageUrl()) }}" alt="" class="img-fluid mx-auto d-block rounded">
+                                        </div>
+                                        <div class="demo-overlay" style="background: linear-gradient(to bottom, #ba9217, black)">
+                                            <div class="overlay-icon">
+                                                <i class="pe-7s-expand1 h1 text-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="demo-box rounded-bottom pt-0 p-2 " style="--bs-bg-opacity:0.8">
+                                <div class="d-flex justify-content-center">
+                                    <h5 class="font-18">{{ product.nomProduit }}</h5>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ product.categorie }}</span>
+                                    <span>{{ product.price }}</span>
+                                </div>
+
+                                <a href="#" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-product-id="{{ product.id }}" onclick="openExchangeModal(event)">Echanger</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New Echange</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {{ form_start(form) }}
+
+                                <div class="form-group">
+                                    <label for="produit-offert">My Products:</label>
+                                    <select class="form-control" id="my-products" name="my-products">
+                                        {% for product in myProducts %}
+                                            <option value="{{ product.id }}">{{ product.nomProduit }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lieu-offre">Lieu d'Offre:</label>
+                                    <input type="text" class="form-control" id="lieu-offre" name="lieu-offre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lieu-echange">Lieu d'Echange:</label>
+                                    <input type="text" class="form-control" id="lieu-echange" name="lieu-echange">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="produit-echange" name="produit-echange" value="">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+            <!-- end container-fluid -->
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log("aaaa")
+        const readMores = document.querySelectorAll('.read-more');
+        readMores.forEach(readMore => {
+            const description = readMore.previousElementSibling;
+            const descriptionContainer = readMore.previousElementSibling;
+
+            if (description.offsetHeight > descriptionContainer.offsetHeight) {
+                descriptionContainer.classList.add('collapsed');
+                readMore.style.display = 'block';
+            }
+
+            readMore.addEventListener('click', event => {
+                event.preventDefault();
+                descriptionContainer.classList.toggle('expanded');
+                descriptionContainer.classList.toggle('collapsed');
+                readMore.textContent = descriptionContainer.classList.contains('collapsed') ? 'Read less' : 'Read more...';
+            });
+        });
+
+
+        function openExchangeModal(event) {
+            event.preventDefault();
+
+            const productId = event.target.getAttribute('data-product-id');
+            const exchangeModal = document.getElementById('exchange-modal');
+
+            // Update the URL with the product ID
+
+
+            // Open the exchange modal
+            $(exchangeModal).modal('show');
+        }
+        $(document).on('submit', '#exchange-form', function(event) {
+            event.preventDefault();
+
+
+        });
+
+    </script>
+{% endblock %}

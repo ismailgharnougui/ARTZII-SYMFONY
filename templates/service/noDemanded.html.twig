@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <!-- services start -->
+    <section class="section" style="height: 100vh; background-image: url({{ asset('home-img3.png') }}) !important ;background-repeat: no-repeat ;background-size: cover" id="services">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="title text-center">
+                        <h4>No Demanded Services</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </section>
+    <!-- services end -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log("aaaa")
+        const readMores = document.querySelectorAll('.read-more');
+        readMores.forEach(readMore => {
+            const description = readMore.previousElementSibling;
+            const descriptionContainer = readMore.previousElementSibling;
+
+            if (description.offsetHeight > descriptionContainer.offsetHeight) {
+                descriptionContainer.classList.add('collapsed');
+                readMore.style.display = 'block';
+            }
+
+            readMore.addEventListener('click', event => {
+                event.preventDefault();
+                descriptionContainer.classList.toggle('expanded');
+                descriptionContainer.classList.toggle('collapsed');
+                readMore.textContent = descriptionContainer.classList.contains('collapsed') ? 'Read less' : 'Read more...';
+            });
+        });
+
+
+
+
+
+    </script>
+{% endblock %}

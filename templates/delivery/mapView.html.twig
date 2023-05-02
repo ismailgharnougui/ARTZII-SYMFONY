@@ -1,0 +1,49 @@
+{% extends 'baselivreur.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+{% endblock %}
+{% block title %} Mes Livraisons {% endblock %}
+{% block dropdownNotif %} {% endblock %}
+{% block body %}
+    <h1>Mes Livraisons</h1>
+
+    <div id="map" style="width: 100%; height: 500px;"></div>
+
+{% endblock %}
+{% block javascripts %} {{ parent()}}
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoieW91c3NlZjA3MDQiLCJhIjoiY2xncjl6ZjBqMTZnYjNqbXR6cDVybzVzMSJ9.KG6v8v5tjnfhlQRMBsmlvw'
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v10',
+        center: [10.190855047450526,36.18102976456394],
+        zoom: 12
+    });
+    let longitude,latitude,str,popup,markerImg,marker;
+    {% for delivery in deliveries %}
+    str ='{{ delivery.client.adresse }}';
+     [longitude,latitude] = str.split(',');
+
+
+     popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    }).setHTML(`<h3>Client : {{delivery.client.nom}}</h3><p>Phone : {{delivery.client.phone}}</p>`);
+     markerImg = document.createElement('img');
+    markerImg.src =' {{ delivery.client.gravatarUrl }}';
+    markerImg.style.width = '40px';
+    markerImg.style.height = '40px';
+    markerImg.style.borderRadius = '50%';
+
+     marker = new mapboxgl.Marker({element : markerImg})
+        .setLngLat([parseFloat(latitude), parseFloat(longitude)])
+        .setPopup(popup)
+        .addTo(map);
+    {% endfor %}
+
+
+</script>
+{% endblock %}

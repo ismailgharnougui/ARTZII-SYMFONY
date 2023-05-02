@@ -1,0 +1,40 @@
+{% extends 'baseadmin.html.twig' %}
+{% block sidebar %}
+    <div id="sidebar-menu">
+
+        <ul id="side-menu">
+
+
+
+            <li>
+                <a href="index.html">
+                    <i class="mdi mdi-view-dashboard"></i>
+                    <span> Dashboard </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('delivery_index') }}">
+                    <i class="mdi mdi-calendar"></i>
+                    <span> Liste Commandes </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('mesLivraisons') }}">
+                    <i class="mdi mdi-scale-bathroom"></i>
+                    <span> Mes Livraisons </span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('mesLivraisonsMap') }}">
+                    <i class="mdi mdi-map"></i>
+                    <span> Map view </span>
+                </a>
+            </li>
+
+
+        </ul>
+
+    </div>
+{% endblock %}

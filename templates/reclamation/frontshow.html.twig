@@ -1,0 +1,48 @@
+{% extends 'profile.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+{% block pageTitle %} Reclamation details {% endblock %}
+{% block content %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ reclamation.id }}</td>
+        </tr>
+        <tr>
+            <th>Date_ajout</th>
+            <td>{{ reclamation.dateAjout ? reclamation.dateAjout|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Sujet</th>
+            <td>{{ reclamation.sujet }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ reclamation.description }}</td>
+        </tr>
+        <tr>
+            <th>Response</th>
+            {% if reclamation.reponse == "" %}
+                <td>waiting for response</td>
+            {% else %}
+                <td>{{ reclamation.reponse.reponse }}</td>
+            {% endif %}
+        </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_mesReclamation_show') }}">back to list</a>
+
+    <a href="{{ path('front_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+
+    <form method="post" action="{{ path('front_reclamation_delete', {'id': reclamation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.id) }}">
+        <button class="btn">Delete</button>
+    </form>
+
+
+
+{% endblock %}

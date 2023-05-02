@@ -1,0 +1,28 @@
+{% extends 'profile.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+{% block pageTitle %} Commande details {% endblock %}
+{% block content %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{ commande.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_mesCommande_show') }}">back to list</a>
+
+
+
+{% endblock %}

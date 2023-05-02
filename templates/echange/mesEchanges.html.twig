@@ -1,0 +1,45 @@
+{% extends 'profile.html.twig' %}
+
+{% block pageTitle %} Mes échanges {% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th scope="col">Produit échangé</th>
+            <th scope="col">Produit offert</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set processed_echanges = [] %}
+
+        {% for echange in echanges %}
+            {% if app.user == echange.produitEchange.user or app.user == echange.produitOffert.user %}
+                {% if echange.id not in processed_echanges %}
+                    {% set processed_echanges = processed_echanges|merge([echange.id]) %}
+                    <tr>
+
+                        <td>{{ echange.produitEchange.nomProduit }}</td>
+                        <td>{{ echange.produitOffert.nomProduit }}</td>
+                        <td>{{ echange.statut }}</td>
+                        <td>
+                            {% if echange.statut == 'en attente' %}
+                                <a href="{{ path('accept_echange', {'id': echange.id}) }}" class="btn btn-primary">Accepter</a>
+                                <a href="{{ path('refuse_echange', {'id': echange.id}) }}" class="btn btn-danger">Refuser</a>
+                            {% else %}
+                                <a href="{{ path('export_echange_to_pdf', {'id': echange.id}) }}" class="mdi mdi-file-pdf-box"></a>
+
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

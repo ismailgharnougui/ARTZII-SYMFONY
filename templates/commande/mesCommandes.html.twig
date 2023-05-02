@@ -1,0 +1,41 @@
+{% extends 'profile.html.twig' %}
+
+{% block pageTitle %} Commandes effectuée {% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+
+            <th>Date</th>
+
+            <th>Total</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in pagination %}
+            <tr>
+                <td>{{ commande.id }}</td>
+
+                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+
+                <td>{{ commande.total }}</td>
+                <td>
+                    <a href="{{ path('front_commande_show', {'id': commande.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
+

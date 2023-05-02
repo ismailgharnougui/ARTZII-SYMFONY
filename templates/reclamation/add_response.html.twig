@@ -1,0 +1,16 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block title %}Add Response{% endblock %}
+
+{% block body %}
+    <h1>Add Response</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.reponse) }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">back to reclamation</a>
+{% endblock %}

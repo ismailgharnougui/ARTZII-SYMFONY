@@ -1,0 +1,58 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Service{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{asset('../admin/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{asset('../admin/assets/css/config/default/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+    <link href="{{asset('../admin/assets/css/config/default/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled="disabled" />
+    <link href="{{asset('../admin/assets/css/config/default/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" disabled="disabled" />
+
+    <!-- icons -->
+    <link href="{{asset('../admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block body %}
+    <h1>Service</h1>
+    <div style="
+    flex: auto;
+    text-align: -webkit-center;">
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="text-center card-body">
+
+                <div>
+                    <img src="{{ asset('../admin/assets/images/users/user-1.jpg') }}" class="rounded-circle avatar-xl img-thumbnail mb-3" alt="profile-image">
+
+                    <p class="text-muted font-13 mb-4">
+                        {{ service.description }}
+                    </p>
+
+                    <div class="text-start">
+                        <p class="text-muted font-13"><strong>Service Title :</strong> <span class="ms-2">{{ service.titre }}</span></p>
+                        <p class="text-muted font-13"><strong>Category :</strong><span class="ms-2 badge bg-danger">{{ service.categorie }}</span></p>
+                        <p class="text-muted font-13"><strong>Published On :</strong> <span class="ms-2">{{ service.dateAnnonce ? service.dateAnnonce|date('Y-m-d') : '' }}</span></p>
+                        <p class="text-muted font-13"><strong>Owner Name :</strong> <span class="ms-2">{{ service.user.nom }}</span></p>
+                        <p class="text-muted font-13"><strong>Mobile :</strong><span class="ms-2">+216 {{ service.user.phone }}</span></p>
+                        <p class="text-muted font-13 m-b-5"><strong>Location :</strong> <span class="ms-2">{{ service.adresse }}</span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <a href="{{ path('app_service_index') }}">back to list</a>
+
+    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+
+    {{ include('service/_delete_form.html.twig') }}
+{% endblock %}

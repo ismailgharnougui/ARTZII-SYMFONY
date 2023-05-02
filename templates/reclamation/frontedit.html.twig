@@ -1,0 +1,17 @@
+{% extends 'profile.html.twig' %}
+
+{% block pageTitle %} Edit Reclamation {% endblock %}
+
+{% block content %}
+
+    {{ include('reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <a href="{{ path('front_mesReclamation_show') }}">back to list</a>
+    
+
+    <form method="post" action="{{ path('front_reclamation_delete', {'id': reclamation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.id) }}">
+        <button class="btn">Delete</button>
+    </form>
+{% endblock %}

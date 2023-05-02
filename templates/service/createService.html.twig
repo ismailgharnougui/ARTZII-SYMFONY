@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="section" style=" background-image: url({{ asset('bg.png') }}) !important ;background-repeat: no-repeat ;background-size: cover" id="contact">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="title text-center mb-5">
+                        <h4>Create a new Service</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row justify-content-center" >
+
+                <div class="col-lg-8">
+                    <div class="custom-form bg-white p-3" style="--bs-bg-opacity:0.7">
+                        <span id="error-msg"></span>
+                        {{ form_start(form, {
+                            'attr': {
+                                'novalidate': 'novalidate',
+                                'onsubmit': 'validateForm()',
+                                'name': 'myForm'
+                            }
+                        }) }}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        {{ form_label(form.titre, 'Service Title', {'label_attr': {'class': 'form-label'}}) }}
+                                        {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Enter Service Title ...','name': 'titre'}}) }}
+                                        {% if form_errors(form.titre) %}
+                                            <div class="form-error alert alert-danger error_message text-center" style="display: flex;align-items: center;justify-content: flex-start;padding-top: 23px; height: 23px;margin-top: 5px">{{ form_errors(form.titre) }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+
+                                        {{ form_label(form.categorie, 'Service Category', {'label_attr': {'class': 'form-label'}}) }}
+                                        {{ form_widget(form.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Category','name': 'categorie'}}) }}
+                                        {% if form_errors(form.categorie) %}
+                                            <div class="form-error alert alert-danger error_message text-center" style="display: flex;align-items: center;justify-content: flex-start;padding-top: 23px; height: 23px;margin-top: 5px">{{ form_errors(form.categorie) }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        {{ form_label(form.adresse, 'Location', {'label_attr': {'class': 'form-label'}}) }}
+                                        {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Enter location...','name': 'adresse'}}) }}
+                                        {% if form_errors(form.adresse) %}
+                                            <div class="form-error alert alert-danger error_message text-center" style="display: flex;align-items: center;justify-content: flex-start;padding-top: 23px; height: 23px;margin-top: 5px">{{ form_errors(form.adresse) }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.date_annonce.vars.id }}" class="form-label">{{ form.date_annonce.vars.label }}</label>
+                                        {{ form_widget(form.date_annonce, {
+                                            'attr': {'class': 'form-control', 'placeholder': 'Announce date', 'id': 'basic-datepicker','name': 'date'}
+                                        }) }}
+                                        {% if form_errors(form.date_annonce) %}
+                                            <div class="form-error alert alert-danger error_message text-center" style="display: flex;align-items: center;justify-content: flex-start;padding-top: 23px; height: 23px;margin-top: 5px">{{ form_errors(form.date_annonce) }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4 ,'placeholder':'Enter Description...','name': 'description'}}) }}
+                                        {% if form_errors(form.description) %}
+                                            <div class="form-error alert alert-danger error_message text-center" style="display: flex;align-items: center;justify-content: flex-start;padding-top: 23px; height: 23px;margin-top: 5px">{{ form_errors(form.description) }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row" style="display: none">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    {{ form_label(form.user, 'Service Owner', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.user, {'attr': {'class': 'form-select'}, 'value': app.user}) }}
+                                    {% if form_errors(form.user) %}
+                                        <div class="form-error">{{ form_errors(form.user) }}</div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                            <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-lg-12 text-end">
+                                    <button class="btn submitBnt btn btn-custom">{{ button_label|default('Save') }}</button>
+
+                                </div>
+                            </div>
+                            <!-- end row -->
+                        {{ form_end(form) }}
+                    </div>
+                    <!-- end custom-form -->
+
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </section>
+    <!-- services end -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+<script>
+    function validateForm() {
+        var titre = document.forms["myForm"]["titre"].value;
+        var description = document.forms["myForm"]["description"].value;
+        var date = document.forms["myForm"]["date"].value;
+        var categorie = document.forms["myForm"]["categorie"].value;
+        var adresse = document.forms["myForm"]["adresse"].value;
+        console.log("bbbbbbb")
+        document.getElementById("error-msg").style.opacity = 0;
+        document.getElementById("error-msg").innerHTML = "";
+        if (titre == "" || titre == null) {
+            document.getElementById("error-msg").innerHTML = "<div class='alert alert-danger error_message text-center'>Please enter a Name</div>";
+            fadeIn();
+            return false;
+        }
+        if (adresse == "" || adresse == null) {
+            document.getElementById("error-msg").innerHTML = "<div class='alert alert-danger error_message text-center'>Please enter a Name</div>";
+            fadeIn();
+            return false;
+        }
+        if (description == "" || description == null) {
+            document.getElementById("error-msg").innerHTML = "<div class='alert alert-danger error_message text-center'>Please enter a Email</div>";
+            fadeIn();
+            return false;
+        }
+        if (date == "" || date == null) {
+            document.getElementById("error-msg").innerHTML = "<div class='alert alert-danger error_message text-center'>Please enter a Subject</div>";
+            fadeIn();
+            return false;
+        }
+        if (categorie == "" || categorie == null) {
+            document.getElementById("error-msg").innerHTML = "<div class='alert alert-danger error_message text-center'>Please enter a Comments</div>";
+            fadeIn();
+            return false;
+        }
+/*
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("simple-msg").innerHTML = this.responseText;
+                document.forms["myForm"]["titre"].value = "";
+                document.forms["myForm"]["description"].value = "";
+                document.forms["myForm"]["adresse"].value = "";
+                document.forms["myForm"]["date"].value = "";
+                document.forms["myForm"]["categorie"].value = "";
+            }
+        };
+        xhttp.open("POST", "php/contact.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("name=" + name + "&email=" + email + "&comments=" + comments);*/
+        return false;
+    }
+
+    function fadeIn() {
+        var fade = document.getElementById("error-msg");
+        var opacity = 0;
+        var intervalID = setInterval(function () {
+            if (opacity < 1) {
+                opacity = opacity + 0.5;
+                fade.style.opacity = opacity;
+            } else {
+                clearInterval(intervalID);
+            }
+        }, 200);
+    }
+
+</script>
+{% endblock %}

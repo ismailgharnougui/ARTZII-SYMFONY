@@ -1,0 +1,51 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Nom_produit</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.categorie }}</td>
+                <td>{{ product.nomProduit }}</td>
+                <td>{{ product.description }}</td>
+                <td><img src="{{ asset(product.getImageUrl()) }}" alt="{{ product.nomProduit }}" height="50" width="50"></td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+
+                    <form method="POST" action="{{ path('app_product_command', {'id': product.id}) }}">
+                        <button type="submit" class="btn btn-success">command</button>
+                    </form>
+                    <form method="POST" action="{{ path('app_product_add_to_basket', {'id': product.id}) }}">
+                        <button type="submit" class="btn btn-primary">add to basket</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_new') }}">Create new</a>
+{% endblock %}

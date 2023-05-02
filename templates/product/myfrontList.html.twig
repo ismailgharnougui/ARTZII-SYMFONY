@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+    <style>
+        .description-container {
+            position: relative;
+            overflow: hidden;
+            max-height: calc(1.2em * 4);
+        }
+
+        .description-container:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 1.2em;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+        }
+
+        .description-container.collapsed:after {
+            display: block;
+        }
+
+        .description-container.expanded {
+            max-height: none;
+        }
+
+        .description-container.expanded:after {
+            display: none;
+        }
+
+        .read-more {
+            display: block;
+            margin-top: 5px;
+            text-align: right;
+            color: black;
+            cursor: pointer;
+        }
+
+
+    </style>
+{% endblock %}
+{% block body %}
+
+
+    <section class="section" style="height: 100vh; background-image: url({{ asset('home-img3.png') }}) !important ;background-repeat: no-repeat ;background-size: cover" id="demo">
+
+        <div class="container-fluid" >
+
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="title text-center">
+                        <h4>My Products</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-stretch" style="gap: 5vw ;justify-content: center ">
+                {% for product in products %}
+                    <div class="col-3" >
+                        <div class="d-flex flex-column h-100">
+                            <div class="demo-box text-center p-3 pb-0 mt-4 mb-0 flex-grow-1" style="justify-self: center;align-self: center">
+                                <a href="{{ path('front_product_show', {'id': product.id})  }}" class="text-dark">
+                                    <div class="position-relative demo-content">
+                                        <div class="demo-img">
+                                            <img style="height: 260px; width: 100vw" src="{{ asset(product.getImageUrl()) }}" alt="" class="img-fluid mx-auto d-block rounded">
+                                        </div>
+                                        <div class="demo-overlay" style="background: linear-gradient(to bottom, #ba9217, black)">
+                                            <div class="overlay-icon">
+                                                <i class="pe-7s-expand1 h1 text-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="demo-box rounded-bottom pt-0 p-2 " style="--bs-bg-opacity:0.8">
+                                <div class="d-flex justify-content-center">
+                                    <h5 class="font-18">{{ product.nomProduit }}</h5>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ product.categorie }}</span>
+                                    <span>{{ product.price }}</span>
+                                </div>
+                                <form  style="display: flex;justify-content: center " action="{{ path('front_delete_product', {'id': product.id}) }}" method="delete" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+
+
+
+            <!-- end container-fluid -->
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log("aaaa")
+        const readMores = document.querySelectorAll('.read-more');
+        readMores.forEach(readMore => {
+            const description = readMore.previousElementSibling;
+            const descriptionContainer = readMore.previousElementSibling;
+
+            if (description.offsetHeight > descriptionContainer.offsetHeight) {
+                descriptionContainer.classList.add('collapsed');
+                readMore.style.display = 'block';
+            }
+
+            readMore.addEventListener('click', event => {
+                event.preventDefault();
+                descriptionContainer.classList.toggle('expanded');
+                descriptionContainer.classList.toggle('collapsed');
+                readMore.textContent = descriptionContainer.classList.contains('collapsed') ? 'Read less' : 'Read more...';
+            });
+        });
+
+
+
+
+
+    </script>
+{% endblock %}

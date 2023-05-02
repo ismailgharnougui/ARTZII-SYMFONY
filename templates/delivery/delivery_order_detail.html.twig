@@ -1,0 +1,29 @@
+{% extends 'baselivreur.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <h1>Commande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{ commande.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('delivery_index') }}">back to list</a>
+
+    <a href="{{ path('delivery_accept', {'id': commande.id}) }}">Accept</a>
+
+{% endblock %}

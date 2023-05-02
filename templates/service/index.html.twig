@@ -1,0 +1,53 @@
+{% extends 'baseadmin.html.twig' %}
+
+
+{% block body %}
+    <div class="col-xl-8" style="width: auto !important;">
+        <div class="card">
+            <div class="card-body">
+
+
+                <h1 class="header-title mt-0 mb-3">Liste Services</h1>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                        <tr>
+                            <th>Titre Service</th>
+                            <th>Description</th>
+                            <th>Publish Date</th>
+                            <th>Location</th>
+                            <th>Categorie</th>
+                            <th>Owner</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for service in services %}
+                            <tr>
+                                <td>{{ service.titre }}</td>
+                                <td style="max-width: 20vw">{{ service.description }}</td>
+                                <td>{{ service.dateAnnonce ? service.dateAnnonce|date('Y-m-d') : '' }}</td>
+                                <td>{{ service.adresse }}</td>
+                                <td><span class="badge bg-danger">{{ service.categorie }}</span></td>
+                                <td>{{ service.user.nom }}</td>
+
+                                <td>
+                                    <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
+                                    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end col -->
+    <a href="{{ path('app_service_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>New Echange</h1>
+
+{{ form_start(form) }}
+        {{ form_row(form.produit_offert) }}
+<div class="form-group">
+    <label for="produit-offert">My Products:</label>
+    <select class="form-control" id="my-products" name="my-products">
+        {% for product in myProducts %}
+            <option value="{{ product.id }}">{{ product.nomProduit }}</option>
+        {% endfor %}
+    </select>
+</div>
+    <div class="form-group">
+        <label for="lieu-offre">Lieu d'Offre:</label>
+        <input type="text" class="form-control" id="lieu-offre" name="lieu-offre">
+    </div>
+    <div class="form-group">
+        <label for="lieu-echange">Lieu d'Echange:</label>
+        <input type="text" class="form-control" id="lieu-echange" name="lieu-echange">
+    </div>
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="produit-echange" name="produit-echange" value="{{ productToExchange.id }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    {{ form_end(form) }}
+{% endblock %}

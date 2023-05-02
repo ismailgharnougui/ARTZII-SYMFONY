@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %} Artzii {% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+        <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+        <!-- icons -->
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!-- Bootstrap core CSS -->
+         <!-- App favicon -->
+        <link rel="shortcut icon" href="images/favicon.ico">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{{asset('front/css/bootstrap.min.css')}}" type="text/css">
+
+        <!--Material Icon -->
+        <link rel="stylesheet" type="text/css" href="{{asset('front/css/materialdesignicons.min.css')}}" />
+    
+        <!--pe-7 Icon -->
+        <link rel="stylesheet" type="text/css" href="{{asset('front/css/pe-icon-7-stroke.css')}}" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+        <!-- Custom  sCss -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css') }}"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            /* Sidebar styles */
+            .sidebar {
+                border: 2px solid black;
+                border-radius: 10px;
+                width: 300px;
+                background-color: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(5px);
+                overflow-y: auto;
+                z-index: 1000;
+            }
+
+            .sidebar ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar li {
+                padding: 10px;
+            }
+
+            .sidebar a {
+                text-decoration: none;
+                color: #000;
+                font-weight: bold;
+                font-size: 16px;
+                transition: color 0.3s ease-in-out;
+            }
+
+            .sidebar a:hover {
+                color: #555;
+            }
+
+            /* Main content styles */
+            .main-content {
+                margin-left: 200px;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+                min-height: 100vh;
+            }
+
+            /* Glass effect styles */
+            body:before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background: inherit;
+                z-index: -1;
+                opacity: 0.8;
+                backdrop-filter: blur(10px);
+            }
+
+
+            .dropdown555 {
+                float: left;
+                overflow: hidden;
+            }
+
+            .dropdown555 .dropbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+
+
+            .dropdown-content5555 {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            .dropdown-content5555 a {
+                float: none;
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+            .dropdown-content5555 a:hover {
+                background-color: #ddd;
+            }
+
+            .dropdown555:hover .dropdown-content5555 {
+                display: block;
+            }
+        </style>
+
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('front/images/favicon.ico') }}">
+</head>
+<body style="background-color: #f8f9fa !important;">
+{% block navbar %}
+    <!--Navbar Start-->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" style="" id="nav-sticky">
+            <div class="container-fluid">
+                <!-- LOGO -->
+                <a class="logo text-uppercase" href="{{ path('homepage') }}">
+                    <img src="{{asset('front/images/logo-dark.png')}}" alt="" class="logo-dark" height="18" />
+                    <img src="{{asset('front/images/logo-dark.png')}}" alt="" class="logo-dark" height="18" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarCollapse">
+                    <ul class="navbar-nav " style="display: flex;justify-content: space-between;margin-left: 25vw;flex:auto" id="mySidenav">
+                        <div style="display: flex ;align-items: center">
+                            <li class="nav-item" style="" >
+                                <div class="dropdown">
+                                    <a href="" class="nav-link dropdown-toggle" style="color: black !important;font-weight: bolder" data-bs-toggle="dropdown"  aria-expanded="false">Services</a>
+                                    <div class="dropdown-menu user-pro-dropdown dropdown-menu-end">
+
+                                        <!-- item-->
+                                        <a href="{{ path('front_service_index') }}" class="dropdown-item notify-item">
+                                            <i class="fe-user me-1"></i>
+                                            <span>Browse Services</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="{{path('front_service_new')}}" class="dropdown-item notify-item">
+                                            <i class="fe-settings me-1"></i>
+                                            <span>Create a Service</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="{{path('front_myService_index')}}" class="dropdown-item notify-item">
+                                            <i class="fe-lock me-1"></i>
+                                            <span>My Services</span>
+                                        </a>
+                                        <!-- item-->
+                                        <a href="{{path('front_demandedServices')}}" class="dropdown-item notify-item">
+                                            <i class="fe-lock me-1"></i>
+                                            <span>Demanded Services</span>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                            <li class="nav-item" style="" >
+                                <div class="dropdown">
+                                    <a href="" class="nav-link dropdown-toggle" style="color: black !important;font-weight: bolder" data-bs-toggle="dropdown"  aria-expanded="false">Products</a>
+                                    <div class="dropdown-menu user-pro-dropdown dropdown-menu-start">
+
+                                        <!-- item-->
+                                        <a href="{{ path('front_product_index') }}" class="dropdown-item notify-item">
+                                            <i class="fe-user me-1"></i>
+                                            <span>Browse Products</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="{{ path('front_product_new') }}" class="dropdown-item notify-item">
+                                            <i class="fe-settings me-1"></i>
+                                            <span>Publish a Product</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="{{ path('front_myProduct_index') }}" class="dropdown-item notify-item">
+                                            <i class="fe-lock me-1"></i>
+                                            <span>My Products</span>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                            <li class="nav-item" style="" >
+                                <div class="dropdown">
+                                    <a href="" class="nav-link dropdown-toggle" style="color: black !important;font-weight: bolder" data-bs-toggle="dropdown"  aria-expanded="false">Echange</a>
+                                    <div class="dropdown-menu user-pro-dropdown dropdown-menu-end">
+
+                                        <!-- item-->
+                                        <a href="{{ path('app_echange_index') }}" class="dropdown-item notify-item">
+                                            <i class="fe-user me-1"></i>
+                                            <span>Browse Products</span>
+                                        </a>
+                                        <!-- item-->
+                                        <a href="{{path('front_service_index')}}" class="dropdown-item notify-item">
+                                            <i class="fe-lock me-1"></i>
+                                            <span>Browse Services</span>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </li>
+                        </div>
+                        <div  style="display: flex ;align-items: center">
+
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li class="nav-item" style="background-color: black ; border-radius: 30px">
+                                    {% for role in app.user.roles %}
+                                        {% if  role == "ROLE_SUPER_ADMIN" %}
+                                            <a href="{{ path('adminDashboard') }}" class="nav-link"
+                                               style="font-family:Calibri,cursive ;font-weight: bold;color: white !important;">Admin
+                                                Dashboard</a>
+                                        {% elseif role =="ROLE_LIVREUR" %}
+                                            <a href="{{ path('livreurDashboard') }}" class="nav-link"
+                                               style="font-family:Calibri,cursive ;font-weight: bold;color: white !important;">Delivery
+                                                Dashboard</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </li>
+
+                            {% endif %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                                <!-- Notification dropdown -->
+                                <li class="dropdown notification-list topbar-dropdown">
+                                    <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <i class="mdi mdi-bell" style="color: #0b0b0b"></i>
+                                        <!-- Display the number of unread notifications -->
+                                        <span class="badge bg-danger rounded-circle noti-icon-badge">{{ app.user.notifs|length }}</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+                                        <!-- Notification title -->
+                                        <div class="dropdown-item noti-title">
+                                            <h5 class="m-0">
+                                                <span class="float-end">
+                                                    <a href="" class="text-dark">
+                                                        <small>Clear All</small>
+                                                    </a>
+                                                </span>
+                                                Notification
+                                            </h5>
+                                        </div>
+                                        <div class="noti-scroll" data-simplebar>
+                                            <!-- Loop through the user's notifications and display them -->
+                                            {% for notification in app.user.notifs %}
+                                                <a href="{{ path('echange_show', {'id': notification.echange.id})  }}" class="dropdown-item notify-item {% if notification.status == 'unread' %}active{% endif %}">
+                                                    <p class="notify-details">{{ notification.title }}</p>
+                                                    <p class="text-muted mb-0 user-msg">
+                                                        <small>{{ notification.content }}</small>
+                                                    </p>
+                                                </a>
+
+
+                                            {% endfor %}
+                                        </div>
+                                        <!-- All notifications link -->
+                                        <a href="#" class="dropdown-item text-center text-primary notify-item notify-all">
+                                            View all
+                                            <i class="fe-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown text-black">
+                                    <a class="nav-link dropdown-toggle waves-effect waves-light" href="#" id="basketDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="mdi mdi-cart" style="color: #0b0b0b"></i>
+                                        <span class="badge bg-danger rounded-circle noti-icon-badge">{{ app.session.get('panier')|length }}</span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="basketDropdown">
+                                        <div class="dropdown-header noti-title">
+                                            <h5 class="text-overflow mb-2"><span class="badge bg-danger">{{ app.session.get('panier')|length }} produits dans le panier</span></h5>
+                                        </div>
+
+                                        {% if app.session.get('panier') is not empty %}
+                                            <div class="scrollable noti-scroll" data-simplebar>
+                                                {% for item in app.session.get('panier') %}
+                                                    <a href="#" class="dropdown-item notify-item">
+                                                        <div class="notify-icon bg-primary"><i class="mdi mdi-cart"></i></div>
+                                                        <p class="notify-details">{{ item['nomProduit'] }} x {{ item['quantite'] }}</p>
+                                                        <p class="text-muted mb-0 user-msg">
+                                                            <small>{{ item['prix'] }} DT</small>
+                                                        </p>
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                            <a href="{{ path('front_panier_show') }}" class="dropdown-item text-center notify-all text-primary">
+                                                Voir le panier
+                                            </a>
+                                        {% else %}
+                                            <div class="dropdown-item noti-title">
+                                                <p class="text-overflow mb-2"><em>Panier vide</em></p>
+                                            </div>                    {% endif %}
+                                    </div>
+
+                                </li>
+                                <li class="nav-item" style="" >
+
+                                    <div class="dropdown">
+
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                            <img  href="" src="{{ app.user.gravatarUrl }}" alt="{{ app.user.username }}'s Gravatar" data-bs-toggle="dropdown"  aria-expanded="false" title="{{ app.user.username }}" class="rounded-circle h3 dropdown-toggle img-thumbnail avatar-md" style="height: 50px !important">
+
+                                        {% endif %}
+                                        <div class="dropdown-menu user-pro-dropdown dropdown-menu-end">
+
+                                            <!-- item-->
+                                            <a href="{{path('userHome')}}" class="dropdown-item notify-item">
+                                                <i class="fe-user me-1"></i>
+                                                <span>My Account</span>
+                                            </a>
+
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                <i class="fe-settings me-1"></i>
+                                                <span>Settings</span>
+                                            </a>
+
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                <i class="fe-lock me-1"></i>
+                                                <span>Lock Screen</span>
+                                            </a>
+
+                                            <!-- item-->
+                                            <a href="{{ path('app_logout') }}" class="dropdown-item notify-item">
+                                                <i class="fe-log-out me-1"></i>
+                                                <span>Logout</span> <span class="mdi mdi-logout mx-1"> </span>
+                                            </a>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                            {% endif %}
+                            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li class="nav-item" style="background-color: black ; border-radius: 30px">
+                                    <a class="nav-link"
+                                       style="font-family:Calibri,cursive ;font-weight: bold;color: white !important;"
+                                       href="{{ path('app_login') }}"><span> <i
+                                                    class="dripicons-enter"></i> </span>Sign In
+                                    </a></li>
+                            {% endif %}
+                            <li class="nav-item" >
+                                {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a class="nav-link "
+                                       style="font-family:Calibri,cursive ;font-weight: bold;color: black !important; "
+                                       href="{{ path('app_register') }}"> <span><i
+                                                    class="dripicons-article"></i> </span> Create Account</a>
+
+                                {% endif %}
+                            </li>
+                        </div>
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+{% endblock %}
+
+{% block body %}
+       <section class="bg-home " style=" padding: 150px 0px 240px !important; background-image: url({{ asset('bg.png') }}) !important; background-repeat: no-repeat;
+               background-size: cover; " id="home">
+            <div class="home-center">
+                <div class="home-desc-center">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="home-title">
+                                    <h5 class="mb-3 text-black">~~Coming soon</h5>
+                                    <h1 class="mb-4 text-black" style="font-size: 60px; font-weight: bolder ">Get Notified <br/>When we Launch</h1>
+                                    <p class="text-black-50 home-desc font-16 mb-5">Adminto is a fully featured premium Landing template built on top of awesome Bootstrap 4.3.1, modern web technology HTML5, CSS3 and jQuery. </p>
+                                    <div class="watch-video mt-5">
+                                    <div class="g-recaptcha" data-sitekey="6Ld95s4lAAAAADEhAAbOH5fVNJoofoFO8sRLJOeV"></div>
+                                    <div class="form-group
+                                        <a href="#" class="btn btn-custom me-4">Get Started <i class="mdi mdi-chevron-right ms-1"></i></a>
+                                        <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i class="mdi mdi-play play-icon-circle me-2"></i> <span>Watch The Video</span></a>
+                                    </div>
+    
+                                </div>
+                            </div>
+                            <div class="col-lg-5 offset-lg-1 col-sm-6">
+                                <div class="home-img mo-mt-20">
+                                    <img src="{{asset('front/images/home-img2.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+                    </div>
+                    <!-- end container-fluid -->
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('front/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('front/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('front/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('front/js/scrollspy.min.js') }}"></script>
+
+    <!-- Magnific Popup -->
+    <script src="{{ asset('front/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+
+    <!-- counter js -->
+    <script src="{{ asset('front/js/counter.int.js') }}"></script>
+
+    <!-- custom js -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('front/js/app.js') }}"></script>
+    <!-- make sure that jquery is included --!>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+{% endblock %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+</body>
+</html>

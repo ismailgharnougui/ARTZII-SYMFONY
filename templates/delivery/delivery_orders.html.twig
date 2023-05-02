@@ -1,0 +1,51 @@
+{% extends 'baselivreur.html.twig' %}
+{% block dropdownNotif %}{% endblock %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+    <div class="col-xl-8" style="width: auto !important;">
+        <div class="card">
+            <div class="card-body">
+
+
+                <h1 class="header-title mt-0 mb-3">Liste commandes</h1>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ commande.total }}</td>
+                                <td>
+                                    <a href="{{ path('delivery_order_detail', {'id': commande.id}) }}">show</a>
+                                    <a href="{{ path('delivery_accept', {'id': commande.id}) }}">Accept</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end col -->
+
+
+
+
+
+{% endblock %}

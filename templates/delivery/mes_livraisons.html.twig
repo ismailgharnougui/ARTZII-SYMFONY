@@ -1,0 +1,61 @@
+{% extends 'baselivreur.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+{% endblock %}
+{% block title %} Mes Livraisons {% endblock %}
+{% block dropdownNotif %} {% endblock %}
+{% block body %}
+    <div class="col-xl-8" style="width: auto !important;">
+        <div class="card">
+            <div class="card-body">
+
+
+                <h1 class="header-title mt-0 mb-3">My Deliveries</h1>
+
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Delivery Date</th>
+                            <th>Distance</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for delivery in pagination %}
+                            <tr>
+                                <td>{{ delivery.client.nom }} {{ delivery.client.prenom }}</td>
+
+                                <td>{{ delivery.dateLivraison ? delivery.dateLivraison|date('Y-m-d') : '' }}</td>
+                                <td>{{ delivery.client.adresse }}</td>
+
+                                <td>
+                                    <a href="{{ path('detailLivraisonMap', {'id': delivery.id}) }}">show in map</a>
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <div class="row justify-content-center">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end col -->
+
+
+
+
+
+{% endblock %}

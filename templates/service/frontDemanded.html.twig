@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} {{ parent() }}
+    <style>
+        .description-container {
+            position: relative;
+            overflow: hidden;
+            max-height: calc(1.2em * 4);
+        }
+
+        .description-container:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 1.2em;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+        }
+
+        .description-container.collapsed:after {
+            display: block;
+        }
+
+        .description-container.expanded {
+            max-height: none;
+        }
+
+        .description-container.expanded:after {
+            display: none;
+        }
+
+        .read-more {
+            display: block;
+            margin-top: 5px;
+            text-align: right;
+            color: black;
+            cursor: pointer;
+        }
+
+
+    </style>
+{% endblock %}
+{% block body %}
+    <!-- services start -->
+    <section class="section" style=" background-image: url({{ asset('home-img3.png') }}) !important ;background-repeat: no-repeat ;background-size: cover" id="services">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="title text-center">
+                        <h4>Demanded Services</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                {% for service in services %}
+                    <div class="col-xl-4 col-sm-6 ">
+                        <div class="services-box p-4 bg-white mt-4 " style="--bs-bg-opacity:0.7">
+                            <div class="services-img float-start me-4">
+                                <img src="{{ service.user.gravatarUrl }}" alt="">
+                            </div>
+                            <h5>{{ service.titre }}</h5>
+                            <div style="margin-bottom: 5px;display: flex ;justify-content: space-between;align-items: start">
+                                <span class="badge text-black "  style="margin-top: 4px;background-color: gold">{{ service.categorie }}</span>
+                                <div style="display: flex;flex-direction: column ;align-items: end">
+                                    <span class=" text-muted">{{ service.dateAnnonce ? service.dateAnnonce|date('Y-m-d') : ''  }}</span>
+
+                                    <span>{{ service.adresse }}</span>
+
+                                </div>
+                            </div>
+                            <div class="description-container">
+                                <p class="description text-muted ">{{ service.description }}</p>
+
+                            </div>
+                            <a  class="read-more ">Read more...</a>
+
+                            <div style="display: flex; justify-content: space-between">
+
+                                <a class="btn btn-primary" href="{{ path('front_demander_service', {'id': service.id}) }}">Show Detail</a>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </section>
+    <!-- services end -->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log("aaaa")
+        const readMores = document.querySelectorAll('.read-more');
+        readMores.forEach(readMore => {
+            const description = readMore.previousElementSibling;
+            const descriptionContainer = readMore.previousElementSibling;
+
+            if (description.offsetHeight > descriptionContainer.offsetHeight) {
+                descriptionContainer.classList.add('collapsed');
+                readMore.style.display = 'block';
+            }
+
+            readMore.addEventListener('click', event => {
+                event.preventDefault();
+                descriptionContainer.classList.toggle('expanded');
+                descriptionContainer.classList.toggle('collapsed');
+                readMore.textContent = descriptionContainer.classList.contains('collapsed') ? 'Read less' : 'Read more...';
+            });
+        });
+
+
+
+
+
+    </script>
+{% endblock %}

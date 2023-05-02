@@ -1,0 +1,166 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+homepage:
+  path: /
+  controller: App\Controller\HomeController::homepage
+userHome:
+  path: /myHome
+  controller: App\Controller\HomeController::userHome
+adminDashboard:
+  path: /admin
+  controller: App\Controller\HomeController::adminDashboard
+livreurDashboard:
+  path: /delivery
+  controller: App\Controller\HomeController::livreurDashboard
+verify_email:
+  path: /verify
+  controller: App\Controller\HomeController::index
+app_logout:
+  path: /logout
+  methods: GET
+
+
+
+
+app_panier_show:
+  path: /admin/panier
+  controller: App\Controller\PanierController::showPanier
+  methods: ['GET']
+front_panier_show:
+  path: /panier
+  controller: App\Controller\PanierController::showfrontPanier
+  methods: ['GET']
+
+app_panier_commander:
+  path: /admin/panier/commander
+  controller: App\Controller\PanierController::confirmerCommande
+  methods: ['POST']
+
+
+front_service_index:
+  path: /services/
+  controller: App\Controller\ServiceController::frontList
+  methods: ['GET']
+front_service_new:
+  path: /services/new
+  controller: App\Controller\ServiceController::createService
+  methods: ['GET', 'POST']
+front_myService_index:
+  path: /services/me
+  controller: App\Controller\ServiceController::myfrontList
+  methods: ['GET']
+front_service_show:
+  path: /services/{id}
+  controller: App\Controller\ServiceController::frontshow
+  methods: ['GET']
+front_delete_service:
+  path: /services/delete/{id}
+  controller: App\Controller\ServiceController::deleteService
+  methods: ['DELETE','GET','POST']
+
+
+front_product_index:
+  path: /products/
+  controller: App\Controller\ProductController::frontList
+  methods: ['GET']
+front_product_new:
+  path: /products/new
+  controller: App\Controller\ProductController::createProduct
+  methods: ['GET', 'POST']
+front_myProduct_index:
+  path: /products/me
+  controller: App\Controller\ProductController::myfrontList
+  methods: ['GET']
+
+front_product_add_to_basket:
+  path: /product/add-to-basket/{id}
+  controller: App\Controller\ProductController::frontaddToBasket
+  methods: ['GET','POST']
+
+front_product_command:
+  path: /product/command/{id}
+  controller: App\Controller\ProductController::frontcommandProduct
+  methods: ['GET','POST']
+
+front_product_show:
+  path: /products/{id}
+  controller: App\Controller\ProductController::frontshow
+  methods: ['GET','POST']
+front_delete_product:
+  path: /products/delete/{id}
+  controller: App\Controller\ProductController::deleteProduct
+  methods: ['DELETE','GET','POST']
+
+
+front_mesCommande_show:
+  path: /mesCommandes
+  controller: App\Controller\CommandeController::commandesbyUser
+  methods: ['GET']
+front_commande_show:
+  path: /mesCommandes/{id}
+  controller: App\Controller\CommandeController::frontshow
+  methods: ['GET']
+front_mesReclamation_show:
+  path: /mesReclamations
+  controller: App\Controller\ReclamationController::reclamationsbyUser
+  methods: ['GET']
+front_reclamation_show:
+  path: /mesReclamations/{id}
+  controller: App\Controller\ReclamationController::frontshow
+  methods: ['GET']
+front_reclamation_edit:
+  path: /mesReclamations/{id}/edit
+  controller: App\Controller\ReclamationController::frontedit
+  methods: ['GET','POST']
+front_reclamation_delete:
+  path: /mesReclamations/{id}/delete
+  controller: App\Controller\ReclamationController::frontdelete
+  methods: ['POST']
+
+
+
+front_mesEchange_show:
+  path: /mesEchanges
+  controller: App\Controller\EchangeController::mesEchanges
+  methods: [ 'GET' ]
+
+front_dashboard:
+  path: /dashboard
+  controller: App\Controller\StatsController::serviceDemandesPieChart
+  methods: [ 'GET' ]
+
+
+app_payment_success:
+  path: /product/payment/success/{id}/{session_id}
+  controller: App\Controller\ProductController::paymentSuccess
+  methods: ['GET']
+app_payment_cancel:
+  path: /product/payment/cancel/{id}
+  controller: App\Controller\ProductController::paymentCancel
+  methods: ['GET']
+
+subscription_paiement:
+  path: /user/subscription/{id}/paiement/load
+  methods: ['GET','POST']
+  controller: App\Controller\ProductController::subscription
+
+
+export_echange_to_pdf:
+  path: '/echange/{id}/pdf'
+  controller: App\Controller\EchangeController::pdfExport
+  methods: ['GET']
+  requirements:
+    id: '\d+'
+
+qr_code:
+  path: /qr-code
+  controller: App\Controller\QrCodeController::generate
+
+push:
+  path: '/push'
+  controller: App\Controller\ReclamationController::push
+
+discover:
+  path: '/discover'
+  controller: App\Controller\ReclamationController::discover
