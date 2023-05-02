@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Dashboard
+{% endblock %}
+
+{% block body %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<main id="main" class="main">
+		<div class="col-9">
+			<p class="text-center">
+				<strong>Livreur Region Statistics</strong>
+			</p>
+			<canvas id="livreur" width="400" height="200"></canvas>
+		</div>
+	</main>
+
+	<script>
+		let livreur = document.querySelector("#livreur");
+let region = {{ regionL|raw }};
+let count = {{ countL|raw }};
+console.log(region)
+console.log(count)
+
+let regionGraph = new Chart(livreur, {
+type: "pie",
+data: {
+labels: region,
+datasets: [
+{
+label: "Récupération des regions des livreurs",
+data: count,
+backgroundColor: ["orange", "lgreen","red","blue"]
+}
+]
+}
+});
+	</script>
+{% endblock %}
+

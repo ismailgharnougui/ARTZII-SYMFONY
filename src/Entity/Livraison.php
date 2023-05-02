@@ -2,88 +2,107 @@
 
 namespace App\Entity;
 
+use App\Repository\LivraisonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-/**
- * Livraison
- *
- * @ORM\Table(name="livraison")
- * @ORM\Entity
- */
+
+
+#[ORM\Entity(repositoryClass: LivraisonRepository::class)]
 class Livraison
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_livraison", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idLivraison;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etatLiv", type="string", length=255, nullable=false)
-     */
-    private $etatliv;
+    #[ORM\Column]
+    private ?bool $etatLiv = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateLiv", type="date", nullable=false)
-     */
-    private $dateliv;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
+    private ?\DateTimeInterface $dateLiv = null;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prixLiv", type="float", precision=10, scale=0, nullable=false)
-     */
-    #[Assert\PositiveOrZero(message: 'Prix ne doit pas etre negative!')]
-    private $prixliv;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?float $prixLiv = null;
 
-    public function getIdLivraison(): ?int
+    #[ORM\ManyToOne(inversedBy: 'livraisons')]
+    #[Assert\NotBlank]
+    private ?Livreur $livreur = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[Assert\NotBlank]
+    private ?Commande $commande = null;
+
+    public function __construct()
     {
-        return $this->idLivraison;
+        $this->dateLiv = new \DateTime('now');
+        $this->etatLiv = true;
     }
 
-    public function getEtatliv(): ?string
+    public function getId(): ?int
     {
-        return $this->etatliv;
+        return $this->id;
     }
 
-    public function setEtatliv(string $etatliv): self
+    public function isEtatLiv(): ?bool
     {
-        $this->etatliv = $etatliv;
+        return $this->etatLiv;
+    }
+
+    public function setEtatLiv(bool $etatLiv): self
+    {
+        $this->etatLiv = $etatLiv;
 
         return $this;
     }
 
-    public function getDateliv(): ?\DateTimeInterface
+    public function getDateLiv(): ?\DateTimeInterface
     {
-        return $this->dateliv;
+        return $this->dateLiv;
     }
 
-    public function setDateliv(\DateTimeInterface $dateliv): self
+    public function setDateLiv(\DateTimeInterface $dateLiv): self
     {
-        $this->dateliv = $dateliv;
+        $this->dateLiv = $dateLiv;
 
         return $this;
     }
 
-    public function getPrixliv(): ?float
+    public function getPrixLiv(): ?float
     {
-        return $this->prixliv;
+        return $this->prixLiv;
     }
 
-    public function setPrixliv(float $prixliv): self
+    public function setPrixLiv(float $prixLiv): self
     {
-        $this->prixliv = $prixliv;
+        $this->prixLiv = $prixLiv;
 
         return $this;
     }
 
+    public function getLivreur(): ?Livreur
+    {
+        return $this->livreur;
+    }
 
+    public function setLivreur(?Livreur $livreur): self
+    {
+        $this->livreur = $livreur;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
 }

@@ -1,79 +1,86 @@
-{% extends 'baseBackLivraison.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Livraison index{% endblock %}
+{% block title %}Livraison index
+{% endblock %}
 
 {% block body %}
+	<div class="pagetitle">
+		<h1>List Livraison</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Livraison</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
 
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+				
+					<table id="my-table" class="table">
 
-	<!-- ======= main ======= -->
-	<main id="main" class="main">
+{% for message in app.flashes("success") %}
+            		<div class="alert alert-success">
+                		{{ message }}
+           			 </div>
+                     {% endfor %}
+						<table class="table" id="my-table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>EtatLiv</th>
+									<th>DateLiv</th>
+									<th>PrixLiv</th>
+									<th>Livreur</th>
+									<th>Id Commande</th>
+									<th>QR CODE</th>
+									<th></th>
+									<th>actions</th>
+									<th></th>
 
-		<div class="pagetitle">
-			<h1>Data Tables</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="index.html">Home</a>
-					</li>
-					<li class="breadcrumb-item">Tables</li>
-					<li class="breadcrumb-item active">Data</li>
-				</ol>
-			</nav>
-		</div>
-		<!-- End Page Title -->
-
-		<section class="section">
-			<div class="row">
-				<div class="col-lg-12">
-
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title">Les livraisons</h5>
-							<p>Bienvenue dans l'interface de gestion des livraisons, vous êtes maintenant aux livraisons !
-							</p>
-
-							<!-- Table with stripped rows -->
-							<table class="table table-striped datatable">
-								<thead>
+								</tr>
+							</thead>
+							<tbody>
+								{% for livraison in livraisons %}
 									<tr>
-										<th>IdLivraison</th>
-                                        <th>Etatliv</th>
-                                        <th>Dateliv</th>
-                                        <th>Prixliv</th>
-                                        <th>actions</th>
+										<td>{{ livraison.id }}</td>
+										<td>{{ livraison.etatLiv ? 'Livrée' : 'En Cours' }}</td>
+										<td>{{ livraison.dateLiv ? livraison.dateLiv|date('Y-m-d') : '' }}</td>
+										<td>{{ livraison.prixLiv }}</td>
+										<td>{{ livraison.livreur.nom }}</td>
+										<td>{{ livraison.commande.id }}</td>
+										{% set var = "http://127.0.0.1:8000/livraison/" ~ livraison.id  %}
+										<td><img src="{{ qr_code_url(var)}}" style="width: 150px; height: 150px"/></td>
+
 									</tr>
-								</thead>
-								<tbody>
-        {% for livraison in livraisons %}
-            <tr>
-                <td>{{ livraison.idLivraison }}</td>
-                <td>{{ livraison.etatliv }}</td>
-                <td>{{ livraison.dateliv ? livraison.dateliv|date('Y-m-d') : '' }}</td>
-                <td>{{ livraison.prixliv }}</td>
-                <td>
-                    <a href="{{ path('app_livraison_show', {'idLivraison': livraison.idLivraison}) }}">show</a>
-                    <a href="{{ path('app_livraison_edit', {'idLivraison': livraison.idLivraison}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-							</table>
-							<!-- End Table with stripped rows -->
+								</td>
+								<td>
+									<a class='btn btn-info' href="{{ path('app_livraison_show', {'id': livraison.id}) }}">show</a>
+								</td>
+								<td>
+									<a class='btn btn-warning' href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
+								</td>
+								<td>
+									<td>{{ include('livraison/_delete_form.html.twig') }}</td>
+								</td>
+							</tbody>
+						</tr>
+					</td>
+				</tbody>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="10">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 
-						</div>
-					</div>
+</table>
+	{{knp_pagination_render(livraisons)}}
 
-				</div>
-			</div>
-		</section>
-
-	</main>
-
-	<!-- End #main -->
-
-
-{% endblock %}
+<a class='btn btn-primary' href="{{ path('app_livraison_new') }}">Create new</a></div></div></div></section>{% endblock %}

@@ -1,13 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Livraison{% endblock %}
+{% block title %}Edit Livraison
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Livraison</h1>
+	<div class="pagetitle">
+		<h1>Edit Livraison</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Livraison</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
 
-    {{ include('livraison/_form.html.twig', {'button_label': 'Update'}) }}
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
 
-    <a href="{{ path('app_livraison_index') }}">back to list</a>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Livraison</h5>
+						{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}
+						) }}
 
-    {{ include('livraison/_delete_form.html.twig') }}
-{% endblock %}
+						<div class="card-body">
+							<div class="form-group">
+								<label for="exampleInputPassword1">Date Livraison
+								</label>
+								{{ form_widget(form.dateLiv, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.dateLiv, {'attr': {"class":"mb-0"}}) }}
+
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Prix Livraison
+								</label>
+								{{ form_widget(form.prixLiv, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.prixLiv, {'attr': {"class":"mb-0"}}) }}
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Livreur
+								</label>
+								{{ form_widget(form.livreur, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.livreur, {'attr': {"class":"mb-0"}}) }}
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Commande
+								</label>
+								{{ form_widget(form.commande, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.commande, {'attr': {"class":"mb-0"}}) }}
+							</div>
+							<div class="card-footer">
+								{{ form_widget(form.edit, {'attr': {'class': 'btn btn-primary'}}) }}
+								<a class='btn btn-info' href="{{ path('app_livraison_index') }}">back to list</a>
+							</div>
+							{{ form_end(form) }}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{{ include('livraison/_delete_form.html.twig') }}
+	{% endblock %}

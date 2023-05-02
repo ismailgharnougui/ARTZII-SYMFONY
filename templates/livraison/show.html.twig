@@ -1,34 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Livraison{% endblock %}
+{% block title %}Livraison
+{% endblock %}
 
 {% block body %}
-    <h1>Livraison</h1>
+	<div class="pagetitle">
+		<h1>List Livraison</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Livraison</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdLivraison</th>
-                <td>{{ livraison.idLivraison }}</td>
-            </tr>
-            <tr>
-                <th>Etatliv</th>
-                <td>{{ livraison.etatliv }}</td>
-            </tr>
-            <tr>
-                <th>Dateliv</th>
-                <td>{{ livraison.dateliv ? livraison.dateliv|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Prixliv</th>
-                <td>{{ livraison.prixliv }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
 
-    <a href="{{ path('app_livraison_index') }}">back to list</a>
 
-    <a href="{{ path('app_livraison_edit', {'idLivraison': livraison.idLivraison}) }}">edit</a>
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Id</th>
+								<td>{{ livraison.id }}</td>
+							</tr>
+							<tr>
+								<th>EtatLiv</th>
+								<td>{{ livraison.etatLiv ? 'Yes' : 'No' }}</td>
+							</tr>
+							<tr>
+								<th>DateLiv</th>
+								<td>{{ livraison.dateLiv ? livraison.dateLiv|date('Y-m-d') : '' }}</td>
+							</tr>
+							<tr>
+								<th>PrixLiv</th>
+								<td>{{ livraison.prixLiv }}</td>
+							</tr>
+						</tbody>
+					</table>
+					<a class='btn btn-primary' href="{{ path('app_livraison_new') }}">Create new</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    {{ include('livraison/_delete_form.html.twig') }}
+
+	<a class='btn btn-info' href="{{ path('app_livraison_index') }}">back to list</a>
+
+
+	<a class='btn btn-warning' href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
+
+	<br><br>
+	{{ include('livraison/_delete_form.html.twig') }}
 {% endblock %}
