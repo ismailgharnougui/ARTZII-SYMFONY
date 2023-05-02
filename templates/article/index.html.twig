@@ -10,6 +10,12 @@
 
         <div class="pagetitle">
             <h1>Les Articles</h1>
+            <form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search2') }}">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+
+
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -115,14 +121,25 @@
 
                                 </tbody>
                             </table>
-                            {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
 
                             <!-- End Default Table Example -->
                             <a href="{{ path('exportExcel') }}">
-                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
-
+                                <button type="button" style="float: right;padding: 10px;margin-left: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
+                            </a>
+                            <a href="{{ path('exportpdf') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Export to PDF</button>
                             </a>
 
+                                <a href="{{ path('stat') }}">
+                                    <button type="button" style="float: left;padding: 10px; margin-right: 10px;" class="btn btn-outline-info">statistique</button>
+                                </a>
+                                <a href="{{ path('tri') }}">
+                                    <button type="button" style="float: left;padding: 10px;margin-right: 10px;" class="btn btn-outline-info">tri croissant</button>
+                                </a>
+
+                            <a href="{{ path('trid') }}">
+                                <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">tri decroissant</button>
+                            </a>
                         </div>
 
                     </div>

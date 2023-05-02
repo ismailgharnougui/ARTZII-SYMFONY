@@ -9,8 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use App\Controller\ArticleRepository;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -30,26 +29,21 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Dompdf\Dompdf;
+
+
 
 
 class ArticleController extends AbstractController
 {
     #[Route('/articles', name: 'display_articles')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(): Response
     {
 
-        $em = $this->getDoctrine()->getManager()->getRepository(Article::class);
+        $em = $this->getDoctrine()->getManager()->getRepository(Article::class); // ENTITY MANAGER ELY FIH FONCTIONS PREDIFINES
 
-        $repository = $this->getDoctrine()->getRepository(Article::class)->findAll();
-
-
-        $pagination = $paginator->paginate(
-            $repository,
-            $request->query->getInt('page', 1), // Current page number
-            3 // Number of items per page
-        );
-
-        return $this->render('article/index.html.twig', ['listS' => $pagination]);
+        $prods = $em->findAll(); // Select * from produits;
+        return $this->render('article/index.html.twig', ['listS'=>$prods]);
     }
 
 
@@ -330,117 +324,214 @@ class ArticleController extends AbstractController
 
 
 
-#[Route('/top', name: 'top')]
+    #[Route('/top', name: 'top')]
     public function afficherTopfiveService()
-{
-    $em = $this->getDoctrine()->getManager();
-
-    $query = $em->createQueryBuilder(); // dql
-    $query->select('s.artid, s.note')
-        ->from('App\Entity\Article', 's')
-        ->orderBy('s.note', 'DESC')
-        ->setMaxResults(3);
-    $res = $query->getQuery();
-    $serviceEvalues = $res->execute();
-    $note = 0;
-    //count
-    $i = 0;
-
-    //tableau
-    $j = 0;
-
-    foreach ($serviceEvalues as $se) {
-        $note = $note + $se["note"];
-        $i++;
-
-        $noteMoy = $note / $i;
-        $noteMoy = round($noteMoy);
-
-        $service = $em->getRepository(Article::class)->findOneBy(array('artid' => $se['artid']));
-        $serviceTop[$j] = $service;
-        $j++;
-    }
-    return $this->render('front/top.html.twig', array('id' => $se['artid'], 'note' => $se['note'], 'topfive' => $serviceTop));
-}
-
- #[Route('/noterService/{artid}/{note}', name: 'noterService')]
-    public function noterService(Request $request, $artid,$note): Response
-{
-    $Services = $this->getDoctrine()->getManager()->getRepository(Article::class)->find($artid);
-
-    $form = $this->createForm(ArticleType::class, $Services);
-
-    $form->handleRequest($request);
-
-
-    if ($form->isSubmitted() && $form->isValid()) {
-
-        $fileUpload = $form->get('artimg')->getData();
-        $fileName = md5(uniqid()) . '.' . $fileUpload->guessExtension();
-
-        $fileUpload->move($this->getParameter('kernel.project_dir') . '/public/uploads', $fileName);
-
-        $Services->setServImg($fileName);
-        $Services->setNote($note);
-
-
-
+    {
         $em = $this->getDoctrine()->getManager();
-        $em->persist($Services);
-        $em->flush();
-        $this->addFlash(
-            'notice', 'Article a été bien noté '
-        );
 
-        return $this->redirectToRoute('display_articles');
+        $query = $em->createQueryBuilder(); // dql
+        $query->select('s.artid, s.note')
+            ->from('App\Entity\Article', 's')
+            ->orderBy('s.note', 'DESC')
+            ->setMaxResults(3);
+        $res = $query->getQuery();
+        $serviceEvalues = $res->execute();
+        $note = 0;
+        //count
+        $i = 0;
 
+        //tableau
+        $j = 0;
+
+        foreach ($serviceEvalues as $se) {
+            $note = $note + $se["note"];
+            $i++;
+
+            $noteMoy = $note / $i;
+            $noteMoy = round($noteMoy);
+
+            $service = $em->getRepository(Article::class)->findOneBy(array('artid' => $se['artid']));
+            $serviceTop[$j] = $service;
+            $j++;
+        }
+        return $this->render('front/top.html.twig', array('id' => $se['artid'], 'note' => $se['note'], 'topfive' => $serviceTop));
     }
 
-    return $this->render('article/modifierArticle.html.twig',
-        ['f' => $form->createView()]
-    );
-}
+    #[Route('/noterService/{artid}/{note}', name: 'noterService')]
+    public function noterService(Request $request, $artid,$note): Response
+    {
+        $Services = $this->getDoctrine()->getManager()->getRepository(Article::class)->find($artid);
+
+        $form = $this->createForm(ArticleType::class, $Services);
+
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $fileUpload = $form->get('artimg')->getData();
+            $fileName = md5(uniqid()) . '.' . $fileUpload->guessExtension();
+
+            $fileUpload->move($this->getParameter('kernel.project_dir') . '/public/uploads', $fileName);
+
+            $Services->setServImg($fileName);
+            $Services->setNote($note);
+
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($Services);
+            $em->flush();
+            $this->addFlash(
+                'notice', 'Article a été bien noté '
+            );
+
+            return $this->redirectToRoute('display_articles');
+
+        }
+
+        return $this->render('article/modifierArticle.html.twig',
+            ['f' => $form->createView()]
+        );
+    }
 
 
     /**
      * @Route("/articles/{id}/note", name="service_note")
      */
     public function addNoteToService(Request $request, Article $service)
-{
-    $note = $request->request->get('note');
+    {
+        $note = $request->request->get('note');
 
-    if ($note) {
-        $service->setNote($note);
-        $this->getDoctrine()->getManager()->flush();
-        $this->addFlash('success', 'Note added successfully!');
-    } else {
-        $this->addFlash('error', 'Note value is required!');
+        if ($note) {
+            $service->setNote($note);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Note added successfully!');
+        } else {
+            $this->addFlash('error', 'Note value is required!');
+        }
+
+        return $this->redirectToRoute('display_articles');
     }
-
-    return $this->redirectToRoute('display_articles');
-}
 
     #[Route('/getNoterArticlePage/{artid}', name: 'getNoterArticlePage')]
     public function getNoterServicePage(\Symfony\Component\HttpFoundation\Request $req, $artid)
-{
-    $em = $this->getDoctrine()->getManager();
-    $Services = $em->getRepository(Article::class)->find($artid);
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Services = $em->getRepository(Article::class)->find($artid);
 
 
-    return $this->render('article/getNoterArticlePage.html.twig', array(
-        'Id' => $Services->getArtid(),
-        'name' => $Services->getArtlib(),
-        'prix' => $Services->getArtprix(),
-        'artdispo' => $Services->getArtdispo(),
-        'description' => $Services->getArtdesc(),
-        'image' => $Services->getArtimg(),
-        'catlib' => $Services->getCatlib(),
-        'User' => $Services->getIdUser()->getNomUser() . ' ' . $Services->getIdUser()->getPrenomUser(),
-        'mail' => $Services->getIdUser()->getEmailUser()
+        return $this->render('article/getNoterArticlePage.html.twig', array(
+            'Id' => $Services->getArtid(),
+            'name' => $Services->getArtlib(),
+            'prix' => $Services->getArtprix(),
+            'artdispo' => $Services->getArtdispo(),
+            'description' => $Services->getArtdesc(),
+            'image' => $Services->getArtimg(),
+            'catlib' => $Services->getCatlib(),
+            'User' => $Services->getIdUser()->getNomUser() . ' ' . $Services->getIdUser()->getPrenomUser(),
+            'mail' => $Services->getIdUser()->getEmailUser()
 
 
-    ));
-}
+        ));
+    }
+
+    #[Route('/exportpdf', name: 'exportpdf')]
+    public function exportToPdf(\App\Repository\ArticleRepository $repository): Response
+    {
+        // Récupérer les données de réservation depuis votre base de données
+        $Services = $repository->findAll();
+
+        // Créer le tableau de données pour le PDF
+        $tableData = [];
+        foreach ($Services as $Services) {
+            $tableData[] = [
+                'name' => $Services->getArtlib(),
+                'prix' => $Services->getArtprix(),
+                'artdispo' => $Services->getArtdispo(),
+                'description' => $Services->getArtdesc(),
+                'catlib' => $Services->getCatlib(),
+                'User' => $Services->getIdUser()->getNomUser() . ' ' . $Services->getIdUser()->getPrenomUser(),
+                'mail' => $Services->getIdUser()->getEmailUser()
+            ];
+        }
+
+        // Créer le PDF avec Dompdf
+        $dompdf = new Dompdf();
+        $html = $this->renderView('article/export-pdf.html.twig', [
+            'tableData' => $tableData,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        // Envoyer le PDF au navigateur
+        $response = new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="articles.pdf"',
+        ]);
+        return $response;
+    }
+
+    // stat
+    #[Route('/dashboard/stat', name: 'stat', methods: ['POST','GET'])]
+    public function VoitureStatistics( \App\Repository\ArticleRepository $repo): Response
+    {
+        $total = $repo->countByCatLib('personnes') +
+            $repo->countByCatLib('classique') +
+            $repo->countByCatLib('paysages');
 
 
+        $BMWCount = $repo->countByCatLib('personnes');
+        $MercedesCount = $repo->countByCatLib('classique');
+        $AudiCount = $repo->countByCatLib('paysages');
+
+
+        $BmwPercentage = round(($BMWCount / $total) * 100);
+        $MercedesPercentage = round(($MercedesCount / $total) * 100);
+        $AudiPercentage = round(($AudiCount / $total) * 100);
+
+        return $this->render('article/stat.html.twig', [
+            'BMWPercentage' => $BmwPercentage,
+            'MercedesPercentage' => $MercedesPercentage,
+            'AudiPercentage' => $AudiPercentage,
+
+
+        ]);
+    }
+
+    #[Route('/article/tricroi', name: 'tri', methods: ['GET','POST'])]
+    public function triCroissant( \App\Repository\ArticleRepository $ArticleRepository): Response
+    {
+        $article = $ArticleRepository->findAllSorted();
+
+        return $this->render('article/index.html.twig', [
+            'listS' => $article,
+        ]);
+    }
+
+    #[Route('/article/tridesc', name: 'trid', methods: ['GET','POST'])]
+    public function triDescroissant( \App\Repository\ArticleRepository $ArticleRepository): Response
+    {
+        $article = $ArticleRepository->findAllSorted1();
+
+        return $this->render('article/index.html.twig', [
+            'listS' => $article,
+        ]);
+    }
+
+    #[Route('/article/search', name: 'search2', methods: ['GET', 'POST'])]
+    public function search2(Request $request, \App\Repository\ArticleRepository $repo): Response
+    {
+        $query = $request->query->get('query');
+        $id = $request->query->get('artid');
+        $artlib = $request->query->get('artlib');
+        $catlib = $request->query->get('catlib');
+
+        $article = $repo->advancedSearch($query, $id, $artlib, $catlib);
+
+        return $this->render('article/index.html.twig', [
+            'listS' => $article,
+        ]);
+    }
 }

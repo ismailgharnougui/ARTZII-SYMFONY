@@ -39,6 +39,8 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
@@ -63,4 +65,61 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function countByCatLib($catlib)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.catlib)')
+            ->where('r.catlib = :catlib')
+            ->setParameter('catlib', $catlib)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findAllSorted(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('cl')
+            ->orderBy('cl.artprix', 'ASC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+    public function findAllSorted1(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('cl')
+            ->orderBy('cl.artprix', 'DESC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function advancedSearch($query, $artid, $artlib, $catlib)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($query) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('c.artid', ':query'),
+                $qb->expr()->like('c.ArtLib', ':query'),
+                $qb->expr()->like('c.catlib', ':query'),
+
+            ))
+                ->setParameter('query', '%' . $query . '%');
+        }
+
+        if ($artid) {
+            $qb->andWhere('c.artid = :artid')
+                ->setParameter('artid', $artid);
+        }
+
+        if ($artlib) {
+            $qb->andWhere('c.ArtLib = :ArtLib')
+                ->setParameter('artlib', $artlib);
+        }
+
+        if ($catlib) {
+            $qb->andWhere('c.catlib = :catlib')
+                ->setParameter('catlib', $catlib);
+        }
+
+
+    }
 }

@@ -70,6 +70,8 @@ class Article
      * @var float
      *
      * @ORM\Column(name="ArtPrix", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
+
      * @Assert\Positive(message="La valeur doit être positive.")
      */
     private $artprix;
