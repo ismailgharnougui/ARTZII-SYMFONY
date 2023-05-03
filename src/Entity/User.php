@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -20,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    #[Assert\NotBlank(message: "email User doit etre non vide")]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -32,16 +33,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
-
+    #[Assert\NotBlank(message: "nom User doit etre non vide")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
-
+    #[Assert\NotBlank(message: "prenom User doit etre non vide")]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
-
+    #[Assert\NotBlank(message: "phone User doit etre non vide")]
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $phone = null;
 

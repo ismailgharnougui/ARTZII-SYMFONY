@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
 
         <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
- <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 
         <!-- icons -->
@@ -241,7 +241,7 @@
                                 <li class="nav-item" style="background-color: black ; border-radius: 30px">
                                     {% for role in app.user.roles %}
                                         {% if  role == "ROLE_SUPER_ADMIN" %}
-                                            <a href="{{ path('adminDashboard') }}" class="nav-link"
+                                            <a href="{{ path('display_User') }}" class="nav-link"
                                                style="font-family:Calibri,cursive ;font-weight: bold;color: white !important;">Admin
                                                 Dashboard</a>
                                         {% elseif role =="ROLE_LIVREUR" %}
@@ -407,8 +407,7 @@
                                     <h1 class="mb-4 text-black" style="font-size: 60px; font-weight: bolder ">Get Notified <br/>When we Launch</h1>
                                     <p class="text-black-50 home-desc font-16 mb-5">Adminto is a fully featured premium Landing template built on top of awesome Bootstrap 4.3.1, modern web technology HTML5, CSS3 and jQuery. </p>
                                     <div class="watch-video mt-5">
-                                    <div class="g-recaptcha" data-sitekey="6Ld95s4lAAAAADEhAAbOH5fVNJoofoFO8sRLJOeV"></div>
-                                    <div class="form-group
+                                   
                                         <a href="#" class="btn btn-custom me-4">Get Started <i class="mdi mdi-chevron-right ms-1"></i></a>
                                         <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i class="mdi mdi-play play-icon-circle me-2"></i> <span>Watch The Video</span></a>
                                     </div>

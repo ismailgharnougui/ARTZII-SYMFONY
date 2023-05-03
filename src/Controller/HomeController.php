@@ -2,7 +2,7 @@
 // src/Controller/HomeController.php
 
 namespace App\Controller;
-
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +16,14 @@ class HomeController extends AbstractController
     {
         return $this->render('Artzii/home.html.twig');
     }
-    public function index(): Response
-    {
-        return $this->render('Artzii/email.html.twig');
-    }
+   
+        #[Route('/admin', name: 'app_admin_index', methods: ['GET'])]
+        public function index(UserRepository $userRepository): Response
+        {
+            return $this->render('Artzii/adminHome.html.twig', [
+                'clients' => $userRepository->findAll(),
+            ]);
+        }    
     public function adminDashboard(): Response
     {
         return $this->render('Artzii/adminHome.html.twig');
@@ -33,5 +37,6 @@ class HomeController extends AbstractController
     {
         return $this->render('profile/myAccount.html.twig');
     }
+
 
 }

@@ -19,10 +19,11 @@
                     <li class="breadcrumb-item">Tables</li>
                     <li class="breadcrumb-item active">General</li>
                 </ol>
-
             </nav>
         </div><!-- End Page Title -->
-
+<div class="input-group custom-search-form">
+    <input    type="text" id="search" class="form-control widget_input" placeholder="Chercher..." style="width: 1180px;background: white">
+</div>
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -60,7 +61,6 @@
                                     <th scope="col">nomU</th>
                                     <th scope="col">prenomU</th>
                                     <th scope="col">emailU</th>
-                                    <th scope="col">mdpU</th>
                                      <th scope="col">roleU</th>
                                     <th scope="col">adresse</th>
 
@@ -89,21 +89,20 @@
                                     <tr>
 
 
-                                        <td>{{ p.nomU }}</td>
-                                        <td>{{p.prenomU}}</td>
-                                        <td>{{p.emailU}}</td>
-                                        <td>{{p.mdpU}}</td>
-                                        <td>{{p.roleU}}</td>
+                                        <td>{{ p.nom }}</td>
+                                        <td>{{p.prenom}}</td>
+                                        <td>{{p.email}}</td>
+                                        <td>client</td>
                                         <td>{{p.adresse}}</td>
 
 
                                         <td>
-                                            <a href="{{ path('modifierUser',{idU:p.idU}) }}">
-                                                <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
+                                          {#  <a href="{{ path('modifierUser',{idU:p.idU}) }}"> #}
+                                    
 
 
                                         <td>
-                                                <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionUser', {'idU': p.idU }) }}';}">
+                                                 <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionUser', {'id': p.id }) }}';}">
 
                                                 <button type="button" class="btn btn-outline-danger">Retirer</button>
                                             </a></td>
@@ -114,6 +113,11 @@
 
                                 </tbody>
                             </table>
+
+                            <!-- End Default Table Example -->
+<a href="{{ path('exportExcel') }}">
+    <button type="button" style="float: right;padding: 10px;margin-left: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
+</a>
                             <!-- End Default Table Example -->
 
                         </div>
@@ -127,7 +131,50 @@
 
             </div>
         </section>
+<!-- jQuery is necessary -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 3;
+            var that = this;
+            var value = $(this).val(); // elyyktbo fi input 7atito fi var var
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+                                    if (key == 'products') {
+                                        if (id != 'error') {
 
+                                            x= document.getElementById("containerr");
+                                            entitySelector.append('<div style="display: table;width:100%;padding: 15px"><span style="text-align: center">'+value[2]+'</span><br/><a href="/show_products_cat/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 150px; height: 150px"/>'+'</a></div>');
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
     </main>
 
 {% endblock %}
