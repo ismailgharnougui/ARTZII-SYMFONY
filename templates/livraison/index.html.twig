@@ -1,0 +1,103 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Livraison index
+{% endblock %}
+
+{% block body %}
+	<!-- ======= main ======= -->
+	<main id="main" class="main">
+
+	<div class="pagetitle">
+		<h1>Data Tables</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Tables</li>
+				<li class="breadcrumb-item active">Data</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
+
+	<section class="section">
+	<div class="row">
+	<div class="col-lg-12">
+
+	<div class="card">
+	<div class="card-body">
+	<h5 class="card-title">Liste des livraisons</h5>
+	<p>Bienvenue dans l'interface de gestion des livraisons!
+	</p>
+					<table id="my-table" class="table">
+
+{% for message in app.flashes("success") %}
+            		<div class="alert alert-success">
+                		{{ message }}
+           			 </div>
+                     {% endfor %}
+						<table class="table" id="my-table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>EtatLiv</th>
+									<th>DateLiv</th>
+									<th>PrixLiv</th>
+									<th>Livreur</th>
+									<th>Id Commande</th>
+									{# <th>QR CODE</th> #}
+									<th>actions</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								{% for livraison in livraisons %}
+									<tr>
+										<td>{{ livraison.id }}</td>
+										<td>{{ livraison.etatLiv ? 'Livrée' : 'En Cours' }}</td>
+										<td>{{ livraison.dateLiv ? livraison.dateLiv|date('Y-m-d') : '' }}</td>
+										<td>{{ livraison.prixLiv }}</td>
+										<td>{{ livraison.livreur.nom }}</td>
+										<td>{{ livraison.commande.id }}</td>
+										{% set var = "http://127.0.0.1:8000/livraison/" ~ livraison.id  %}
+									{# 	<td><img src="{{ qr_code_url(var)}}" style="width: 150px; height: 150px"/></td>  #}
+
+										</td>
+										<td>
+											<a class='btn btn-info' href="{{ path('app_livraison_show', {'id': livraison.id}) }}" style="margin-left:-50px;">show</a>
+											<a class='btn btn-warning' href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>{{ include('livraison/_delete_form.html.twig') }}
+
+										</td>
+
+
+									</tr>
+							</tbody>
+						</tr>
+					</td>
+				</tbody>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="10">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+
+</table>
+	{{knp_pagination_render(livraisons)}}
+
+
+
+	</div>
+	</div>
+
+	</div>
+	</div>
+	</section>
+
+	</main>
+{#
+<a class='btn btn-primary' href="{{ path('app_livraison_new') }}">Create new</a></div></div></div></section>
+#}
+{% endblock %}

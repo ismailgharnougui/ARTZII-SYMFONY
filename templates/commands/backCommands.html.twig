@@ -1,0 +1,177 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+
+{% block body %}
+
+
+	<!-- ======= main ======= -->
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Data Tables</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Tables</li>
+					<li class="breadcrumb-item active">Data</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Les commandes</h5>
+							<p>Bienvenue dans l'interface de gestion des commandes, vous êtes maintenant aux commandes !
+							</p>
+
+							<!-- Table with stripped rows -->
+							<table class="table table-striped datatable">
+								<thead>
+									<tr>
+										<th scope="col">Nom et Prénom</th>
+										<th scope="col">Adresse</th>
+										<th scope="col">Date commande</th>
+										<th scope="col">Mode paiement</th>
+										<th scope="col">Mode livraison</th>
+										<th scope="col">Coût totale</th>
+										<th scope="col">Status</th>
+										<th scope="col">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for command in commands %}
+										<tr>
+											<td scope="row">{{command.idClient.getNom}}
+												{{command.idClient.getPrenom}}</td>
+											<td>{{command.adresse}}</td>
+											<td>{{command.dateCommande | date('Y-m-d')}}</td>
+											<td>{{command.modePaiement}}</td>
+											<td>{{command.modeLivraison}}</td>
+											<td>{{command.coutTotale}}
+												DT</td>
+											<td>
+													{% set status = command.etatCommande  %}
+
+												<select id="EtatCommand{{command.getId()}}">
+													{% if status == 'En cours' %}
+														<option value="En cours" selected>
+															<span class="badge bg-primary">En cours</span>
+														</option>
+													{% else  %}
+														<option value="En cours">En cours</option>
+													{% endif %}
+
+													{% if status == 'En attente' %}
+														<option value="En attente" selected>
+															<span class="badge bg-warning">En attente</span>
+														</option>
+													{% else  %}
+														<option value="En attente">
+															<span class="badge bg-warning">En attente</span>
+														</option>
+													{% endif %}
+
+													{% if status == 'Livré' %}
+
+														<option value="Livré" selected>
+															<span class="badge bg-success">Livré</span>
+														</option>
+													{% else  %}
+														<option value="Livré">
+															<span class="badge bg-success">Livré</span>
+														</option>
+													{% endif %}
+													{% if status == 'Annulé' %}
+
+														<option value="Annulé" selected>
+															<span class="badge bg-danger">Annulé</span>
+														</option>
+													{% else  %}
+														<option value="Annulé">
+															<span class="badge bg-danger">Annulé</span>
+														</option>
+													{% endif %}
+
+												</select>
+
+											</td>
+
+											<td>
+
+												<a href="#" onclick="modifierCommand(EtatCommand{{command.getId()}})">
+													<img src="{{asset('assets/images/editBlack.png')}}" alt="modifier" width="24px">
+												</a>
+
+
+												<a href="{{ path('app_removeCommand', {'idCommand': command.getId()} ) }}">
+													<img src="{{asset('assets/images/trash.png')}}" alt="supprimer" width="39px" style="margin-left: -8px;">
+												</a>
+												<a href="{{path('app_afficheCommandAdmin',{'idCommand':command.id})}}">
+													<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="27px" style="margin-left:-6px;">
+												</a>
+
+												{% if command.etatCommande == "En cours" %}
+												<a href="{{path('app_livraison_new',{'idCommand':command.id})}}">
+													<img src="{{ asset('livraisonIcon.png') }}" alt="eye" width="33px" style="margin-left:-6px;">
+												</a>
+												{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+
+								</tbody>
+							</table>
+							<!-- End Table with stripped rows -->
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- End #main -->
+
+	{% for flash_message in app.session.flashbag.get('SuccessModifierCommand') %}
+		<div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+			{{ flash_message }}
+
+		</div>
+	{% endfor %}
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+	<script>
+
+		// Automatically dismiss the alert after 3 seconds
+setTimeout(function () {
+document.querySelector('.alert').remove();
+}, 3000);
+
+const selectElement = document.getElementById("EtatCommand");
+selectElement.addEventListener("change", function () {
+const selectedValue = selectElement.value;
+console.log(selectedValue);
+});
+
+
+function modifierCommand(select) {
+
+let selectedElement = select.options[select.selectedIndex].value;
+location.href = "http://localhost:8000/updateCommand/" + select.id.replace("EtatCommand", "") + "/" + selectedElement;
+
+}
+	</script>
+{% endblock %}

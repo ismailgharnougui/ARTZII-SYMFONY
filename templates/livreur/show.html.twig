@@ -1,0 +1,63 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Livreur
+{% endblock %}
+
+{% block body %}
+
+		<div class="pagetitle">
+			<h1>List Livreurs</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Livreur</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>Id</th>
+									<td>{{ livreur.id }}</td>
+								</tr>
+								<tr>
+									<th>Nom</th>
+									<td>{{ livreur.nom }}</td>
+								</tr>
+								<tr>
+									<th>Prenom</th>
+									<td>{{ livreur.prenom }}</td>
+								</tr>
+								<tr>
+									<th>Region</th>
+									<td>{{ livreur.region }}</td>
+								</tr>
+								<tr>
+									<th>Telephone</th>
+									<td>{{ livreur.telephone }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<a class='btn btn-success' href="{{ path('app_livreur_index') }}">back to list</a>
+
+
+		<a class='btn btn-warning' href="{{ path('app_livreur_edit', {'id': livreur.id}) }}">edit</a>
+		<br><br>
+
+		{{ include('livreur/_delete_form.html.twig') }}
+	{% endblock %}

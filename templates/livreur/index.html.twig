@@ -1,0 +1,70 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Livreur index
+{% endblock %}
+
+{% block body %}
+
+		<div class="pagetitle">
+			<h1>List Livreurs</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Livreur</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+					{% for message in app.flashes("success") %}
+            		<div class="alert alert-success">
+                		{{ message }}
+           			 </div>
+                     {% endfor %}
+						<table class="table" id="my-table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nom</th>
+									<th>Prenom</th>
+									<th>Region</th>
+									<th>Telephone</th>
+									<th></th>
+									<th>actions</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for livreur in livreurs %}
+									<tr>
+										<td>{{ livreur.id }}</td>
+										<td>{{ livreur.nom }}</td>
+										<td>{{ livreur.prenom }}</td>
+										<td>{{ livreur.region }}</td>
+										<td>{{ livreur.telephone }}</td>
+										<td><a class='btn btn-info' href="{{ path('app_livreur_show', {'id': livreur.id}) }}">show</a></td>
+										<td><a class='btn btn-warning' href="{{ path('app_livreur_edit', {'id': livreur.id}) }}">edit</a></td>
+										<td>{{ include('livreur/_delete_form.html.twig') }}</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="8">no records found</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+	{{knp_pagination_render(livreurs)}}
+
+						<a class='btn btn-primary' href="{{ path('app_livreur_new') }}">Create new</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	{% endblock %}

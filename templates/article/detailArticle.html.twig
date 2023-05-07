@@ -1,0 +1,58 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block body %}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+
+
+                <div class="row">
+                    <a href="{{ path('display_articles') }}">
+                        <i class="fa fa-arrow-circle-left" style="font-size: 30px;"></i>
+
+                    </a>
+
+                </div>
+                <br/>
+                <div class="row" style="padding:10px;display: flex;align-items: center;justify-content: center;">
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <div class="card m-b-20">
+                            <img class="card-img-top img-fluid" src="{{ asset('uploads/'~image) }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title style="color:#ff5b5b""> Article numero :{{id }}</h4>
+
+                                <li class="list-group-item style="color:#ff5b5b"">Nom : {{ name }}</li>
+                                <li class="list-group-item style="color:#ff5b5b"">Description :{{description }}</span> </li>
+                                <li class="list-group-item style="color:#ff5b5b"">Disponibilite :{{artdispo }}</span> </li>
+
+                                <li class="list-group-item style="color:#ff5b5b" >Prix: {{prix }}</span> </li>
+                                <li class="list-group-item style="color:#ff5b5b"">Categorie : {{catlib }}</li>
+                                <hr/>
+                                <tr>
+                                    <th>Scan this code if you like</th>
+                                    <th>
+                                        <img src="{{ qr }}" alt="QR code" style="height:20%;width:15%"/>
+                                    </th>
+                                </tr>
+                             {#   <p>Added by : <span style="color: #0c9a9e;padding:8px;align-items: center; " >{{ User}}</span></p>
+                                <li class="list-group-item" style="color:#E0b0ff">Artist mail : {{ mail }}</li>
+                             #}
+                                </ul>
+
+                        </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

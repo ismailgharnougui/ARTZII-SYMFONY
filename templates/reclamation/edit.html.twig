@@ -1,0 +1,37 @@
+
+{% extends 'base3.html.twig' %}
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 my-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h6>Edit Reclamation</h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{ include('reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 me-2">
+                <a href="{{ path('app_reclamation_index') }}" class="btn btn-warning">back to list</a>
+
+            </div>
+            <div class="col">
+                {{ include('reclamation/_delete_form.html.twig') }}
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'base2.html.twig' %}
+
+{% block categories %}
+
+{% endblock %}
+
+{% block candidate %}
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="min-sec">
+        <div class="container">
+
+            <div class="row">
+                <section >
+
+                    <div class="album py-5 bg-light">
+                        <div class="container">
+                            <div class="sidebar-search" >
+                                <div class="input-group custom-search-form" style="margin-top: -27px;">
+                                    <input    type="text" id="search" class="form-control widget_input" placeholder="Chercher..." style="width: 1180px;background: white">
+                                </div>
+                                <br>
+                                <!-- /input-group -->
+                                <ul class="nav" id="side-menu">
+                                    <li>
+                                        <a href="#"> <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level" id="entitiesNav">
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row d-flex" id="containerr">
+                <div id="search"></div>
+
+                <div class="row justify-content-center">
+
+                    <div class="row">
+                        <!-- Single Item -->
+                        {% for p in listS %}
+                            <div class="col-lg-4 col-md-6 col-sm-12" style="transform: scale(0.8); margin-top: -60px;">
+                                <div class="ser_110">
+                                    <div class="ser_110_thumb">
+                                        <a href="{{ path('detailArticlefront',{artid:p.artid}) }}" class="ser_100_link">
+                                            <img src="{{ asset('uploads/'~p.artimg) }}" class="img-fluid" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="ser_110_footer bott">
+                                        <div class="_110_foot_left">
+
+
+                                            <div class="text-center">
+                                                <div class="ser_title098">
+                                                    <h4 class="_ser_title"><a href="{{ path('detailArticlefront',{artid:p.artid}) }}">{{ p.artlib }}</a></h4>
+                                                </div>
+                                                <div class="_oi0po"><i class="fa fa-bolt"></i>From <strong class="theme-cl">{{ p.artprix }} DT</strong></div>
+                                                <div class="ser_110_caption">
+                                                    <div class="ser_rev098">
+                                                        {% for i in range(0, p.note) %}
+                                                            <i class="fa fa-star filled"></i>
+                                                        {% endfor %}
+                                                        {% for i in range(0, 5 - p.note) %}
+                                                            <i class="fa fa-star"></i>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+
+
+                                                <a href="{{ path('getNoterArticlePage',{artid:p.artid}) }}" class="ser_100_link">Noter</a>
+
+                                                {% if p.getArtid in existingArticles %}
+                                                    <img  src="{{asset('assets/images/basketChecked.png')}}" alt="exist in cart" width="54px" style="position: absolute; top: 0 ; right: 0; margin-top: 15px; margin-right: 15px;">
+                                                {% else %}
+                                                    <a href="{{ path('app_addToBasket', {'idArticle': p.getArtid()} ) }}">
+                                                        <img  src="{{asset('assets/images/basket2.png')}}" alt="add to cart" width="52px" style="position: absolute; top: 0 ; right: 0; margin-top: 15px; margin-right: 15px;">
+                                                    </a>
+                                                {% endif %}
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
+
+    </section>
+    {% for flash_message in app.session.flashbag.get('success') %}
+        <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+            {{ flash_message }}
+
+        </div>
+    {% endfor %}
+
+    {% for flash_message in app.session.flashbag.get('successPaiement') %}
+        <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 105px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+            {{ flash_message }}
+
+        </div>
+    {% endfor %}
+
+    {% for flash_message in app.session.flashbag.get('command_ajoute') %}
+        <div id="myAlert2" class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 65px; left: 50%; transform: translateX(-50%); z-index: 9999; margin: 10px; padding: 8px 25px; border-radius: 4px; background-color: #2ecc71; color: #fff; font-size: 16px; ">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
+    <script>
+        // Automatically dismiss the alert after 3 seconds
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 3000);
+    </script>
+
+    <!-- jQuery is necessary -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 3;
+                var that = this;
+                var value = $(this).val(); // elyyktbo fi input 7atito fi var var
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'products') {
+                                            if (id != 'error') {
+
+                                                x= document.getElementById("containerr");
+                                                entitySelector.append('<div style="display: table;width:100%;padding: 15px"><span style="text-align: center">'+value[2]+'</span><br/><a href="/show_products_cat/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 150px; height: 150px"/>'+'</a></div>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function(){
+            $(".btn1").click(function(){
+                $("h1").slideUp();
+            });
+            $(".btn2").click(function(){
+                $("h1").slideDown();
+            });
+            $(".btn3").click(function(){
+                $("h1").slideToggle();
+            });
+        });
+    </script>
+    {{ knp_pagination_render(listS, 'bootstrap_4_pagination.html.twig') }}
+
+{% endblock %}

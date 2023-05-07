@@ -1,0 +1,266 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Artzii{% endblock %}
+{% block body %}
+
+	<div class="container" style="transform: scale(0.96); margin-top: -15px;">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="card" style="margin-top: 8px; border-radius: 7px;">
+					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
+						<h4 class="card-title">1. ADRESSE</h4>
+					</div>
+
+					<div class="card-body">
+					
+							<h5 style="margin-bottom: 0px;">{{connectedUser.prenom}} {{connectedUser.nom}} </h5>
+							<div  style="margin-top: 0px;" >{{connectedUser.adresse}}</div>    
+					</div>
+				</div>
+
+				<div class="card" style="margin-top: 8px; border-radius: 7px;">
+					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
+						<h4 class="card-title">
+							2. MODE DE LIVRAISON
+						</h4>
+					</div>
+
+					<div class="card-body">
+						<span>
+							<h5 class="card-title">Comment voulez-vous que votre commande soit livrée ?</h5>
+						</span>
+
+
+						<div class="form-check1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="livraisonRadios" id="exampleRadios1" value="Livraison domicile" checked>
+								<span class="form-check-sign"></span>
+								Livraison à domicile : recevez vos pieces priféres chez vous en toute sécurité et en toute simplicité
+								<br>
+							</label>
+							<br>
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="livraisonRadios" id="exampleRadios1" value="Artzii now" >
+								<span class="form-check-sign"></span>
+								Livraison Artzii now : frais de livraison moins cher que la livraison à domicile
+							</label>
+						</div>
+
+
+						<span>
+							<h5 class="card-title" style="margin-top: 12px;">Comment voulez-vous payer ?</h5>
+						</span>
+
+
+						<div class="form-check2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="paiementRadios" id="exampleRadios1" value="Cash" checked>
+								<span class="form-check-sign"></span>
+								Paiement CASH à la livraison
+							</label>
+							<br>
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="paiementRadios" id="exampleRadios1" value="En ligne">
+								<span class="form-check-sign"></span>
+								Paiement en ligne via STRIPE
+							</label>
+						</div>
+
+						<div class="card" style="margin-top: 18px; border-radius: 7px;">
+							<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
+								<h4 class="card-title">
+									DÉTAILS DE LIVRAISON
+								</h4>
+							</div>
+
+							<div class="card-body">
+								{% set j = 1 %}
+								{% for basketItem in basketData %}
+									<h6 class="card-title">Piece {{j}} de {{basketData|length}}</h6>
+									<div>
+										<span style="font-weight: bold;">
+											1x
+										</span>
+										{{basketItem.idArticle.artlib}}
+									</div>
+
+									<div>
+										Livré entre {{ "now"|date("d-m-Y") }} et {{ "now"|date_modify("+4 days")|date("Y-m-d") }}
+									</div>
+									<hr>
+									{% set j = j + 1 %}
+								{% endfor %}
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-5">
+				<div class="card" style="margin-top: 8px; border-radius: 7px;">
+					<div class="card-header bg-white" style="border-top-right-radius: 7px; border-top-left-radius: 7px;">
+						<h4 class="card-title">VOTRE COMMANDE({{basketData|length}} articles)</h4>
+					</div>
+
+					<div class="card-body">
+					{% set i = 1 %}
+
+						{% for basketItem in basketData %}
+							<div class="row">
+
+								<div class="col-md-6">
+									<img src="{{asset('uploads/'~basketItem.idArticle.artimg)}}" style="width: 75%; height: 100%; border-radius: 4px; margin-left: 20px;">
+								</div>
+
+								<div class="col-md-6" style="margin-left: -30px; margin-top: -10px;">
+									<h6 class="card-title"  style="margin-top:10px;">Piece {{i}} de {{basketData|length}}  </h6>
+									<div>
+										<span style="font-weight: bold;">
+											1x
+										</span>
+										<span>
+											{{basketItem.idArticle.artlib}}
+										</span>
+									</div>
+									<div>
+										Dimension : {{basketItem.idArticle.artdesc}} cm
+									</div>
+
+
+
+									<div>
+									Prix : {{basketItem.idArticle.artprix}} DT
+									</div>
+								</div>
+							</div>
+							<hr>
+							{% set i = i + 1 %}
+						{% endfor %}
+
+						<div class="row">
+
+							<div class="col-md-9">
+								<h6 class="card-title">Sous-total</h6>
+							</div>
+
+							<div class="col-md-3">
+								<h6 class="card-title">{{totalPrice}} DT</h6>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-9">
+								<h6 class="card-title">Montant livraison</h6>
+							</div>
+
+							<div class="col-md-3">
+								<h6 class="card-title">8 DT</h6>
+							</div>
+						</div>
+						<hr style="margin-top: 5px;">
+
+						<div class="row" style="margin-top: -8px;">
+
+							<div class="col-md-9">
+								<h6 class="card-title">Total</h6>
+							</div>
+
+							<div class="col-md-3">
+								<h6 class="card-title">{{totalPrice + 8}} DT</h6>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<a id="sending" href="{{ path('app_confirmCommand', {'livMethod': 'livraison', 'payMethod': 'paiement', 'adress': 'mmmmm'}) }}">
+								<button type="button" class="btn btn-primary btn-round btn-block" style="margin-top: 12px; margin-left:40%; font-weight:bold;">Commander</button>
+								</a>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+<script>
+let radios = document.getElementsByName('livraisonRadios');
+let livraison;
+let radios2 = document.getElementsByName('paiementRadios');
+let paiement;
+
+let a = document.getElementById('sending');
+
+function update() {
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      livraison = radios[i].value;
+      break;
+    }
+  }
+   for (let i = 0; i < radios2.length; i++) {
+    if (radios2[i].checked) {
+      paiement = radios2[i].value;
+      break;
+    }
+  }
+  
+  a.href = "{{ path('app_confirmCommand', {'livMethod': 'livraison', 'payMethod': 'paiement'}) }}".replace('livraison', livraison).replace('paiement', paiement);
+}
+
+
+
+// add event listeners to update livraison whenever a radio button is selected or deselected
+for (let i = 0; i < radios.length; i++) {
+  radios[i].addEventListener('change', update);
+}
+
+// add event listeners to update paiement whenever a radio button is selected or deselected
+for (let i = 0; i < radios2.length; i++) {
+  radios2[i].addEventListener('change', update);
+}
+
+// initialize paiement with the default selected radio button value
+update();
+
+</script>
+
+
+
+
+
+<style>
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-size: 16px;
+	width: 320px;
+	border-radius: 4px;
+  }
+
+  input.clicked {
+	border-color: orange;
+  }
+  
+  .error-message {
+    color: red;
+    display: none;
+  }
+
+</style>
+
+{% endblock %}
+

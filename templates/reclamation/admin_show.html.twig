@@ -1,0 +1,69 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+<div class="pagetitle">
+    <h1>Reclmation</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href={{ path('app_admin_reclamation') }}>Liste Reclamation</a></li>
+            <li class="breadcrumb-item active">Reclamation</li>
+        </ol>
+
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                Reclamation
+            </div>
+
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ reclamation.id }}</td>
+                </tr>
+                <tr>
+                    <th>TypeR</th>
+                    <td>{{ reclamation.TypeR }}</td>
+                </tr>
+                <tr>
+                    <th>DateR</th>
+                    <td>{{ reclamation.dateR ? reclamation.dateR|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Etat</th>
+                    <td>{{ reclamation.etat }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ reclamation.Description }}</td>
+                </tr>
+                <tr>
+                    <th>Objet</th>
+                    <td>{{ reclamation.objet }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+            {{ include('reclamation/_delete_form_admin.html.twig') }}
+        </div>
+    </div>
+        </div>
+    </div>
+</section>
+    </main>
+
+
+{% endblock %}

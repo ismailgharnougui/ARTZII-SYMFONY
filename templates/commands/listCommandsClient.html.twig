@@ -1,0 +1,238 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Artzii
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="card" style="margin-top: 8px; border-radius: 7px;">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Historique de vos commandes:</h2>
+
+						<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 10px;">
+							<li class="nav-item">
+								<a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tous</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">En attente</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">En livraison</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="complete-tab" data-bs-toggle="tab" href="#complete" role="tab" aria-controls="contact" aria-selected="false">Complété</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="complete-tab" data-bs-toggle="tab" href="#annule" role="tab" aria-controls="contact" aria-selected="false">Annulé</a>
+							</li>
+						</ul>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th class="table-header" scope="col">Numéro de commande</th>
+											<th class="table-header" scope="col">Adresse</th>
+											<th class="table-header" scope="col">Date de commande</th>
+											<th class="table-header" scope="col">Etat paiement</th>
+											<th class="table-header" scope="col">Statut</th>
+											<th class="table-header" scope="col">Total</th>
+											<th class="table-header" scope="col">Détails</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for command in commands %}
+											<tr>
+												<td scope="row">{{command.id}}</td>
+												<td>{{command.adresse}}</td>
+												<td>{{command.dateCommande | date}}</td>
+												<td>{{command.modePaiement}}</td>
+												<td>{{command.etatCommande}}</td>
+												<td>{{command.coutTotale}} DT</td>
+												<td>
+													<a href="{{path('app_afficheCommandClient',{'idCommand':command.id})}}">
+														<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="30" style="margin-left:12px;">
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+
+								</table>
+
+
+							</div>
+							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th class="table-header" scope="col">Numéro de commande</th>
+											<th class="table-header" scope="col">Adresse</th>
+											<th class="table-header" scope="col">Date de commande</th>
+											<th class="table-header" scope="col">Etat paiement</th>
+											<th class="table-header" scope="col">Statut</th>
+											<th class="table-header" scope="col">Total</th>
+											<th class="table-header" scope="col">Détails</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for command in EnAttentelist %}
+											<tr>
+												<td scope="row">{{command.id}}</td>
+												<td>{{command.adresse}}</td>
+												<td>{{command.dateCommande | date}}</td>
+												<td>{{command.modePaiement}}</td>
+												<td>{{command.etatCommande}}</td>
+												<td>{{command.coutTotale}}
+													DT</td>
+												<td>
+													<a href="{{path('app_afficheCommandClient',{'idCommand':command.id})}}">
+														<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="30" style="margin-left:12px;">
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+
+								</table>
+
+							</div>
+
+							<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="profile-tab">
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th class="table-header" scope="col">Numéro de commande</th>
+											<th class="table-header" scope="col">Adresse</th>
+											<th class="table-header" scope="col">Date de commande</th>
+											<th class="table-header" scope="col">Etat paiement</th>
+											<th class="table-header" scope="col">Statut</th>
+											<th class="table-header" scope="col">Total</th>
+											<th class="table-header" scope="col">Détails</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for command in Encourslist %}
+											<tr>
+												<td scope="row">{{command.id}}</td>
+												<td>{{command.adresse}}</td>
+												<td>{{command.dateCommande | date}}</td>
+												<td>{{command.modePaiement}}</td>
+												<td>{{command.etatCommande}}</td>
+												<td>{{command.coutTotale}}
+													DT</td>
+												<td>
+													<a href="{{path('app_afficheCommandClient',{'idCommand':command.id})}}">
+														<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="30" style="margin-left:12px;">
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+
+								</table>
+
+							</div>
+							<div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
+
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th class="table-header" scope="col">Numéro de commande</th>
+											<th class="table-header" scope="col">Adresse</th>
+											<th class="table-header" scope="col">Date de commande</th>
+											<th class="table-header" scope="col">Etat paiement</th>
+											<th class="table-header" scope="col">Statut</th>
+											<th class="table-header" scope="col">Total</th>
+											<th class="table-header" scope="col">Détails</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for command in Livrelist %}
+											<tr>
+												<td scope="row">{{command.id}}</td>
+												<td>{{command.adresse}}</td>
+												<td>{{command.dateCommande | date}}</td>
+												<td>{{command.modePaiement}}</td>
+												<td>{{command.etatCommande}}</td>
+												<td>{{command.coutTotale}}
+													DT</td>
+												<td>
+													<a href="{{path('app_afficheCommandClient',{'idCommand':command.id})}}">
+														<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="30" style="margin-left:12px;">
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+
+								</table>
+
+
+							</div>
+
+
+							<div class="tab-pane fade" id="annule" role="tabpanel" aria-labelledby="complete-tab">
+
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th class="table-header" scope="col">Numéro de commande</th>
+											<th class="table-header" scope="col">Adresse</th>
+											<th class="table-header" scope="col">Date de commande</th>
+											<th class="table-header" scope="col">Etat paiement</th>
+											<th class="table-header" scope="col">Statut</th>
+											<th class="table-header" scope="col">Total</th>
+											<th class="table-header" scope="col">Détails</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for command in Annulelist %}
+											<tr>
+												<td scope="row">{{command.id}}</td>
+												<td>{{command.adresse}}</td>
+												<td>{{command.dateCommande | date}}</td>
+												<td>{{command.modePaiement}}</td>
+												<td>{{command.etatCommande}}</td>
+												<td>{{command.coutTotale}}
+													DT</td>
+												<td>
+													<a href="{{path('app_afficheCommandClient',{'idCommand':command.id})}}">
+														<img src="{{ asset('assets/images/detailspng.png') }}" alt="eye" width="30" style="margin-left:12px;">
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+
+								</table>
+
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<style>
+		.table-header {
+			background-color: #f2f2f2;
+			color: black;
+		}
+	</style>
+{% endblock %}

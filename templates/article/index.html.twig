@@ -1,0 +1,157 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+
+    <main id="main" class="main">
+
+
+
+        <div class="pagetitle">
+            <h1>Les Articles</h1>
+            <form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search2') }}">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+
+
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">General</li>
+                </ol>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+                        {% for message in app.flashes('notice') %}
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+
+                        {% for message in app.flashes('noticedelete') %}
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">List Articles</h5>
+                            <a href="{{ path('ajouterArticle') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Ajouter</button>
+
+                            </a>
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ArtLib</th>
+                                    <th scope="col">ArtDispo</th>
+                                    <th scope="col">ArtImage</th>
+
+                                    <th scope="col">ArtPrix</th>
+                                    <th scope="col">Categorie</th>
+                                    <th scope="col">QrCode</th>
+
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Supprimer</th>
+                                    <th scope="col">Detail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {% if listS | length == 0 %}
+
+                                            <p style="text-align: center">Articles vides</p>
+
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+
+
+
+                                {% for p in listS  %}
+
+
+
+                                    <tr>
+
+                                        <td>{{p.artlib}}</td>
+                                        <td>{{ p.artdispo }}</td>
+
+
+                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.artimg) }}"/></td>
+                                        <td>{{p.artprix}}</td>
+                                        <td>{{p.catlib}}</td>
+                                        <td><img  style="width: 75px; height: 55px; padding: 5px;" src="{{ asset('uploads/'~p.qrcode) }}"/></td>
+
+                                        <td>
+                                            <a href="{{ path('modifierArticle',{artid:p.artid}) }}">
+                                                <button type="button" class="btn btn-outline-success">Modifier</button></a></td>
+
+
+                                        <td>
+                                            <a href="javascript:void(0)" onclick="if(confirm('Voulez vraiement supprimer ?')){window.location='{{ path('suppressionArticle', {'artid': p.artid }) }}';}">
+
+                                                <button type="button" class="btn btn-outline-danger">Supprimer</button>
+                                            </a></td>
+                                        <td><a href="{{ path('detailArticle',{artid:p.artid}) }}">
+                                                <button type="button" class="btn btn-outline-dark">Detail</button>
+                                            </a></td>                                    </tr>
+
+
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+
+                            <!-- End Default Table Example -->
+                            <a href="{{ path('exportExcel') }}">
+                                <button type="button" style="float: right;padding: 10px;margin-left: 10px;" class="btn btn-outline-secondary">Exporter Excel</button>
+                            </a>
+                            <a href="{{ path('exportpdf') }}">
+                                <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Export to PDF</button>
+                            </a>
+
+                                <a href="{{ path('stat') }}">
+                                    <button type="button" style="float: left;padding: 10px; margin-right: 10px;" class="btn btn-outline-info">statistique</button>
+                                </a>
+                                <a href="{{ path('tri') }}">
+                                    <button type="button" style="float: left;padding: 10px;margin-right: 10px;" class="btn btn-outline-info">tri croissant</button>
+                                </a>
+
+                            <a href="{{ path('trid') }}">
+                                <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">tri decroissant</button>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}

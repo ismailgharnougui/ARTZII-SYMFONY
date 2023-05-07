@@ -1,0 +1,96 @@
+{% extends 'base3.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+<div class="container" style="transform: scale(0.98); margin-top: -5px;">
+    <div class="row">
+        <div class="col-md-12">
+    <h1>Mes reclamation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TypeR</th>
+                <th>DateR</th>
+                <th>Etat</th>
+                <th>Description</th>
+                <th>Objet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.TypeR }}</td>
+                <td>{{ reclamation.dateR ? reclamation.dateR|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>{{ reclamation.Description }}</td>
+                <td>{{ reclamation.objet }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    {%  if reclamation.etat=="nonresolu" %}
+                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ul class="pagination">
+                {% set rowsPerPage = 4 %}
+                {% set numRows = reclamations|length %}
+                {% set numPages = (numRows / rowsPerPage)|round(0, 'ceil') %}
+                {% for i in 1..numPages %}
+                    <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+        <div class="row">
+            <a href="{{ path('app_reclamation_new') }}" class="btn btn-primary">Create new</a>
+
+        </div>
+    </div>
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var rowsPerPage = 4;
+            var currentPage = 1;
+            var start = 0;
+            var end = rowsPerPage;
+            showPage(currentPage);
+
+            function showPage(page) {
+                start = (page-1)*rowsPerPage;
+                end = start+rowsPerPage;
+                $("table tbody tr").hide();
+                $("table tbody tr").slice(start, end).show();
+                $(".page-link").removeClass("active");
+                $(".page-link").eq(page-1).addClass("active");
+            }
+
+            $(".page-link").on("click", function(){
+                var page =  parseInt($(this).text());
+                showPage(page);
+                currentPage = page;
+
+            });
+
+        });
+    </script>
+    {% endblock %}
+
+{% endblock %}

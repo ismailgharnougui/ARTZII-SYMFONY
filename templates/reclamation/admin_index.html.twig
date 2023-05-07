@@ -1,0 +1,141 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste Reclamation</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row mt-3">
+            <div class="col-12">
+                <input type="text" id="search-input" placeholder="Search..." class="form-control">
+
+            </div>
+
+        </div>
+        <div class="row mt-3 mx-auto">
+            <button class="btn btn-warning col-3 me-2 etat-filter-btn" etat-filter="resolu">Resolu</button>
+            <button class="btn btn-danger col-3 me-2 etat-filter-btn" etat-filter="nonresolu">Non Resolu</button>
+            <button class="btn btn-primary col-3 etat-filter-btn" etat-filter="all">All</button>
+
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-12">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>TypeR</th>
+            <th>DateR</th>
+            <th>Etat</th>
+            <th>Description</th>
+            <th>Objet</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.TypeR }}</td>
+                <td>{{ reclamation.dateR ? reclamation.dateR|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>{{ reclamation.Description }}</td>
+                <td>{{ reclamation.objet }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show_admin', {'id': reclamation.id}) }}">show</a>
+                    {% if(reclamation.etat=="nonresolu") %}
+                    <a href="{{ path('app_reponse_new', {'idreclmaation': reclamation.id}) }}">repondre</a>
+                          {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="pagination">
+                    {% set rowsPerPage = 3 %}
+                    {% set numRows = reclamations|length %}
+                    {% set numPages = (numRows / rowsPerPage)|round(0, 'ceil') %}
+                    {% for i in 1..numPages %}
+                        <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <a class="btn btn-primary" href="{{ path('app_admin_reclamation_statistique') }}">Stat</a>
+            </div>
+        </div>
+    </section>
+</main>
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#search-input').on('keyup', function() {
+                    var value = $(this).val().toLowerCase();
+                    $('table tbody tr').filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                var rowsPerPage = 3;
+                var currentPage = 1;
+                var start = 0;
+                var end = rowsPerPage;
+                showPage(currentPage);
+
+                function showPage(page) {
+                    start = (page-1)*rowsPerPage;
+                    end = start+rowsPerPage;
+                    $("table tbody tr").hide();
+                    $("table tbody tr").slice(start, end).show();
+                    $(".page-link").removeClass("active");
+                    $(".page-link").eq(page-1).addClass("active");
+                }
+                $(".page-link").on("click", function(){
+                    var page =  parseInt($(this).text());
+                    showPage(page);
+                    currentPage = page;
+
+                });
+
+            });
+            $('button:contains("Resolu")').click(function() {
+                $('table tbody tr').show();
+
+                $('table tbody tr:contains("nonresolu")').hide();
+            });
+
+            // Filter by "Non Resolu"
+            $('button:contains("Non Resolu")').click(function() {
+                $('table tbody tr').hide();
+                $('table tbody tr:contains("nonresolu")').show();
+            });
+
+            // Remove filter
+            $('button:contains("All")').click(function() {
+                $('table tbody tr').show();
+            });
+
+        </script>
+    {% endblock %}
+
+
+
+{% endblock %}

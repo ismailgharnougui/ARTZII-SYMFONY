@@ -1,0 +1,88 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste des Reponses</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRep</th>
+                <th>DateRep</th>
+                <th>ContenuRep</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.id }}</td>
+                <td>{{ reponse.dateRep ? reponse.dateRep|date('Y-m-d') : '' }}</td>
+                <td>{{ reponse.contenuRep }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_show', {'idRep': reponse.id}) }}">show</a>
+                    <a href="{{ path('app_reponse_edit', {'idRep': reponse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul class="pagination">
+        {% set rowsPerPage = 3 %}
+        {% set numRows = reponses|length %}
+        {% set numPages = (numRows / rowsPerPage)|round(0, 'ceil') %}
+        {% for i in 1..numPages %}
+        <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
+
+            </div>
+        </div>
+
+
+    </section>
+</main>
+
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var rowsPerPage = 3;
+                var currentPage = 1;
+                var start = 0;
+                var end = rowsPerPage;
+                showPage(currentPage);
+
+                function showPage(page) {
+                    start = (page-1)*rowsPerPage;
+                    end = start+rowsPerPage;
+                    $("table tbody tr").hide();
+                    $("table tbody tr").slice(start, end).show();
+                    $(".page-link").removeClass("active");
+                    $(".page-link").eq(page-1).addClass("active");
+                }
+
+                $(".page-link").on("click", function(){
+                    var page =  parseInt($(this).text());
+                    showPage(page);
+                    currentPage = page;
+
+                });
+
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

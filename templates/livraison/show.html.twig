@@ -1,0 +1,83 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Livraison index
+{% endblock %}
+
+{% block body %}
+<!-- ======= main ======= -->
+<main id="main" class="main">
+
+	<div class="pagetitle">
+		<h1>Data Tables</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Tables</li>
+				<li class="breadcrumb-item active">Data</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
+
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Liste des livraisons</h5>
+						<p>Bienvenue dans l'interface de gestion des livraisons!
+						</p>
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Id</th>
+								<td>{{ livraison.id }}</td>
+							</tr>
+							<tr>
+								<th>EtatLiv</th>
+								<td>{{ livraison.etatLiv ? 'Livré' : 'Non livré' }}</td>
+							</tr>
+							<tr>
+								<th>DateLiv</th>
+								<td>{{ livraison.dateLiv ? livraison.dateLiv|date('Y-m-d') : '' }}</td>
+							</tr>
+							<tr>
+								<th>PrixLiv</th>
+								<td>{{ livraison.prixLiv }} DT</td>
+							</tr>
+						</tbody>
+					</table>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<a class='btn btn-info' href="{{ path('app_livraison_index') }}">back to list</a>
+
+
+	<a class='btn btn-warning' href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
+
+	{{ include('livraison/_delete_form.html.twig') }}
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+
+<link rel="canonical" href="login.html"><link rel="shortcut icon" href="{{asset('../../cdn.shopify.com/s/files/1/0402/4431/4268/files/fav_32x32f995.png?v=1613730012" type="image/png"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1')}}" />
+
+		<!--[if IE]>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<![endif]-->
+		
+		<!-- CSS -->
+		
+<style type="text/css">
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 300;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n3.e9c2ec7697570c33b13645dbd15f3f729c5e921b.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=3550705e19830529f18a25108a044640d73bbf154eec8d1d954764e897dd7a64") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n3.f481a31eaff8b48749cc413f5c6990b1db3c9103.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=2815f12b254ad6aff4fa758228431f4ff542a99201c5a232f0b68b8c5d644bdc") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.e72d00d31ae5399d260a80ec70322c62c1819762.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=73f33816ad1840ed02696e30524dc5c04ab9e9497417befc75928c6779e17b64") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.18a018b6c83e89030c5d70a6d4c02c969f228500.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=c7d9c641daef8a148f2657fb9972491d0eb24a03e4d95ee0d15f2f37683404ec") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.c496e9cf2031deec4c4bca338faa81971c8631d4.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=622e2111f1480e59f1c7173dd8716dcc09cff70ea38a0553a2426facbe33444e") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.78b0223375c94b39ce1af7e09a0225f2bb3d05f7.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=a701e38de84560d414a31b72e6214b193a0fd4baecd88a96379815f10ea52550") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.7a3c341961dc23aaabcc116124b80f2a7abec1a2.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=be95cde9109bfb2e306097c5b1817b0ab59b9e41cb10d0491bd1850288a5efde") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.2c97c1a692c63ad09ab0635cb73b1939c5f417c0.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=7402201df31ed42494d6830f22cd2494a32d124dc25e5f83a4359b82b809face") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 800;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n8.d0ee6fdb3a3fec57b7ba86e76adad5b86d8b298f.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=bced379f7cd161ff0d6aa917257afd5b4216286caeb21494b47fcbd4a8838832") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n8.57046b0201ba1025a279f9546bf469833729dc63.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=2f8a779fa729841a31de8eda30f0d30e82ca6bba1d7ba328527555fa3e940aae") format("woff");
+}
+
+	
+	:root {
+		/*  TYPOGRAPHY  */
+		--base-font: Montserrat, sans-serif;
+		--base-font-size: 16px;
+		--heading-font: Montserrat, sans-serif;
+		--heading-font-size: 30px;
+		--heading-light-font-weight: 300;
+		--heading-regular-font-weight: 400;
+		--heading-medium-font-weight: 500;
+		--heading-bold-font-weight: 700;
+		--heading-semi-bold-font-weight: 600;
+		--heading-extra-bold-font-weight: 800;
+		/*  COLORS  */
+		--color-1: #141414;
+		--color-2: #f43d0c;
+		--color-3: #ffffff;
+		--color-4: #000000;
+		--bg-color: #ffffff;
+		--base-font-color: #888888;
+		--heading-font-color: #141414;
+		--border-color: #e4e4e4;
+		--links-color: #141414;
+		--links-color-hover: #f43d0c;
+		--button-color: #f43d0c;
+		--button-text-color: #ffffff;
+		--button-border-color: #f43d0c;
+		--button-hover-color: #141414;
+		--button-hover-text-color: #ffffff;
+		--button-hover-border-color: #141414;
+		--alt-button-color: #141414;
+		--alt-button-text-color: #ffffff;
+		--alt-button-border-color: #141414;
+		--alt-button-hover-color: #f43d0c;
+		--alt-button-hover-text-color: #ffffff;
+		--alt-button-hover-border-color: #f43d0c;
+		--product-name-color: #888888;
+		--product-name-color-hover: #f43d0c;
+		--product-price-color: #141414;
+		--product-price-sale-color: #777777;
+	}
+</style>
+		<link href="{{asset('../../cdn.shopify.com/s/files/1/0402/4431/4268/t/2/assets/style.scss3747.css?v=82075864039122045691656105590')}}" rel="stylesheet" type="text/css" media="all" />
+		<link href="{{asset('../../cdn.shopify.com/s/files/1/0402/4431/4268/t/2/assets/responsive.scss752c.css?v=154932112072804460831591262450')}}" rel="stylesheet" type="text/css" media="all" />
+		
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <style type="text/css">
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 300;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n3.e9c2ec7697570c33b13645dbd15f3f729c5e921b.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=3550705e19830529f18a25108a044640d73bbf154eec8d1d954764e897dd7a64") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n3.f481a31eaff8b48749cc413f5c6990b1db3c9103.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=2815f12b254ad6aff4fa758228431f4ff542a99201c5a232f0b68b8c5d644bdc") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=0bc99274252e50a72933e2332da61224f4b2b0c767df74a6aa14c2cfba2d63a7") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=e13323b2cce4bde698e3a3948b7446ed82ef4f89071dd48a79baee7dc3a572e9") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.e72d00d31ae5399d260a80ec70322c62c1819762.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=73f33816ad1840ed02696e30524dc5c04ab9e9497417befc75928c6779e17b64") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.18a018b6c83e89030c5d70a6d4c02c969f228500.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=c7d9c641daef8a148f2657fb9972491d0eb24a03e4d95ee0d15f2f37683404ec") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.c496e9cf2031deec4c4bca338faa81971c8631d4.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=622e2111f1480e59f1c7173dd8716dcc09cff70ea38a0553a2426facbe33444e") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.78b0223375c94b39ce1af7e09a0225f2bb3d05f7.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=a701e38de84560d414a31b72e6214b193a0fd4baecd88a96379815f10ea52550") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.7a3c341961dc23aaabcc116124b80f2a7abec1a2.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=be95cde9109bfb2e306097c5b1817b0ab59b9e41cb10d0491bd1850288a5efde") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.2c97c1a692c63ad09ab0635cb73b1939c5f417c0.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=7402201df31ed42494d6830f22cd2494a32d124dc25e5f83a4359b82b809face") format("woff");
+}
+
+	@font-face {
+  font-family: Montserrat;
+  font-weight: 800;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/montserrat/montserrat_n8.d0ee6fdb3a3fec57b7ba86e76adad5b86d8b298f.woff2?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=bced379f7cd161ff0d6aa917257afd5b4216286caeb21494b47fcbd4a8838832") format("woff2"),
+       url("https://fonts.shopifycdn.com/montserrat/montserrat_n8.57046b0201ba1025a279f9546bf469833729dc63.woff?h1=dGhlbWU4NzAtY2FyLWRlYWxlci5hY2NvdW50Lm15c2hvcGlmeS5jb20&amp;hmac=2f8a779fa729841a31de8eda30f0d30e82ca6bba1d7ba328527555fa3e940aae") format("woff");
+}
+
+	
+	:root {
+		/*  TYPOGRAPHY  */
+		--base-font: Montserrat, sans-serif;
+		--base-font-size: 16px;
+		--heading-font: Montserrat, sans-serif;
+		--heading-font-size: 30px;
+		--heading-light-font-weight: 300;
+		--heading-regular-font-weight: 400;
+		--heading-medium-font-weight: 500;
+		--heading-bold-font-weight: 700;
+		--heading-semi-bold-font-weight: 600;
+		--heading-extra-bold-font-weight: 800;
+		/*  COLORS  */
+		--color-1: #141414;
+		--color-2: #f43d0c;
+		--color-3: #ffffff;
+		--color-4: #000000;
+		--bg-color: #ffffff;
+		--base-font-color: #888888;
+		--heading-font-color: #141414;
+		--border-color: #e4e4e4;
+		--links-color: #141414;
+		--links-color-hover: #f43d0c;
+		--button-color: #f43d0c;
+		--button-text-color: #ffffff;
+		--button-border-color: #f43d0c;
+		--button-hover-color: #141414;
+		--button-hover-text-color: #ffffff;
+		--button-hover-border-color: #141414;
+		--alt-button-color: #141414;
+		--alt-button-text-color: #ffffff;
+		--alt-button-border-color: #141414;
+		--alt-button-hover-color: #f43d0c;
+		--alt-button-hover-text-color: #ffffff;
+		--alt-button-hover-border-color: #f43d0c;
+		--product-name-color: #888888;
+		--product-name-color-hover: #f43d0c;
+		--product-price-color: #141414;
+		--product-price-sale-color: #777777;
+	}
+</style>
+
+        {% endblock %}
+    </head>
+    <body>
+
+        {% block navbar %}
+
+        {% endblock %}
+        {% block body %}
+
+Test Test - Saibi Dhia 3A5
+
+        {% endblock %}
+
+
+
+        {% block javascripts %}
+        <!-- JavaScript Libraries -->
+    <script src="{{asset('https://code.jquery.com/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{{asset('mail/jqBootstrapValidation.min.js')}}"></script>
+    <script src="{{asset('mail/contact.js')}}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{asset('js/main.js')}}"></script>
+   
+        {% endblock %}
+    </body>
+</html>

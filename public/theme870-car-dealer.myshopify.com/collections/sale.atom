@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify">
+  <id>https://theme870-car-dealer.myshopify.com/collections/all.atom</id>
+  <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/collections/all"/>
+  <link rel="self" type="application/atom+xml" href="https://theme870-car-dealer.myshopify.com/collections/sale.atom"/>
+  <title>Motore</title>
+  <updated>2020-06-03T06:01:49-04:00</updated>
+  <author>
+    <name>Motore</name>
+  </author>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266476662940</id>
+    <published>2020-06-03T06:01:49-04:00</published>
+    <updated>2020-06-03T06:01:49-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/lamborghini-gallardo-lp-520-front-differential"/>
+    <title>Lamborghini Gallardo LP 520 Front Differential</title>
+    <s:type>Body parts</s:type>
+    <s:vendor>USA</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/lamborghini_gallardo_lp_520_front_differential_01.png?v=1591178517"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>USA<br>
+        <strong>Type: </strong>Body parts<br>
+        <strong>Price: </strong>
+            89.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>So, if you like listening to the sound of your engine, or if you like the smell of burning rubber of your wheels, you are in the right place.We provide auto spare parts and our main goal is to satisfy all of our customers. The secret of our success is that our goods are an unbeaten combination of high quality and fair price. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. We believe that everything must be perfect in our business.  And don’t forget you can save your money with the help of our system of benefits and discounts. <br></p>
+<ol>
+<li>Headlight </li>
+<li>Wheel Nuts </li>
+<li>Vehicle Body Type </li>
+<li>Hatchback </li>
+<li>Coupe </li>
+<li>Sedan </li>
+<li>Year</li>
+</ol>
+<p> </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Wheel Nuts</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266476662940</id>
+      <title>Default Title</title>
+      <s:price currency="USD">89.00</s:price>
+      <s:sku>327038</s:sku>
+      <s:grams>32600</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266476269724</id>
+    <published>2020-06-03T06:01:37-04:00</published>
+    <updated>2020-06-03T06:01:37-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/maserati-granturismo-gearbox-transmission"/>
+    <title>Maserati Granturismo Gearbox Transmission</title>
+    <s:type>Wheels &amp; Tires</s:type>
+    <s:vendor>Grmany</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/img_29.png?v=1631818066"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Grmany<br>
+        <strong>Type: </strong>Wheels &amp; Tires<br>
+        <strong>Price: </strong>
+            140.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><h3></h3>
+<p>We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies. Car is more than a piece of a metal, it became a social phenomenon.<br></p>
+<p>Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. Have you ever noticed that we often try to talk to the car as if it was a human? We use the achievements of progress and provide some new technologies. </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Vehicle Body Type</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266476269724</id>
+      <title>Default Title</title>
+      <s:price currency="USD">140.00</s:price>
+      <s:sku>654654654-56</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266475745436</id>
+    <published>2020-06-03T06:01:25-04:00</published>
+    <updated>2020-06-03T06:01:25-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/noco-genius-boost-gb30-12v-ultrasafe-lithium"/>
+    <title>NOCO Genius Boost GB30 12V UltraSafe Lithium</title>
+    <s:type>Interior</s:type>
+    <s:vendor>China</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/img_01.png?v=1631818089"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>China<br>
+        <strong>Type: </strong>Interior<br>
+        <strong>Price: </strong>
+            890.00 - 1900.00
+            <a href="https://theme870-car-dealer.myshopify.com/products/noco-genius-boost-gb30-12v-ultrasafe-lithium">(4 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Even if you don’t like speed and power, racing and all this stuff, but you love your car, you are still in the right place because you might be interested in professional spare parts.Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues.Have you ever noticed that we often try to talk to the car as if it was a human? We believe that everything must be perfect in our business. Car is a part of culture because we spend a significant amount of time of our lives by the steering wheel. We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. Just remember that we estimate our clients and improve our support and delivery systems.<br></p>
+<h2></h2></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Hatchback</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266475745436</id>
+      <title>Black / 2008 / Sedan</title>
+      <s:price currency="USD">1000.00</s:price>
+      <s:sku>327AE-6</s:sku>
+      <s:grams>4990</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266475745436</id>
+      <title>Silver / 2008 / Sedan</title>
+      <s:price currency="USD">1900.00</s:price>
+      <s:sku>556-62225</s:sku>
+      <s:grams>5000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266475745436</id>
+      <title>Black / 2010 / Sedan</title>
+      <s:price currency="USD">890.00</s:price>
+      <s:sku>64554</s:sku>
+      <s:grams>1134</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266475745436</id>
+      <title>Silver / 2010 / Coupe</title>
+      <s:price currency="USD">1000.00</s:price>
+      <s:sku>245687</s:sku>
+      <s:grams>100</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266475384988</id>
+    <published>2020-06-03T06:01:15-04:00</published>
+    <updated>2020-06-03T06:01:15-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/portseat-set-las-vegas-artificial-leather-black"/>
+    <title>Portseat Set Las Vegas Artificial Leather Black</title>
+    <s:type>Exterior</s:type>
+    <s:vendor>Russian</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/portseat_set_las_vegas_artificial_leather_black_01.png?v=1591178485"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Russian<br>
+        <strong>Type: </strong>Exterior<br>
+        <strong>Price: </strong>
+            80.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Our industry made a great number of legendary cars, and this is a true argument that it is essential part of our life.So, if you like listening to the sound of your engine, or if you like the smell of burning rubber of your wheels, you are in the right place.<br></p>
+<ul>
+<li>our parts are the standard of real reliability and durability;</li>
+<li>we believe that everything must be perfect in our business;</li>
+<li>we use the achievements of progress and provide some new technologies.</li>
+</ul>
+<p>We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Coupe</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266475384988</id>
+      <title>Default Title</title>
+      <s:price currency="USD">80.00</s:price>
+      <s:sku></s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266474401948</id>
+    <published>2020-06-03T06:00:56-04:00</published>
+    <updated>2020-06-03T06:00:56-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/richmond-gear-super-street-5-speed-transmission"/>
+    <title>Richmond Gear Super Street 5 Speed Transmission</title>
+    <s:type>Lighting</s:type>
+    <s:vendor>USA</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/richmond_gear_super_street_5_speed_transmission_1.png?v=1591178464"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>USA<br>
+        <strong>Type: </strong>Lighting<br>
+        <strong>Price: </strong>
+            1800.00 - 2500.00
+            <a href="https://theme870-car-dealer.myshopify.com/products/richmond-gear-super-street-5-speed-transmission">(3 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>So, if you like listening to the sound of your engine, or if you like the smell of burning rubber of your wheels, you are in the right place.We provide auto spare parts and our main goal is to satisfy all of our customers. The secret of our success is that our goods are an unbeaten combination of high quality and fair price. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. We believe that everything must be perfect in our business.  And don’t forget you can save your money with the help of our system of benefits and discounts. <br></p>
+<p> </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Sedan</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266474401948</id>
+      <title>Black</title>
+      <s:price currency="USD">2500.00</s:price>
+      <s:sku>327AE-6</s:sku>
+      <s:grams>2000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266474401948</id>
+      <title>Silver</title>
+      <s:price currency="USD">1990.00</s:price>
+      <s:sku>556-62225</s:sku>
+      <s:grams>2000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266474401948</id>
+      <title>Red</title>
+      <s:price currency="USD">1800.00</s:price>
+      <s:sku>64554</s:sku>
+      <s:grams>7000</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266473844892</id>
+    <published>2020-06-03T06:00:44-04:00</published>
+    <updated>2020-06-03T06:00:44-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/spare-parts-headlight-left-ford-ka-typ-rbt"/>
+    <title>Spare Parts Headlight Left Ford KA (TYP RBT)</title>
+    <s:type>Body parts</s:type>
+    <s:vendor>Grmany</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/spare_parts_headlight_left_ford_ka_typ_rbt_01.png?v=1591178455"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Grmany<br>
+        <strong>Type: </strong>Body parts<br>
+        <strong>Price: </strong>
+            130.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies. Car is more than a piece of a metal, it became a social phenomenon. Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. Have you ever noticed that we often try to talk to the car as if it was a human? We use the achievements of progress and provide some new technologies. <br></p>
+<ul>
+<li>our parts are the standard of real reliability and durability;</li>
+<li>we use the achievements of progress and provide some new technologies.</li>
+</ul>
+<p> </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Year</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266473844892</id>
+      <title>Default Title</title>
+      <s:price currency="USD">130.00</s:price>
+      <s:sku>327038</s:sku>
+      <s:grams>32600</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266473320604</id>
+    <published>2020-06-03T06:00:31-04:00</published>
+    <updated>2020-06-03T06:00:31-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/sport-air-filter-replacement-filter-audi-a6-4f-fr"/>
+    <title>Sport Air Filter Replacement Filter Audi A6 (4F) FR</title>
+    <s:type>Wheels &amp; Tires</s:type>
+    <s:vendor>China</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/sport_air_filter_replacement_filter_audi_a6_4f_fr_01.png?v=1591178443"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>China<br>
+        <strong>Type: </strong>Wheels &amp; Tires<br>
+        <strong>Price: </strong>
+            260.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">Our manufacturers and vendors guarantee its high quality. Car is more than a piece of a metal, it became a social phenomenon.  Have you ever noticed that we often try to talk to the car as if it was a human? Our manufacturers and vendors guarantee its high quality.  
+<p>We understand:</p>
+<ul>
+<li>our parts are the standard of real reliability and durability;</li>
+<li>we believe that everything must be perfect in our business;</li>
+<li>we use the achievements of progress and provide some new technologies.</li>
+</ul>
+<h3></h3></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Headlight</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266473320604</id>
+      <title>Default Title</title>
+      <s:price currency="USD">260.00</s:price>
+      <s:sku>654654654-56</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266472992924</id>
+    <published>2020-06-03T06:00:19-04:00</published>
+    <updated>2020-06-03T06:00:19-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/sport-air-filter-replacement-filter-peugeot-206-fr"/>
+    <title>Sport Air Filter Replacement Filter Peugeot 206 FR</title>
+    <s:type>Interior</s:type>
+    <s:vendor>Russian</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/sport_air_filter_replacement_filter_peugeot_206_fr_01.png?v=1591178429"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Russian<br>
+        <strong>Type: </strong>Interior<br>
+        <strong>Price: </strong>
+            150.00 - 360.00
+            <a href="https://theme870-car-dealer.myshopify.com/products/sport-air-filter-replacement-filter-peugeot-206-fr">(4 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Our manufacturers and vendors guarantee its high quality. Our industry made a great number of legendary cars, and this is a true argument that it is essential part of our life.So, if you like listening to the sound of your engine, or if you like the smell of burning rubber of your wheels, you are in the right place.</p>
+<ul>
+<li>our parts are the standard of real reliability and durability;</li>
+<li>we believe that everything must be perfect in our business;</li>
+<li>we use the achievements of progress and provide some new technologies.</li>
+</ul>
+<p>We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Wheel Nuts</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266472992924</id>
+      <title>Black / 2008 / Sedan</title>
+      <s:price currency="USD">360.00</s:price>
+      <s:sku>327AE-6</s:sku>
+      <s:grams>4990</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266472992924</id>
+      <title>Silver / 2008 / Sedan</title>
+      <s:price currency="USD">320.00</s:price>
+      <s:sku>556-62225</s:sku>
+      <s:grams>5000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266472992924</id>
+      <title>Black / 2010 / Sedan</title>
+      <s:price currency="USD">150.00</s:price>
+      <s:sku>64554</s:sku>
+      <s:grams>1134</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266472992924</id>
+      <title>Silver / 2010 / Coupe</title>
+      <s:price currency="USD">250.00</s:price>
+      <s:sku>245687</s:sku>
+      <s:grams>100</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266471747740</id>
+    <published>2020-06-03T05:59:52-04:00</published>
+    <updated>2020-06-03T05:59:52-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/sport-shock-absorber-high-tec-bmw"/>
+    <title>Sport Shock Absorber High Tec BMW</title>
+    <s:type>Lighting</s:type>
+    <s:vendor>Grmany</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/sport_shock_absorber_high_tec_bmw_1.png?v=1591178402"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Grmany<br>
+        <strong>Type: </strong>Lighting<br>
+        <strong>Price: </strong>
+            1800.00 - 2500.00
+            <a href="https://theme870-car-dealer.myshopify.com/products/sport-shock-absorber-high-tec-bmw">(3 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>We believe that everything must be perfect in our business. We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies. Car is more than a piece of a metal, it became a social phenomenon. Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. Have you ever noticed that we often try to talk to the car as if it was a human? We use the achievements of progress and provide some new technologies. </p>
+<p> </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Hatchback</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266471747740</id>
+      <title>Black</title>
+      <s:price currency="USD">2500.00</s:price>
+      <s:sku>327AE-6</s:sku>
+      <s:grams>2000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266471747740</id>
+      <title>Silver</title>
+      <s:price currency="USD">1990.00</s:price>
+      <s:sku>556-62225</s:sku>
+      <s:grams>2000</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266471747740</id>
+      <title>Red</title>
+      <s:price currency="USD">1800.00</s:price>
+      <s:sku>64554</s:sku>
+      <s:grams>7000</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/products/5266471256220</id>
+    <published>2020-06-03T05:59:42-04:00</published>
+    <updated>2020-06-03T05:59:42-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/products/sport-shock-absorber-high-tec-fiat"/>
+    <title>Sport Shock Absorber High Tec Fiat</title>
+    <s:type>Body parts</s:type>
+    <s:vendor>China</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0402/4431/4268/products/sport_shock_absorber_high_tec_fiat_1.png?v=1591178391"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>China<br>
+        <strong>Type: </strong>Body parts<br>
+        <strong>Price: </strong>
+            250.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Modern clothing is not only what helps us feel comfortable. We spend endless hours in traffic jams; we like to eat in a car, like to listen to music and so on. And you know it is true. We believe that everything must be perfect in our business. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. We use the achievements of progress and provide some new technologies. Car is more than a piece of a metal, it became a social phenomenon.</p>
+<p>Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. Have you ever noticed that we often try to talk to the car as if it was a human? We use the achievements of progress and provide some new technologies. </p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>Coupe</s:tag>
+    <s:variant>
+      <id>https://theme870-car-dealer.myshopify.com/products/5266471256220</id>
+      <title>Default Title</title>
+      <s:price currency="USD">250.00</s:price>
+      <s:sku>327038</s:sku>
+      <s:grams>32600</s:grams>
+    </s:variant>
+  </entry>
+</feed>

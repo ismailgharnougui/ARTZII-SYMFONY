@@ -1,0 +1,66 @@
+
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}Edit Reponse{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Edit Reponse sur reclamation</h1>
+
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Reclmation </h3>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-12">
+                    <table class="table">
+
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ reponse.getIdreclamation.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>TypeR</th>
+                            <td>{{ reponse.getIdreclamation.TypeR }}</td>
+                        </tr>
+                        <tr>
+                            <th>DateR</th>
+                            <td>{{ reponse.getIdreclamation.dateR ? reponse.getIdreclamation.dateR|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Etat</th>
+                            <td>{{ reponse.getIdreclamation.etat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ reponse.getIdreclamation.Description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Objet</th>
+                            <td>{{ reponse.getIdreclamation.objet }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+
+                    {{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}
+
+                    <a href="{{ path('app_reponse_index') }}">back to list</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
+

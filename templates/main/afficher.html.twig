@@ -1,0 +1,53 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+
+{% block body %}
+
+
+    <main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Liste Des users</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+
+                <!-- Table with stripped rows -->
+                <table class="table table-striped my-3">
+                    <thead>
+                    <tr>     <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Mail</th>
+                        <th>Adresse</th>
+                        <th>Numero</th>
+                        <th>CIN</th>
+                        <th>Modification</th>
+                        <th>Suppression</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in u %}
+                        <tr>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.mail }}</td>
+                            <td>{{ user.adresse }}</td>
+                            <td>{{ user.numero }}</td>
+                            <td>{{ user.cin }}</td>
+                            <td>
+                                <a class="btn btn-success" href="{{ path('app_modifier',{'id':user.getIdUser()}) }}">Modifier</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" href="{{ path('app_supprimer',{'id':user.getIdUser()}) }}">Supprimer</a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+    </section>
+    </main>
+
+                <!-- End small tables -->
+{% endblock %}

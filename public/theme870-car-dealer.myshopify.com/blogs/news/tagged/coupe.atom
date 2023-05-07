@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify">
+  <id>https://theme870-car-dealer.myshopify.com/blogs/news.atom</id>
+  <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/blogs/news"/>
+  <link rel="self" type="application/atom+xml" href="https://theme870-car-dealer.myshopify.com/blogs/news/tagged/coupe.atom"/>
+  <title>Motore - Blog</title>
+  <updated>2020-06-03T06:27:00-04:00</updated>
+  <author>
+    <name>Motore</name>
+  </author>
+  <entry>
+    <id>https://theme870-car-dealer.myshopify.com/blogs/news/are-you-ready-for-the-online-dealership</id>
+    <published>2020-06-03T06:27:00-04:00</published>
+    <updated>2020-06-03T06:28:28-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://theme870-car-dealer.myshopify.com/blogs/news/are-you-ready-for-the-online-dealership"/>
+    <title>Are you ready for the online dealership?</title>
+    <author>
+      <name>Mickey Mouse</name>
+    </author>
+    <content type="html">
+      <![CDATA[<p>So, if you like listening to the sound of your engine, or if you like the smell of burning rubber of your wheels, you are in the right place.We provide auto spare parts and our main goal is to satisfy all of our customers. The secret of our success is that our goods are an unbeaten combination of high quality and fair price. We produce and sell only professional parts - that’s why we have a great number of devoted clients all over the country and there is nothing better than the happy and satisfied customers. </p>
+<p><iframe src="https://www.youtube.com/embed/CHsMnE_iUWQ" allowfullscreen="" height="720" width="1280"></iframe></p>
+<p>Our goods are real bestsellers; we are offering a great list of some unique spare parts that have no analogues. We believe that everything must be perfect in our business.  And don’t forget you can save your money with the help of our system of benefits and discounts. </p>
+<ul>
+<li>Interior </li>
+<li>Exterior </li>
+<li>Lighting </li>
+<li>Body parts </li>
+<li>Wheels &amp; Tires</li>
+</ul>
+<p>Our industry made a great number of legendary cars, and this is a true argument that it is essential part of our life.The secret of our success is that our goods are an unbeaten combination of high quality and fair priceYou know, psychologists claim that style of driving shows some striking features of character. </p>
+<p><a href="-">And don’t forget you can save your money with the help of our system of benefits and discounts. </a></p>]]>
+    </content>
+  </entry>
+</feed>

@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artzii{% endblock %}
+
+{% block body %}
+        
+<div class="main_content container_big ">
+								<div id="shopify-section-template-login" class="shopify-section"><div class="template_customer template_customer__login">
+	<div class="container">
+		<h1 class="page_heading">Account</h1>
+
+		
+			
+			<div id="account_section__wrapper">
+				<div class="customer_wrapper">
+					<a href="{{ path('app_login') }}" id="account_login__link" class="customer_block customer_block__login">
+						<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M20 16C15.6 16 12 12.4 12 8C12 3.6 15.6 0 20 0C24.4 0 28 3.6 28 8C28 12.4 24.4 16 20 16ZM20 2C16.7 2 14 4.7 14 8C14 11.3 16.7 14 20 14C23.3 14 26 11.3 26 8C26 4.7 23.3 2 20 2Z"></path>
+							<path d="M40 40H0V39C0.299252 34.1 2.39401 29.3 5.88529 25.8C9.67581 22.1 14.6633 20 19.9501 20C25.2369 20 30.3242 22.1 34.015 25.9C37.5062 29.4 39.8005 34 40 39V40ZM2.09476 38H37.8055C37.3067 33.9 35.5112 30.2 32.6185 27.3C29.3267 23.9 24.7382 22 19.9501 22C15.1621 22 10.6733 23.9 7.2818 27.3C4.38903 30.2 2.59352 33.9 2.09476 38Z"></path>
+						</svg>
+						<h5>Log in</h5>
+					</a>
+
+					<a href="{{ path('app_ajouter') }}" id="account_register__link" class="customer_block customer_block__register">
+						<svg width="44" height="40" viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M20 16C15.6 16 12 12.4 12 8C12 3.6 15.6 0 20 0C24.4 0 28 3.6 28 8C28 12.4 24.4 16 20 16ZM20 2C16.7 2 14 4.7 14 8C14 11.3 16.7 14 20 14C23.3 14 26 11.3 26 8C26 4.7 23.3 2 20 2Z"></path>
+							<path d="M40 40H0V39C0.299252 34.1 2.39401 29.3 5.88529 25.8C9.67581 22.1 14.6633 20 19.9501 20C25.2369 20 30.3242 22.1 34.015 25.9C37.5062 29.4 39.8005 34 40 39V40ZM2.09476 38H37.8055C37.3067 33.9 35.5112 30.2 32.6185 27.3C29.3267 23.9 24.7382 22 19.9501 22C15.1621 22 10.6733 23.9 7.2818 27.3C4.38903 30.2 2.59352 33.9 2.09476 38Z"></path>
+							<path d="M35 23V22H34H32H31V23V27H27H26V28V30V31H27H31V35V36H32H34H35V35V31H39H40V30V28V27H39H35V23Z" stroke="white" stroke-width="2"></path>
+						</svg>
+						<h5>Registration </h5>
+					</a>
+
+					
+
+
+					<a href="#" id="account_reset__link" class="customer_block customer_block__restore">
+						<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M42.435 15.5649C35.0151 8.14495 22.9849 8.14495 15.565 15.5649C8.14501 22.9849 8.14501 35.015 15.565 42.435C22.9849 49.8549 35.0151 49.8549 42.435 42.435C44.8821 39.9879 46.5222 37.0393 47.3552 33.9201" stroke="#222222" stroke-width="2"></path>
+							<path d="M43.5 11.5L42.5 16.5L37.5 15.5" stroke="#222222" stroke-width="2"></path>
+							<rect x="22" y="25" width="14" height="12" stroke="#222222" stroke-width="2"></rect>
+							<path d="M33 26C33 23.2386 31.2091 21 29 21C26.7909 21 25 23.2386 25 26" stroke="#222222" stroke-width="2"></path>
+							<circle cx="29" cy="31" r="2" fill="#222222"></circle>
+						</svg>
+
+						<h5>Restore Password</h5>
+					</a>
+				</div>
+			</div>
+
+			
+			<div id="account_section__register" class="account_section account_section__register">
+				<div class="customer_item_wrap">
+					<h4>Create an account <a class="link_close account_register__close" href="#" title="Close">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M13.7156 5L15 6.14286L10.993 10L15 13.8571L13.7156 15L9.95417 11.2857L6.28442 15L5 13.8571L8.9342 10L5 6.14286L6.28442 5L9.95417 8.71429L13.7156 5Z" fill="#222222"></path>
+						</svg>
+					</a></h4>
+
+					<div class="form-horizontal">
+						<form method="post" action="https://theme870-car-dealer.myshopify.com/account" id="create_customer" accept-charset="UTF-8" data-login-with-shop-sign-up="true"><input type="hidden" name="form_type" value="create_customer"><input type="hidden" name="utf8" value="✓">
+							<input type="hidden" id="password_confirmed" name="customer[password]">
+
+							
+
+							<div class="clearfix form-group">
+								<label for="first_name">First name</label>
+								<div class="">
+									<input type="text" value="" name="customer[first_name]" id="first_name"><p class="alert-inline" style="display: none;"></p>
+								</div>
+							</div>
+
+							<div class="clearfix form-group">
+								<label for="last_name">Last name</label>
+								<div>
+									<input type="text" value="" name="customer[last_name]" id="last_name"><p class="alert-inline" style="display: none;"></p>
+								</div>
+							</div>
+
+							<div class="clearfix form-group">
+								<label for="email">Email address</label>
+								<div>
+									<input type="email" value="" name="customer[email]" id="email"><p class="alert-inline" style="display: none;"></p>
+								</div>
+							</div>
+
+							<div class="clearfix form-group">
+								<label for="password_1">Password</label>
+								<div>
+									<i class="file_eye_el"></i>
+									<input type="password" value="" name="customer[password]" id="password_1"><p class="alert-inline" style="display: none;"></p>
+								</div>
+							</div>
+
+							<div class="clearfix form-group">
+								<label for="password_2">Confirm password</label>
+								<div>
+									<i class="file_eye_el"></i>
+									<input type="password" value="" id="password_2"><p class="alert-inline" style="display: none;"></p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div>
+									<button class="btn btn-primary" type="submit">Register</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div> 
+			</div>
+			
+			
+			<div id="account_section__login" class="account_section account_section__login">
+				<div class="customer_item_wrap">
+					<form method="post" action="https://theme870-car-dealer.myshopify.com/account/login" id="customer_login" accept-charset="UTF-8" data-login-with-shop-sign-in="true"><input type="hidden" name="form_type" value="customer_login"><input type="hidden" name="utf8" value="✓">
+						<h4>Already registered?<a class="link_close account_login__close" href="#" title="Close">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M13.7156 5L15 6.14286L10.993 10L15 13.8571L13.7156 15L9.95417 11.2857L6.28442 15L5 13.8571L8.9342 10L5 6.14286L6.28442 5L9.95417 8.71429L13.7156 5Z" fill="#222222"></path>
+						</svg>
+						</a></h4>
+
+						
+
+						<div class="form-group">
+							<label for="customer_email">Email address</label>
+							<input type="email" value="" name="customer[email]" id="customer_email"><p class="alert-inline" style="display: none;"></p>
+						</div>
+						
+						
+							<div class="form-group">
+								<label for="customer_password">Password</label>
+								<i class="file_eye_el"></i>
+								<input type="password" value="" name="customer[password]" id="customer_password"><p class="alert-inline" style="display: none;"></p>
+							</div>
+						
+						  
+						<div class="form-group">
+							<button class="btn" type="submit">Sign in</button>
+						</div>
+					<input type="hidden" name="return_url" value="/account"></form>
+				</div>
+			</div>
+			
+			
+			
+
+			
+			<div id="account_section__reset" class="account_section account_section__reset">
+				<div class="customer_item_wrap">
+					<h4>Reset Password 
+						<a class="link_close account_reset__cancel" href="#" title="Close">
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M13.7156 5L15 6.14286L10.993 10L15 13.8571L13.7156 15L9.95417 11.2857L6.28442 15L5 13.8571L8.9342 10L5 6.14286L6.28442 5L9.95417 8.71429L13.7156 5Z" fill="#222222"></path>
+							</svg>
+						</a>
+					</h4>
+
+					<p class="note">We will send you an email to reset your password</p>
+
+					<form method="post" action="https://theme870-car-dealer.myshopify.com/account/recover" accept-charset="UTF-8"><input type="hidden" name="form_type" value="recover_customer_password"><input type="hidden" name="utf8" value="✓">
+						<div class="clearfix form-horizontal">
+							
+								
+							
+
+							<div class="form-group">
+								<label for="email_recover" class="large">Email Address</label>
+								<div>
+									<input type="email" id="email_recover" name="email" value="">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div>
+									<button type="submit" class="btn">Submit</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		
+	</div>
+</div>
+
+
+
+
+</div>
+ 
+							    
+							</div>
+
+
+{% endblock %}

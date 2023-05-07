@@ -1,0 +1,64 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+{% block title %}New Livrasion
+{% endblock %}
+
+{% block body %}
+
+	<div class="pagetitle">
+		<h1>Ajout Livraison</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index.html">Home</a>
+				</li>
+				<li class="breadcrumb-item">Livraison</li>
+			</ol>
+		</nav>
+	</div>
+	<!-- End Page Title -->
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Livraison</h5>
+						{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}
+						) }}
+
+						<div class="card-body">
+							<div class="form-group">
+								<label for="exampleInputPassword1">Date Livraison
+								</label>
+                                {{ form_widget(form.dateLiv, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.dateLiv, {'attr': {"class":"mb-0"}}) }}
+
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Prix Livraison
+								</label>
+								{{ form_widget(form.prixLiv, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.prixLiv, {'attr': {"class":"mb-0"}}) }}
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Livreur
+								</label>
+								{{ form_widget(form.livreur, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.livreur, {'attr': {"class":"mb-0"}}) }}
+							</div>
+
+							<div class="card-footer">
+								{{ form_widget(form.ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+								<a class='btn btn-info' href="{{ path('app_livraison_index') }}">back to list</a>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+
+	{% endblock %}
+

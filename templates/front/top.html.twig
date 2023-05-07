@@ -1,0 +1,69 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block categories %}
+
+{% endblock %}
+
+{% block candidate %}
+
+{% endblock %}
+
+{% block body %}
+    <section class="min-sec">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-9">
+                    <div class="sec-heading">
+                        <h2>Top 3  <span class="theme-cl-2">Articles</span></h2>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <!-- Single Item -->
+                <!-- Single Item -->
+                {% for p in topfive %}
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+                        <div class="job_grid_02">
+                            <img src="{{ asset('uploads/'~p.artimg) }}" class="img-_featured_jbs" alt="">
+
+                            <div class="jobs-like">
+                            </div>
+                            <div class="jb_types fulltime">
+
+                                {% if p.artdispo == 0 %}
+                                    <div style="color: red;">Non disponible</div>
+                                {% else %}
+                                    <div style="color: blue;"> disponible</div>
+                                {% endif %}
+
+                            </div>
+                            <div class="jb_grid_01_thumb">
+                                <a href="employer-detail.html"><img src="assets/img/c-1.png" class="img-fluid" alt=""></a>
+                            </div>
+                            <div class="jb_grid_01_caption">
+                                <h4 class="_jb_title"><a href="job-detail.html">{{ p.artlib }}</a></h4>
+                                <div class="_emp_jb">{{ p.artdesc }}</div>
+                            </div>
+                            <div class="jb_grid_01_footer">
+
+                                <a href="{{ path('detailArticlefront',{artid:p.artid}) }}" class="_jb_apply">View Job</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+{% endblock %}

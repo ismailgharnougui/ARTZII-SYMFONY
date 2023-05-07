@@ -1,0 +1,84 @@
+{% extends 'baseBackCommand.html.twig' %}
+
+
+{% block body %}
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h5 class="card-title">Modifier Utilisateur </h5>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+    <div class="row">
+
+            <div class="card col-8 mx-auto">
+                <div class="card-body">
+
+
+                     {{ form_start(f, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="form-group">
+                        {{ form_label(f.nom, 'Nom :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+                        {{ form_errors(f.nom, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.prenom, 'Prénom :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
+                        {{ form_errors(f.prenom, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.mail, 'Mail :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.mail, {'attr': {'class': 'form-control', 'placeholder': 'Votre adresse mail'}}) }}
+                        {{ form_errors(f.mail, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.adresse, 'Adresse :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Votre adresse'}}) }}
+                        {{ form_errors(f.adresse, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.cin, 'CIN :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.cin, {'attr': {'class': 'form-control', 'placeholder': 'Votre CIN'}}) }}
+                        {{ form_errors(f.cin, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.numero, 'Numéro de téléphone :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.numero, {'attr': {'class': 'form-control', 'placeholder': 'Votre numéro de téléphone'}}) }}
+                        {{ form_errors(f.numero, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(f.role, {'attr': {'class': 'form-control', 'placeholder': 'Votre role', 'style': 'display:none;', 'value': 'client'}}) }}
+                        {{ form_errors(f.role, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                    
+                        {{ form_label(f.password.first, 'Mot de passe :', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                        {{ form_widget(f.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'},'value': f.vars.value.password}) }}
+                        {{ form_errors(f.password.first, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.password.second, 'Confirmez le mot de passe :', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(f.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'},'value': f.vars.value.password}) }}
+                        {{ form_errors(f.password.second, {'attr': {'class': 'text-danger'}}) }}
+                    </div>
+                    <div class="form-group">
+                    {{ form_widget(f.Creer, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_end(f) }}
+
+
+
+                    
+                </div>
+            </div>
+
+
+    </div>
+    </section>
+</main>
+
+
+{% endblock %}
